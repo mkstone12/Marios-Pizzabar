@@ -13,10 +13,10 @@ public class Pizza {
         String[] components = csv.split(";");
 
         // save the info to the respective attributes
-        this.navn = components[0];
-        this.desc = components[1];
-        this.pris = Double.parseDouble(components[2]);
-        this.pizzaNr = Integer.parseInt(components[3]);
+        this.pizzaNr = Integer.parseInt(components[0]);
+        this.navn = components[1];
+        this.desc = components[2];
+        this.pris = Double.parseDouble(components[3]);
     }
 
     @Override
