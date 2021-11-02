@@ -3,6 +3,8 @@ import java.util.List;
 
 public class Controller {
 
+    Pizza testPizza = new Pizza("Test", "Description", 55.0, 1);
+
     public void run(){
         UserInterface ui = new UserInterface();
         List<String> test = Arrays.asList("one", "two", "three");
