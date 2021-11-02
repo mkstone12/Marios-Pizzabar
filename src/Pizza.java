@@ -15,7 +15,7 @@ public class Pizza {
         // save the info to the respective attributes
         this.navn = components[0];
         this.desc = components[1];
-        this.pris = Integer.parseInt(components[2]);
+        this.pris = Double.parseDouble(components[2]);
         this.pizzaNr = Integer.parseInt(components[3]);
     }
 
