@@ -7,32 +7,41 @@ public class Controller {
 
     public void run(){
         UserInterface ui = new UserInterface();
+
         List<String> test = Arrays.asList("one", "two", "three");
         Menu menu = new Menu(test);
-        while(true) {
+
+        boolean keepGoing = true;
+
+        while(keepGoing) {
+
             int choice = ui.printMainMenu();
+
             switch (choice){
-                case 1 -> {
+                case 1 ->
                     ui.printMenu(menu);
-                }
-                case 2 -> {
+
+                case 2 ->
                     ui.printBestillingsOversigt();
-                }
-                case 3 -> {
+
+                case 3 ->
                     opretOrdre();
 
-                }
-                case 4 -> {
+                case 4 ->
                     redigerOrdre();
-                }
 
-                case 5 -> {
+                case 5 ->
                     færdiggørOrdre();
-                }
+
+                case 0 ->
+                    keepGoing = false;
+
 
            }
         }
     }
+
+
     public void opretOrdre(){
 
     }

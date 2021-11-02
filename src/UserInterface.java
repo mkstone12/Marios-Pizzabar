@@ -39,10 +39,10 @@ public class UserInterface {
 
 
     public void printMenu(Menu menu){
-        for(int i = 0; i < menu.getSize(); i++){
+        /*for(int i = 0; i < menu.getSize(); i++){
             ArrayList<Pizza> pizzaer = menu.getPizzaer();
             System.out.println(pizzaer.get(i));
-        }
+        }*/
     }
 
 
