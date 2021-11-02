@@ -1,15 +1,15 @@
-import java.util.Arrays;
-import java.util.List;
-
 public class Controller {
+    private final FileHandler fileHandler = new FileHandler();
+    private Menu menu;
 
     Pizza testPizza = new Pizza("Test", "Description", 55.0, 1);
 
     public void run(){
-        UserInterface ui = new UserInterface();
+        // initialize menu
+        menu = new Menu(fileHandler.getMenuFromFile());
 
-        List<String> test = Arrays.asList("one", "two", "three");
-        Menu menu = new Menu(test);
+        // make UserInterface
+        UserInterface ui = new UserInterface();
 
         boolean keepGoing = true;
 
@@ -19,7 +19,7 @@ public class Controller {
 
             switch (choice){
                 case 1 ->
-                    ui.printMenu(menu);
+                    ui.printMenu(menu.getListofPizzas());
 
                 case 2 ->
                     ui.printBestillingsOversigt();
@@ -50,7 +50,7 @@ public class Controller {
 
     }
 
-    public void færdiggørOrdre(){
+    public void færdiggørOrdre(){ // TODO: 02/11/2021 translate to english
 
     }
 }
