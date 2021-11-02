@@ -6,20 +6,40 @@ import java.util.Scanner;
 
 public class FileHandler {
 
-    private final String ARCHEIVED_ORDERS = "data/archived_orders.txt";
+    private final String ARCHIVED_ORDERS = "data/archived_orders.txt";
     private final String MENU = "data/menu.csv";
     private final String ACTIVE_ORDERS = "data/active_orders.txt";
 
 
 
     public List<String> getMenuFromFile() {
-        ArrayList<String> pizzas = new ArrayList<>();
+        return getLinesFromFile(MENU);
+    }
+
+    public void storeArchivdOrder(Order order){
+
+    }
+
+    public List<String> getArchivedOrders(){
+        return getLinesFromFile(ARCHIVED_ORDERS);
+    }
+
+    public void storeActiveOrders(){
+
+    }
+
+    public List<String> getStoredActiveOrders(){
+        return getLinesFromFile(ACTIVE_ORDERS);
+    }
+
+    private ArrayList<String> getLinesFromFile(String filePath){
+        ArrayList<String> lines = new ArrayList<>();
         try {
-            Scanner load = new Scanner(new File(MENU));
+            Scanner load = new Scanner(new File(filePath));
             while(load.hasNextLine()){
-                pizzas.add(load.nextLine());
+                lines.add(load.nextLine());
             }
-            return pizzas;
+            return lines;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
