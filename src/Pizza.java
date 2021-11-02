@@ -19,6 +19,14 @@ public class Pizza {
         this.pizzaNr = Integer.parseInt(components[3]);
     }
 
+    @Override
+    public String toString() {
+        return pizzaNr + ". " +
+                navn + ": " +
+                desc + "......." +
+                pris + ",-";
+    }
+
     public String getNavn() {
         return navn;
     }
