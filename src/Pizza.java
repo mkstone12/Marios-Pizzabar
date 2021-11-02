@@ -24,7 +24,7 @@ public class Pizza {
         return pizzaNr + ". " +
                 navn + ": " +
                 desc + "......." +
-                pris + ",-";
+                String.format("%.2fkr.", pris);
     }
 
     public String getNavn() {
