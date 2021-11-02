@@ -14,7 +14,7 @@ public class Menu {
 
     public Pizza getPizzaFromListNumber(int number){
         for (Pizza pizza : pizzasInMenu) {
-            if (pizza.getPizzaNr = number) return pizza; // TODO: 02/11/2021 add getPizzaNr to Pizza
+            if (pizza.getPizzaNr() == number) return pizza;
         }
         return null;
     }
