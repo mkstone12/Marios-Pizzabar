@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -15,7 +14,7 @@ public class UserInterface {
                 2. Se bestillingsoversigt
                 3. Oprette ordre
                 4. Redigere ordre
-                5. Færdiggøre ordre  
+                5. Færdiggøre ordre
                 
                 0. Afslutte programmet""");
         int choice;
@@ -38,11 +37,10 @@ public class UserInterface {
 
 
 
-    public void printMenu(Menu menu){
-        /*for(int i = 0; i < menu.getSize(); i++){
-            ArrayList<Pizza> pizzaer = menu.getPizzaer();
-            System.out.println(pizzaer.get(i));
-        }*/
+    public void printMenu(String menu){
+        System.out.println("Menu:");
+        System.out.println(menu);
+        System.out.println();
     }
 
 
