@@ -22,7 +22,7 @@ public class Menu {
     public String getListofPizzas(){
         StringBuilder returnString = new StringBuilder();
         for (Pizza pizza : pizzasInMenu){
-            returnString.append(pizza);
+            returnString.append(pizza).append('\n');
         }
         return returnString.toString();
     }
