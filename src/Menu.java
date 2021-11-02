@@ -18,4 +18,12 @@ public class Menu {
         }
         return null;
     }
+
+    public String getListofPizzas(){
+        StringBuilder returnString = new StringBuilder();
+        for (Pizza pizza : pizzasInMenu){
+            returnString.append(pizza);
+        }
+        return returnString.toString();
+    }
 }
