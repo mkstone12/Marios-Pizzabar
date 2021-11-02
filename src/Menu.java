@@ -8,7 +8,7 @@ public class Menu {
     public Menu(List<String> menuList){
         this.pizzasInMenu = new ArrayList<>();
         for(String item : menuList){
-            pizzasInMenu.add(new Pizza(item));// TODO: 02/11/2021 Add constructor that takes a csv string
+            pizzasInMenu.add(new Pizza(item));
         }
     }
 
