@@ -1,8 +1,12 @@
+import java.util.Arrays;
+import java.util.List;
+
 public class Controller {
 
     public void run(){
         UserInterface ui = new UserInterface();
-        Menu menu = new Menu();
+        List<String> test = Arrays.asList("one", "two", "three");
+        Menu menu = new Menu(test);
         while(true) {
             int choice = ui.printMainMenu();
             switch (choice){
@@ -17,7 +21,11 @@ public class Controller {
 
                 }
                 case 4 -> {
-                    færdiggørBestilling();
+                    redigerOrdre();
+                }
+
+                case 5 -> {
+                    færdiggørOrdre();
                 }
 
            }
@@ -27,7 +35,11 @@ public class Controller {
 
     }
 
-    public void færdiggørBestilling(){
+    public void redigerOrdre(){
+
+    }
+
+    public void færdiggørOrdre(){
 
     }
 }
