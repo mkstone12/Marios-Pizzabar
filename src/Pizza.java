@@ -5,6 +5,28 @@ public class Pizza {
     private double pris;
     private int pizzaNr;
 
+    public Pizza(String csv) {
+        //checks if the string that has been passed is not empty
+        if (csv == null) throw new IllegalArgumentException("Cannot create a new Pizza without proper information");
+
+        // split the csv string and save in array
+        String[] components = csv.split(";");
+
+        // save the info to the respective attributes
+        this.pizzaNr = Integer.parseInt(components[0]);
+        this.navn = components[1];
+        this.desc = components[2];
+        this.pris = Double.parseDouble(components[3]);
+    }
+
+    @Override
+    public String toString() {
+        return pizzaNr + ". " +
+                navn + ": " +
+                desc + "......." +
+                String.format("%.2fkr.", pris);
+    }
+
     public String getNavn() {
         return navn;
     }
