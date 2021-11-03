@@ -25,7 +25,7 @@ public class Controller {
                     ui.printBestillingsOversigt();
 
                 case 3 ->
-                    opretOrdre(ui);
+                    opretOrdre(ui, menu);
 
                 case 4 ->
                     redigerOrdre();
@@ -42,8 +42,10 @@ public class Controller {
     }
 
 
-    public void opretOrdre(UserInterface ui){
+    public void opretOrdre(UserInterface ui, Menu menu){
         ui.navnPåOrdre();
+
+        ui.printMenu(menu.getListofPizzas());
         ui.tilføjTilOrdre();
 
     }
