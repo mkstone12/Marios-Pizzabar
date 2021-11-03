@@ -44,7 +44,7 @@ public class UserInterface {
     }
 
 
-    public void printOrderOversight(){
+    public void printActiveOrders(){
     }
 
     public String nameOfOrder(){
@@ -57,6 +57,28 @@ public class UserInterface {
         Scanner input = new Scanner(System.in);
         System.out.println("Hvad vil du gerne tilføje til ordre");
         return input.nextInt();
+    }
+
+    public int whoMany(){
+        Scanner input = new Scanner(System.in);
+        System.out.println("Hvor mange af denne type pizzaer");
+        return input.nextInt();
+    }
+
+    public int toEndOrder(){
+        Scanner input = new Scanner(System.in);
+        System.out.println("1. Vil du tilføje til order\n2. Vil du afslutte order");
+
+        //TO DO check om det er 1 eller 2
+
+        return input.nextInt();
+
+    }
+
+    public void printFinalOrder(String order, double price,int ETA){
+        System.out.println("\n\nOrderen er oprettet\nDer er bestilt:");
+        System.out.println(order);
+        System.out.println("Prisen for denne order er " + price + " Kr\nDen skal være klar om " + ETA + " minutter\n\n");
 
     }
 }
