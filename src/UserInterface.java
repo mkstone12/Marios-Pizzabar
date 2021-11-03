@@ -52,7 +52,7 @@ public class UserInterface {
 
     public int editMenu() {
         System.out.println("Hvilken order vil du ændre? ");
-        return 1; // for test
+        return 1; // todo menu to choose order
     }
 
     public String nameOfOrder(){
