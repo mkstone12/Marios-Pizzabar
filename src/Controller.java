@@ -22,16 +22,16 @@ public class Controller {
                     ui.printMenu(menu.getListofPizzas());
 
                 case 2 ->
-                    ui.printBestillingsOversigt();
+                    ui.printOrderOversight();
 
                 case 3 ->
-                    opretOrdre(ui, menu);
+                    createOrder(ui, menu);
 
                 case 4 ->
-                    redigerOrdre();
+                    editOrder();
 
                 case 5 ->
-                    færdiggørOrdre();
+                    completeOrder();
 
                 case 0 ->
                     keepGoing = false;
@@ -42,19 +42,19 @@ public class Controller {
     }
 
 
-    public void opretOrdre(UserInterface ui, Menu menu){
-        ui.navnPåOrdre();
+    public void createOrder(UserInterface ui, Menu menu){
+        ui.nameOfOrder();
 
         ui.printMenu(menu.getListofPizzas());
-        ui.tilføjTilOrdre();
+        ui.addToOrder();
 
     }
 
-    public void redigerOrdre(){
+    public void editOrder(){
 
     }
 
-    public void færdiggørOrdre(){ // TODO: 02/11/2021 translate to english
+    public void completeOrder(){
 
     }
 }

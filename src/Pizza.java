@@ -1,8 +1,8 @@
 public class Pizza {
 
-    private String navn;
+    private String name;
     private String desc;
-    private double pris;
+    private double price;
     private int pizzaNr;
 
     public Pizza(String csv) {
@@ -14,25 +14,25 @@ public class Pizza {
 
         // save the info to the respective attributes
         this.pizzaNr = Integer.parseInt(components[0]);
-        this.navn = components[1];
+        this.name = components[1];
         this.desc = components[2];
-        this.pris = Double.parseDouble(components[3]);
+        this.price = Double.parseDouble(components[3]);
     }
 
     @Override
     public String toString() {
         return pizzaNr + ". " +
-                navn + ": " +
+                name + ": " +
                 desc + "......." +
-                String.format("%.2fkr.", pris);
+                String.format("%.2fkr.", price);
     }
 
-    public String getNavn() {
-        return navn;
+    public String getName() {
+        return name;
     }
 
-    public void setNavn(String navn) {
-        this.navn = navn;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDesc() {
@@ -43,12 +43,12 @@ public class Pizza {
         this.desc = desc;
     }
 
-    public double getPris() {
-        return pris;
+    public double getPrice() {
+        return price;
     }
 
-    public void setPris(double pris) {
-        this.pris = pris;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public int getPizzaNr() {
@@ -60,9 +60,9 @@ public class Pizza {
     }
 
     public Pizza(String navn, String desc, double pris, int pizzaNr) {
-        this.navn = navn;
+        this.name = navn;
         this.desc = desc;
-        this.pris = pris;
+        this.price = pris;
         this.pizzaNr = pizzaNr;
     }
 }
