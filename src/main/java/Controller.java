@@ -1,3 +1,5 @@
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 public class Controller {
     private final FileHandler fileHandler = new FileHandler();
     private Menu menu;
@@ -5,6 +7,12 @@ public class Controller {
     Pizza testPizza = new Pizza("Test", "Description", 55.0, 1);
 
     public void run(){
+        try {
+            fileHandler.storeActiveOrders();
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
         // initialize menu
         menu = new Menu(fileHandler.getMenuFromFile());
 
@@ -12,7 +20,6 @@ public class Controller {
         UserInterface ui = new UserInterface();
 
         boolean keepGoing = true;
-
 
         while(keepGoing) {
 

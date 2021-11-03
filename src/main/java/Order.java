@@ -9,14 +9,15 @@ import java.util.UUID;
 
 public class Order {
     private int orderID;
-    private int count;
     private ArrayList<Pizza> orderedPizzas;
 
     public Order(int ID, ArrayList orderedPizzas) {
         this.orderID = ID;
         this.orderedPizzas = orderedPizzas;
-        count++;
-        ID = count;
+    }
+
+    public void setOrderedPizzas(ArrayList<Pizza> orderedPizzas) {
+        this.orderedPizzas = orderedPizzas;
     }
 
     public ArrayList<Pizza> getOrderedPizzas() {
