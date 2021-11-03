@@ -1,8 +1,12 @@
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -23,31 +27,54 @@ public class FileHandler {
 
     }
 
-    public List<String> getArchivedOrders(){
-        return getLinesFromFile(ARCHIVED_ORDERS);
+    public List<Order> getArchivedOrders(){
+        return null;
     }
 
-    public void storeActiveOrders() throws JsonProcessingException {
-        ArrayList<Pizza> pizzas = new ArrayList<>();
-        pizzas.add(new Pizza("name", "desc", 1, 1));
-        pizzas.add(new Pizza("name", "desc", 1, 2));
-        pizzas.add(new Pizza("name", "desc", 1, 3));
-        pizzas.add(new Pizza("name", "desc", 1, 4));
-        pizzas.add(new Pizza("name", "desc", 1, 5));
-        pizzas.add(new Pizza("name", "desc", 1, 6));
-        pizzas.add(new Pizza("name", "desc", 1, 7));
-        pizzas.add(new Pizza("name", "desc", 1, 8));
-        Order order = new Order(1, pizzas);
+    public void storeActiveOrders(List<Order> orders) throws JsonProcessingException {
+        JsonNode node =  Json.toJson(orders);
 
-        JsonNode node =  Json.toJson(order);
+        String jsonString = Json.prettyPrint(node);
 
-        String jsonString = Json.stringify(node);
-
-        System.out.println(jsonString);
+        try {
+            saveActiveOrdersToFile(jsonString);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
-    public List<String> getStoredActiveOrders(){
-        return getLinesFromFile(ACTIVE_ORDERS);
+    private void saveActiveOrdersToFile(String stringToSave) throws FileNotFoundException {
+        File file = new File(ACTIVE_ORDERS);
+        PrintStream ps;
+        try {
+            ps = new PrintStream(file, StandardCharsets.UTF_8);
+            ps.println(stringToSave);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ArrayList<Order> getStoredActiveOrders(){
+        List<String> lines = getLinesFromFile(ACTIVE_ORDERS);
+
+
+        StringBuilder stringBuilder = new StringBuilder();
+        for (String line : lines) {
+            stringBuilder.append(line).append('\n');
+        }
+
+        List<Order> orders = null;
+        if (stringBuilder.length() > 0) {
+            try {
+                orders = Json.fromJsonToArray(stringBuilder.toString(), new TypeReference<List<Order>>() {
+                });
+            } catch (JsonProcessingException e) {
+                e.printStackTrace();
+            }
+            return new ArrayList<>(orders);
+        }
+        return new ArrayList<>();
     }
 
     private ArrayList<String> getLinesFromFile(String filePath){
