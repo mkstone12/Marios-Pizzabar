@@ -6,6 +6,10 @@ public class OrderLine {
         this.pizza = pizza;
         this.amount = amount;
     }
+    
+    public OrderLine(){
+
+    }
 
     public Pizza getPizza(){
         return pizza;
