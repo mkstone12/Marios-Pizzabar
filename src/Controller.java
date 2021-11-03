@@ -67,7 +67,6 @@ public class Controller {
 
         // Choose order to edit
         int choice = ui.editMenu();
-        System.out.println(choice);
 
         // what element to edit? pizza, other?
 
