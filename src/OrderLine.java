@@ -10,4 +10,8 @@ public class OrderLine {
     public Pizza getPizza(){
         return pizza;
     }
+
+    public int getAmount(){
+        return amount;
+    }
 }

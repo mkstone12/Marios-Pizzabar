@@ -13,13 +13,23 @@ public class Order {
     private ArrayList<OrderLine> orderLine = new ArrayList<OrderLine>();
     private int ETA = 0;
     private double price;
+    private String name;
 
-    public Order() {
+    public Order(String name) {
         this.orderID = UUID.randomUUID();
+        this.name = name;
     }
 
-    public ArrayList<OrderLine> getOrderedPizzas() {
-        return orderLine;
+    public String getName(){
+        return name;
+    }
+
+    public String getOrderedPizzas() {
+        StringBuilder returnString = new StringBuilder();
+        for(int i = 0; i < orderLine.size();i++){
+            returnString.append(orderLine.get(i).getPizza().getPizzaNr()).append(". ").append(orderLine.get(i).getPizza().getName()).append(" - Antal ").append(orderLine.get(i).getAmount()).append("\n");
+        }
+        return returnString.toString();
     }
 
     public UUID getOrderID() {
@@ -30,7 +40,7 @@ public class Order {
         OrderLine orderLine = new OrderLine(pizza, amount);
         this.orderLine.add(orderLine);
         ETA += 5 * amount;
-        price +=  pizza.getPris() * amount;
+        price +=  pizza.getPrice() * amount;
     }
 
     public int getETA(){

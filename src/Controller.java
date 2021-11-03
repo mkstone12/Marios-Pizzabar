@@ -1,6 +1,9 @@
+import java.util.ArrayList;
+
 public class Controller {
     private final FileHandler fileHandler = new FileHandler();
     private Menu menu;
+    private ArrayList<Order> allActiveOrders = new ArrayList<Order>();
 
     Pizza testPizza = new Pizza("Test", "Description", 55.0, 1);
 
@@ -44,11 +47,24 @@ public class Controller {
 
 
     public void createOrder(UserInterface ui, Menu menu){
-        ui.nameOfOrder();
-
+        String name = ui.nameOfOrder();
+        Order order = new Order(name);
         ui.printMenu(menu.getListofPizzas());
-        ui.addToOrder();
+        while(true){
+            int toEndOrder = ui.toEndOrder();
 
+            if(toEndOrder == 1){
+
+                Pizza pizzaNr = menu.getPizzaFromListNumber(ui.addToOrder());
+                int antal = ui.whoMany();
+                order.addOrderLine(pizzaNr,antal);}
+
+            else{
+                ui.printFinalOrder(order.getOrderedPizzas(),order.getPrice(),order.getETA());
+                allActiveOrders.add(order);
+                break;
+            }
+        }
     }
 
     public void editOrder(){
