@@ -59,8 +59,6 @@ public class UserInterface {
         return input.nextInt();
 
     }
-
-
 }
 
 
