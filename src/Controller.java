@@ -16,7 +16,6 @@ public class Controller {
 
         boolean keepGoing = true;
 
-
         while(keepGoing) {
 
             int choice = ui.printMainMenu();
@@ -39,12 +38,9 @@ public class Controller {
 
                 case 0 ->
                     keepGoing = false;
-
-
            }
         }
     }
-
 
     public void createOrder(UserInterface ui, Menu menu){
         String name = ui.nameOfOrder();
