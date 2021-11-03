@@ -2,14 +2,12 @@ import java.util.ArrayList;
 
 public class Controller {
     private final FileHandler fileHandler = new FileHandler();
-    private Menu menu;
-    private ArrayList<Order> allActiveOrders = new ArrayList<Order>();
+    private final Menu menu = new Menu(fileHandler.getMenuFromFile());
+    private final ArrayList<Order> allActiveOrders = fileHandler.getStoredActiveOrders();
 
     Pizza testPizza = new Pizza("Test", "Description", 55.0, 1);
 
     public void run() {
-        // initialize menu
-        menu = new Menu(fileHandler.getMenuFromFile());
 
         // make UserInterface
         UserInterface ui = new UserInterface();
@@ -52,7 +50,7 @@ public class Controller {
                 int antal = ui.whoMany();
                 order.addOrderLine(pizzaNr, antal);
             } else {
-                ui.printFinalOrder(order.getOrderedPizzas(), order.getPrice(), order.getETA());
+                ui.printFinalOrder(order.stringOfOrderedPizzas(), order.getPrice(), order.getETA());
                 allActiveOrders.add(order);
                 break;
             }
