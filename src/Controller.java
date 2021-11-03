@@ -25,7 +25,7 @@ public class Controller {
                     ui.printMenu(menu.getListofPizzas());
 
                 case 2 ->
-                    ui.printOrderOversight();
+                    ui.printActiveOrders();
 
                 case 3 ->
                     createOrder(ui, menu);

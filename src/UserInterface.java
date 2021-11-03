@@ -35,13 +35,16 @@ public class UserInterface {
         return choice;
     }
 
+
+
     public void printMenu(String menu){
         System.out.println("Menu:");
         System.out.println(menu);
         System.out.println();
     }
 
-    public void printOrderOversight(){
+
+    public void printActiveOrders(){
     }
 
     public String nameOfOrder(){
@@ -64,17 +67,19 @@ public class UserInterface {
 
     public int toEndOrder(){
         Scanner input = new Scanner(System.in);
-        System.out.println("1. Vil du tilføje til ordre\n2. Vil du afslutte ordre");
+        System.out.println("1. Vil du tilføje til order\n2. Vil du afslutte order");
 
         //TO DO check om det er 1 eller 2
 
         return input.nextInt();
+
     }
 
     public void printFinalOrder(String order, double price,int ETA){
         System.out.println("\n\nOrderen er oprettet\nDer er bestilt:");
         System.out.println(order);
         System.out.println("Prisen for denne order er " + price + " Kr\nDen skal være klar om " + ETA + " minutter\n\n");
+
     }
 }
 
