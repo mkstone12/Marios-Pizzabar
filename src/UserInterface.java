@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -44,7 +45,14 @@ public class UserInterface {
     }
 
 
-    public void printActiveOrders(){
+    public void printActiveOrders(ArrayList<String> list) {
+        for (String string : list)
+        System.out.print(string);
+    }
+
+    public int editMenu() {
+        System.out.println("Hvilken order vil du ændre? ");
+        return 1; // for test
     }
 
     public String nameOfOrder(){
