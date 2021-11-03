@@ -25,7 +25,7 @@ public class Controller {
                     ui.printBestillingsOversigt();
 
                 case 3 ->
-                    opretOrdre();
+                    opretOrdre(ui);
 
                 case 4 ->
                     redigerOrdre();
@@ -42,7 +42,9 @@ public class Controller {
     }
 
 
-    public void opretOrdre(){
+    public void opretOrdre(UserInterface ui){
+        ui.navnPåOrdre();
+        ui.tilføjTilOrdre();
 
     }
 
