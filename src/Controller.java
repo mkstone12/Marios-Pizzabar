@@ -45,9 +45,14 @@ public class Controller {
 
     public void opretOrdre(UserInterface ui, Menu menu){
         ui.navnPåOrdre();
-
         ui.printMenu(menu.getListofPizzas());
         ui.tilføjTilOrdre();
+
+        Pizza test = menu.getPizzaFromListNumber(1);
+        Order order = new Order();
+        order.addOrderLine(test, 2);
+        System.out.println(order.getOrderedPizzas().get(0).toString());
+        System.out.println(order.getOrderID());
 
     }
 
