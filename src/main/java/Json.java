@@ -1,6 +1,11 @@
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Json {
     private static ObjectMapper objectMapper = getDefaultObjectMapper();
@@ -18,6 +23,10 @@ public class Json {
 
     public static <A> A fromJson(JsonNode node, Class<A> clazz) throws JsonProcessingException {
         return objectMapper.treeToValue(node, clazz);
+    }
+
+    public static <A> A fromJsonToArray(String path, TypeReference<A> type) throws JsonProcessingException {
+        return objectMapper.readValue(path, type);
     }
 
     public static JsonNode toJson(Object a) {
