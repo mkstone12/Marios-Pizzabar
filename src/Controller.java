@@ -13,6 +13,7 @@ public class Controller {
 
         boolean keepGoing = true;
 
+
         while(keepGoing) {
 
             int choice = ui.printMainMenu();
@@ -52,9 +53,20 @@ public class Controller {
 
     public void editOrder(){
 
+        // find order
+
+        // what element to edit? pizza, other?
+
+        // add pizza to order
+        // remove pizza from order
+
+        // add/remove other items? cola, chips?
+
     }
 
     public void completeOrder(){
+
+        // ?
 
     }
 }
