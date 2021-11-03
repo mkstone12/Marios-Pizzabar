@@ -55,12 +55,11 @@ public class Controller {
 
         // find order
 
-        // what element to edit? pizza, other?
+        // what element to edit? which pizza type
 
         // add pizza to order
         // remove pizza from order
 
-        // add/remove other items? cola, chips?
 
     }
 
