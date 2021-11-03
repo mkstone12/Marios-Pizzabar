@@ -44,16 +44,16 @@ public class UserInterface {
     }
 
 
-    public void printBestillingsOversigt(){
+    public void printOrderOversight(){
     }
 
-    public String navnPåOrdre(){
+    public String nameOfOrder(){
         Scanner input = new Scanner(System.in);
         System.out.println("Indtast navnet på bestillingen");
         return input.nextLine();
     }
 
-    public int tilføjTilOrdre(){
+    public int addToOrder(){
         Scanner input = new Scanner(System.in);
         System.out.println("Hvad vil du gerne tilføje til ordre");
         return input.nextInt();
