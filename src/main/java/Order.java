@@ -1,10 +1,12 @@
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.UUID;
 
 public class Order {
     private UUID orderID;
+    private Date creationDate;
     private static int count;
     private ArrayList<OrderLine> orderLines = new ArrayList<>();
     private double price;
@@ -13,6 +15,7 @@ public class Order {
 
     public Order(String name) {
         this.orderID = UUID.randomUUID();
+        this.creationDate = new Date();
         this.name = name;
     }
 
@@ -32,10 +35,6 @@ public class Order {
         price +=  pizza.getPrice() * amount;
     }
 
-    public void removePizza(Pizza pizza) { // TODO: 03/11/2021 ?fix 
-        orderLines.remove(pizza);
-    }
-
     public double getPrice(){
         return price;
     }
@@ -48,6 +47,24 @@ public class Order {
             output.append(orderLine.getAmount()).append(" ").append(orderLine.getPizza().getName()).append(", ");
         }
         return output.toString();
+    }
+
+    //*********************************************
+    //
+    // DO NOT DELETE, IS USED TO CREATE FROM JSON
+    //
+    //*********************************************
+
+    public Order(){
+
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 
     public UUID getOrderID() {
