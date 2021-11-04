@@ -50,22 +50,14 @@ public class UserInterface {
         System.out.print(string);
     }
 
-    public void printSelectedOrderline() {
-
+    // prints errorMessage in bright red and resets the text color afterwards
+    public void errorPrint(String errorMessage){
+        System.out.println("\033[0;91m" + errorMessage + "\u001B[0m");
     }
 
-    public int editMenu(int choices) {
-        Scanner input = new Scanner(System.in); // new scanner??
-        System.out.print("Hvilken order vil du ændre? ");
-        int choice = input.nextInt();
-        input.nextLine();
-        if (choice < 1 || choice > choices) {
-            System.out.println("Ugyldig valg");
-            return 0;
-        } else {
-
-            return choice;
-        }
+    public int editMenu() {
+        System.out.println("Hvilken order vil du ændre? ");
+        return 1; // todo menu to choose order
     }
 
     public String nameOfOrder(){

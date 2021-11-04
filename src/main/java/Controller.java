@@ -1,18 +1,22 @@
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import java.util.ArrayList;
 
 public class Controller {
     private final FileHandler fileHandler = new FileHandler();
-    private Menu menu;
-    private ArrayList<Order> allActiveOrders = new ArrayList<Order>();
+    private final Menu menu = new Menu(fileHandler.getMenuFromFile());
+    private ArrayList<Order> allActiveOrders;
+    private UserInterface ui = new UserInterface();
 
     Pizza testPizza = new Pizza("Test", "Description", 55.0, 1);
 
     public void run() {
-        // initialize menu
-        menu = new Menu(fileHandler.getMenuFromFile());
-
-        // make UserInterface
-        UserInterface ui = new UserInterface();
+        // get allActiveOrders
+        try {
+            allActiveOrders = fileHandler.getStoredActiveOrders();
+        } catch (JsonProcessingException e) {
+            System.out.println("Warning: the active orders from previous session could not be loaded!");
+        }
 
         boolean keepGoing = true;
 
@@ -52,7 +56,7 @@ public class Controller {
                 int antal = ui.whoMany();
                 order.addOrderLine(pizzaNr, antal);
             } else {
-                ui.printFinalOrder(order.getOrderedPizzas(), order.getPrice(), order.getETA());
+                ui.printFinalOrder(order.stringOfOrderedPizzas(), order.getPrice(), order.getETA());
                 allActiveOrders.add(order);
                 break;
             }

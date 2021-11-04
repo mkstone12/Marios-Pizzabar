@@ -19,6 +19,10 @@ public class Pizza {
         this.price = Double.parseDouble(components[3]);
     }
 
+    public Pizza(){
+
+    }
+
     @Override
     public String toString() {
         return pizzaNr + ". " +

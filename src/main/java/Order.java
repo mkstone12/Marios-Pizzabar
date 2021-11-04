@@ -10,7 +10,7 @@ import java.util.UUID;
 public class Order {
     private UUID orderID;
     private static int count;
-    private ArrayList<OrderLine> orderLines = new ArrayList<OrderLine>();
+    private ArrayList<OrderLine> orderLines = new ArrayList<>();
     private int ETA = 0;
     private double price;
     private String name;
@@ -20,20 +20,17 @@ public class Order {
         this.name = name;
     }
 
-    public String getName(){
-        return name;
+    public Order(){
+
     }
 
-    public String getOrderedPizzas() {
+    public String stringOfOrderedPizzas() { // TODO: 03/11/2021 Reduce coupling
         StringBuilder returnString = new StringBuilder();
-        for(int i = 0; i < orderLines.size(); i++){
-            returnString.append(orderLines.get(i).getPizza().getPizzaNr()).append(". ").append(orderLines.get(i).getPizza().getName()).append(" - Antal ").append(orderLines.get(i).getAmount()).append("\n");
+        for (OrderLine orderLine : orderLines) {
+            returnString.append(orderLine.getPizza().getPizzaNr()).append(". ").
+                    append(orderLine.getPizza().getName()).append(" - Antal ").append(orderLine.getAmount()).append("\n");
         }
         return returnString.toString();
-    }
-
-    public UUID getOrderID() {
-        return orderID;
     }
 
     public void addOrderLine(Pizza pizza, int amount) {
@@ -41,6 +38,46 @@ public class Order {
         this.orderLines.add(orderLine);
         ETA += 5 * amount;
         price +=  pizza.getPrice() * amount;
+    }
+
+    public void removePizza(Pizza pizza) { // TODO: 03/11/2021 ?fix 
+        orderLines.remove(pizza);
+    }
+
+    public void setOrderID(UUID orderID) {
+        this.orderID = orderID;
+    }
+
+    public static void setCount(int count) {
+        Order.count = count;
+    }
+
+    public void setOrderLines(ArrayList<OrderLine> orderLines) {
+        this.orderLines = orderLines;
+    }
+
+    public void setETA(int ETA) {
+        this.ETA = ETA;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public ArrayList<OrderLine> getOrderLines() {
+        return orderLines;
+    }
+
+    public UUID getOrderID() {
+        return orderID;
     }
 
     public int getETA(){
@@ -51,10 +88,6 @@ public class Order {
         return price;
     }
 
-
-  public void removePizza(Pizza pizza) {
-       orderLines.remove(pizza);
-    }
 
     @Override
     public String toString() {
