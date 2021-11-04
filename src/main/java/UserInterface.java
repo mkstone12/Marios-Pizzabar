@@ -5,9 +5,9 @@ import java.util.Scanner;
 
 public class UserInterface {
     private Menu test;
+    Scanner input = new Scanner(System.in);
 
     public int printMainMenu() {
-        Scanner input = new Scanner(System.in);
         System.out.println("""
                 Velkommen til Marios Pizzabar
                 Hvad vil du gerne gøre?
@@ -62,29 +62,24 @@ public class UserInterface {
     }
 
     public String nameOfOrder(){
-        Scanner input = new Scanner(System.in);
         System.out.println("Indtast navnet på bestillingen");
+        input.nextLine();
         return input.nextLine();
     }
 
     public int addToOrder(){
-        Scanner input = new Scanner(System.in);
         System.out.println("Hvad vil du gerne tilføje til ordre");
         return input.nextInt();
     }
 
     public int whoMany(){
-        Scanner input = new Scanner(System.in);
         System.out.println("Hvor mange af denne type pizzaer");
         return input.nextInt();
     }
 
     public int toEndOrder(){
-        Scanner input = new Scanner(System.in);
         System.out.println("1. Vil du tilføje til order\n2. Vil du afslutte order");
-
         //TO DO check om det er 1 eller 2
-
         return input.nextInt();
 
     }
@@ -93,7 +88,13 @@ public class UserInterface {
         System.out.println("\n\nOrderen er oprettet\nDer er bestilt:");
         System.out.println(order);
         System.out.println("Prisen for denne order er " + price + " Kr\nDen skal være klar klokken " + ETA + "\n\n");
+    }
 
+    public int deleteOrderMenu(){
+        System.out.println("Hvilken order er færdig?");
+        int choice = input.nextInt();
+        System.out.println("Order " + choice + " er afsluttet\n");
+        return choice;
     }
 }
 

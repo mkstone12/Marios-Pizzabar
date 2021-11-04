@@ -109,7 +109,11 @@ public class Controller {
 
     public void completeOrder() {
 
-        // ?
+        ui.printActiveOrders(getActiveOrders());
+        int choice = ui.deleteOrderMenu();
+        //write to file needed
+        allActiveOrders.remove(choice-1);
+
 
     }
 }
