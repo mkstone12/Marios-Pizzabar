@@ -111,7 +111,16 @@ public class Controller {
 
     public void completeOrder() {
 
-        // ?
+        ui.printActiveOrders(getActiveOrders());
 
+        // get which order to finish
+        int choice =  ui.whichOrderToComplete() - 1;
+
+        try {
+            fileHandler.storeArchivedOrder(allActiveOrders.get(choice));
+            allActiveOrders.remove(choice);
+        } catch (IOException e) {
+            ui.errorPrint("Warning: Failed to complete order, cannot store!");
+        }
     }
 }
