@@ -26,8 +26,6 @@ public class Order {
         this.orderDueTime = orderDueTime;
     }
 
-    public Order(){
-    }
 
     public LocalTime getOrderDueTime(){
         return orderDueTime;
@@ -52,40 +50,6 @@ public class Order {
     public void removePizza(Pizza pizza) { // TODO: 03/11/2021 ?fix 
         orderLines.remove(pizza);
     }
-
-    public void setOrderID(UUID orderID) {
-        this.orderID = orderID;
-    }
-
-    public static void setCount(int count) {
-        Order.count = count;
-    }
-
-    public void setOrderLines(ArrayList<OrderLine> orderLines) {
-        this.orderLines = orderLines;
-    }
-
-
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getName(){
-        return name;
-    }
-
-    public ArrayList<OrderLine> getOrderLines() {
-        return orderLines;
-    }
-
-    public UUID getOrderID() {
-        return orderID;
-    }
-
 
     public double getPrice(){
         return price;
