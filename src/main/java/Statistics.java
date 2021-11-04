@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Statistics {
@@ -7,6 +8,7 @@ public class Statistics {
     // Most popular pizza sold in a period (day, week, month, year, ever)
 
     private final UserInterface ui;
+    private ArrayList<Order> orderList;
     private Date startDate;
     private Date endDate;
 
@@ -14,7 +16,8 @@ public class Statistics {
         this.ui = ui;
     }
 
-    public void reviewStats() {
+    public void reviewStats(ArrayList<Order> orderList) {
+        this.orderList = orderList;
         System.out.println("Statistics"); // test
         int choice = ui.printStatsMenu();
         switch (choice) {

@@ -61,16 +61,13 @@ public class UserInterface {
         System.out.println("Hvilken order vil du ændre? ");
         int orderChoice = input.nextInt();
 
-
         System.out.println("""
                 Vil du:
                 1. Tilføje til order
                 2. Fjerne fra order
                 3. Slette order""");
+
         int editChoice = input.nextInt();
-
-
-
         int[] choice = {orderChoice - 1 ,editChoice};
         return choice; // todo menu to choose order
     }
@@ -101,7 +98,7 @@ public class UserInterface {
         return input.nextInt();
     }
 
-    public int whoMany(){
+    public int howMany(){
         System.out.println("Hvor mange af denne type pizzaer");
         return input.nextInt();
     }
