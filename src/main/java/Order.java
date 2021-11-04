@@ -14,7 +14,7 @@ public class Order {
     private static int count;
     private ArrayList<OrderLine> orderLines = new ArrayList<>();
     private double price;
-    LocalTime time = LocalTime.now();
+    LocalTime orderDueTime = LocalTime.now();
     private String name;
 
     public Order(String name) {
@@ -25,8 +25,8 @@ public class Order {
     public Order(){
     }
 
-    public LocalTime getTime(){
-        return time;
+    public LocalTime getOrderDueTime(){
+        return orderDueTime;
     }
 
     public String stringOfOrderedPizzas() { // TODO: 03/11/2021 Reduce coupling
@@ -41,7 +41,7 @@ public class Order {
     public void addOrderLine(Pizza pizza, int amount) {
         OrderLine orderLine = new OrderLine(pizza, amount);
         this.orderLines.add(orderLine);
-        time = time.truncatedTo(ChronoUnit.MINUTES).plusMinutes(5 * amount);
+        orderDueTime = orderDueTime.truncatedTo(ChronoUnit.MINUTES).plusMinutes(5 * amount);
         price +=  pizza.getPrice() * amount;
     }
 

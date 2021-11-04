@@ -67,7 +67,7 @@ public class Controller {
                 int antal = ui.whoMany();
                 order.addOrderLine(pizzaNr, antal);
             } else {
-                ui.printFinalOrder(order.stringOfOrderedPizzas(), order.getPrice(), order.getTime());
+                ui.printFinalOrder(order.stringOfOrderedPizzas(), order.getPrice(), order.getOrderDueTime());
                 allActiveOrders.add(order);
                 break;
             }
