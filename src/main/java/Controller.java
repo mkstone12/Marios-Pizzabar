@@ -114,7 +114,9 @@ public class Controller {
         int choice =  ui.whichOrderToComplete() - 1;
 
         try {
+            // store order
             fileHandler.storeArchivedOrder(allActiveOrders.get(choice));
+            // remove order from allActiveOrders
             allActiveOrders.remove(choice);
         } catch (IOException e) {
             ui.errorPrint("Warning: Failed to complete order, cannot store!");
