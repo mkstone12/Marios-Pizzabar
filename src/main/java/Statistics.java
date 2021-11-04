@@ -12,6 +12,25 @@ public class Statistics {
 
     public void reviewStats() {
         System.out.println("Statistics"); // test
-        ui.printStatsMenu();
+        int choice = ui.printStatsMenu();
+        switch (choice) {
+            case 1 -> salesStats();
+
+            case 2 -> pizzaStats();
+
+            case 3 -> otherStats();
+        }
+    }
+
+    public void salesStats() {
+        System.out.println("sales"); // test
+    }
+
+    public void pizzaStats() {
+        System.out.println("pizza"); // test
+    }
+
+    public void otherStats() {
+        System.out.println("other"); // test
     }
 }
