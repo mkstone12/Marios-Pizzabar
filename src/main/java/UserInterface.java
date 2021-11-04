@@ -24,7 +24,7 @@ public class UserInterface {
         while(true){
         try{
             choice = input.nextInt();
-            if(choice <=5 && choice >= 0){
+            if(choice <=6 && choice >= 0){
             break;}
             else{
                 System.out.println("Dette er ikke muligt");

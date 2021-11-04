@@ -8,6 +8,6 @@ public class Statistics {
     }
 
     public void reviewStats() {
-
+        System.out.println("Statistics"); // test
     }
 }
