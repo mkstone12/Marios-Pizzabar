@@ -98,7 +98,7 @@ public class UserInterface {
         return input.nextInt();
     }
 
-    public int whoMany(){
+    public int howMany(){
         System.out.println("Hvor mange af denne type pizzaer");
         return input.nextInt();
     }
