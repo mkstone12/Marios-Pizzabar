@@ -4,6 +4,7 @@ public class Pizza {
     private String desc;
     private double price;
     private int pizzaNr;
+    private boolean newProduct;
 
     public Pizza(String csv) {
         //checks if the string that has been passed is not empty

@@ -119,12 +119,23 @@ public class UserInterface {
     public int printStatsMenu() {
         System.out.println("""
                 Vil du:
-                1. se total salg
-                2. se den meste populære pizza
-                3. andet??""");
+                1. Se total salg
+                2. Se den meste populære pizza
+                3. Skift datoer
+                
+                0. Forlade statistik""");
         return input.nextInt();
     }
 
+    public String getDate(String type) {
+        Scanner inputLine = new Scanner(System.in);
+        System.out.print("Indtast datoen du vil søge " + type + " (dd/mm/åååå) "); // check valid throws exception
+        return inputLine.nextLine();
+    }
+
+    public void printTotalSales(String sales) {
+        System.out.println(sales);
+    }
 }
 
 

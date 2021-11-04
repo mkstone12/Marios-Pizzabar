@@ -1,4 +1,6 @@
 import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -14,6 +16,7 @@ public class Statistics {
     private ArrayList<Order> orderList;
     private Date startDate;
     private Date endDate;
+    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 
     public Statistics(UserInterface ui) {
         this.ui = ui;
@@ -21,31 +24,50 @@ public class Statistics {
 
     public void reviewStats(ArrayList<Order> orderList) {
         this.orderList = orderList;
-        System.out.println("Statistics"); // test
-        int choice = ui.printStatsMenu();
-        switch (choice) {
-            case 1 -> salesStats();
+        getRequestedDates();
+        boolean stats = true;
+        while (stats) {
+            int choice = ui.printStatsMenu();
+            switch (choice) {
+                case 0 -> stats = false;
 
-            case 2 -> pizzaStats();
+                case 1 -> salesStats();
 
-            case 3 -> otherStats();
+                case 2 -> pizzaStats();
+
+                case 3 -> changeDates();
+            }
+        }
+    }
+
+    public void getRequestedDates() {
+        String startStats = ui.getDate("fra"); // simple date format
+        String endStats = ui.getDate("til"); // simple date format
+        try {
+            startDate =formatter.parse(startStats);
+            endDate =formatter.parse(endStats);
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
     }
 
     public void salesStats() {
-        System.out.println("sales"); // test
-        // try date format
+        double totalSales = 0;
+        double orderPrice;
         for (Order order : orderList) {
-            Date orderDate = order.getCreationDate();
-            System.out.println(DateFormat.getDateInstance().format(orderDate)); //test date format
+            orderPrice = order.getPrice();
+            totalSales += orderPrice;
         }
+        String salg = "Total salg fra " + DateFormat.getDateInstance().format(startDate)
+                + " til " + DateFormat.getDateInstance().format(endDate) + " = " + totalSales + "kr."; // test
+        ui.printTotalSales(salg);
     }
 
     public void pizzaStats() {
         System.out.println("pizza"); // test
     }
 
-    public void otherStats() {
-        System.out.println("other"); // test
+    public void changeDates() {
+        System.out.println("dates"); // test
     }
 }
