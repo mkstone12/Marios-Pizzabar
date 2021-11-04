@@ -1,14 +1,14 @@
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Controller {
     private final FileHandler fileHandler = new FileHandler();
     private final Menu menu = new Menu(fileHandler.getMenuFromFile());
+    private final UserInterface ui = new UserInterface();
     private ArrayList<Order> allActiveOrders;
-    private UserInterface ui = new UserInterface();
 
-    Pizza testPizza = new Pizza("Test", "Description", 55.0, 1);
 
     public void run() {
         // get allActiveOrders
@@ -30,20 +30,28 @@ public class Controller {
 
                 case 2 -> ui.printActiveOrders(getActiveOrders());
 
-                case 3 -> createOrder(ui, menu);
+                case 3 -> createOrder(menu);
 
-                case 4 -> editOrder(ui);
+                case 4 -> editOrder();
 
                 case 5 -> completeOrder();
 
-                case 0 -> keepGoing = false;
-
-
+                case 0 -> keepGoing = saveAndQuit();
             }
         }
     }
 
-    public void createOrder(UserInterface ui, Menu menu) {
+    private boolean saveAndQuit() {
+        try {
+            fileHandler.storeActiveOrders(allActiveOrders);
+            return false;
+        } catch (IOException e) {
+            ui.errorPrint("Warning: Storing of active orders failed. Quit aborted");
+            return true;
+        }
+    }
+
+    public void createOrder(Menu menu) {
         String name = ui.nameOfOrder();
         Order order = new Order(name);
         ui.printMenu(menu.getListofPizzas());
@@ -56,14 +64,14 @@ public class Controller {
                 int antal = ui.whoMany();
                 order.addOrderLine(pizzaNr, antal);
             } else {
-                ui.printFinalOrder(order.stringOfOrderedPizzas(), order.getPrice(), order.getETA());
+                ui.printFinalOrder(order.stringOfOrderedPizzas(), order.getPrice(), order.getOrderDueTime());
                 allActiveOrders.add(order);
                 break;
             }
         }
     }
 
-    public void editOrder(UserInterface ui) {
+    public void editOrder() {
 
         // List active orders
 
@@ -99,8 +107,18 @@ public class Controller {
     }
 
     public void completeOrder() {
+        ui.printActiveOrders(getActiveOrders());
 
-        // ?
+        // get which order to finish
+        int choice =  ui.whichOrderToComplete() - 1;
 
+        try {
+            // store order
+            fileHandler.storeArchivedOrder(allActiveOrders.get(choice));
+            // remove order from allActiveOrders
+            allActiveOrders.remove(choice);
+        } catch (IOException e) {
+            ui.errorPrint("Warning: Failed to complete order, cannot store!");
+        }
     }
 }

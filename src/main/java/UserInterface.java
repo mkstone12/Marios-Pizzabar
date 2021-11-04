@@ -1,12 +1,12 @@
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class UserInterface {
-    private Menu test;
+    Scanner input = new Scanner(System.in);
 
     public int printMainMenu() {
-        Scanner input = new Scanner(System.in);
         System.out.println("""
                 Velkommen til Marios Pizzabar
                 Hvad vil du gerne gøre?
@@ -60,40 +60,45 @@ public class UserInterface {
         return 1; // todo menu to choose order
     }
 
-    public String nameOfOrder(){
+    public int whichOrderToComplete() {
         Scanner input = new Scanner(System.in);
+        System.out.print("Hvilken order vil du færdigøre? ");
+        while (!input.hasNextInt()){
+            System.out.print("Du kan kun vælge med tal:");
+            input.nextLine(); // to avoid scanner bug
+        }
+        return input.nextInt();
+    }
+
+    public String nameOfOrder(){
         System.out.println("Indtast navnet på bestillingen");
+        input.nextLine();
         return input.nextLine();
     }
 
     public int addToOrder(){
-        Scanner input = new Scanner(System.in);
         System.out.println("Hvad vil du gerne tilføje til ordre");
         return input.nextInt();
     }
 
     public int whoMany(){
-        Scanner input = new Scanner(System.in);
         System.out.println("Hvor mange af denne type pizzaer");
         return input.nextInt();
     }
 
     public int toEndOrder(){
-        Scanner input = new Scanner(System.in);
         System.out.println("1. Vil du tilføje til order\n2. Vil du afslutte order");
-
         //TO DO check om det er 1 eller 2
-
         return input.nextInt();
 
     }
 
-    public void printFinalOrder(String order, double price,int ETA){
+    public void printFinalOrder(String order, double price, LocalTime ETA){
         System.out.println("\n\nOrderen er oprettet\nDer er bestilt:");
         System.out.println(order);
-        System.out.println("Prisen for denne order er " + price + " Kr\nDen skal være klar om " + ETA + " minutter\n\n");
-
+        System.out.println("Prisen for denne order er " + price + " Kr\nDen skal være klar klokken " + ETA + "\n\n");
     }
+
 }
 
 
