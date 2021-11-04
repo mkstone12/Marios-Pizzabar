@@ -7,6 +7,7 @@ public class Controller {
     private final FileHandler fileHandler = new FileHandler();
     private final Menu menu = new Menu(fileHandler.getMenuFromFile());
     private final UserInterface ui = new UserInterface();
+    private final Statistics stats = new Statistics(ui);
     private ArrayList<Order> allActiveOrders;
 
     public void run() {
@@ -16,8 +17,13 @@ public class Controller {
         } catch (JsonProcessingException e) {
             System.out.println("Warning: the active orders from previous session could not be loaded!");
         }
-
         boolean keepGoing = true;
+
+        // to generate test orders
+        /*for (int i = 0; i < 10; i++) {
+            allActiveOrders.add(new Order("name " + i));
+            allActiveOrders.get(i).addOrderLine(menu.getPizzaFromListNumber(i+1), 2);
+        }*/
 
 
         while (keepGoing) {
@@ -34,6 +40,8 @@ public class Controller {
                 case 4 -> editOrder();
 
                 case 5 -> completeOrder();
+
+                case 6 -> stats.reviewStats();
 
                 case 0 -> keepGoing = saveAndQuit();
             }
@@ -60,8 +68,8 @@ public class Controller {
             if (toEndOrder == 1) {
 
                 Pizza pizzaNr = menu.getPizzaFromListNumber(ui.addToOrder());
-                int antal = ui.whoMany();
-                order.addOrderLine(pizzaNr, antal);
+                int amount = ui.whoMany();
+                order.addOrderLine(pizzaNr, amount);
             } else {
                 ui.printFinalOrder(order.stringOfOrderedPizzas(), order.getPrice(), order.getOrderDueTime());
                 allActiveOrders.add(order);
@@ -76,28 +84,57 @@ public class Controller {
 
         ui.printActiveOrders(getActiveOrders());
 
-        // Choose order to edit
+        // Choose order to edit and what to edit
         int choice[] = ui.editMenu();
+
+        //Delete order
         if(choice[1] == 3 ){
             allActiveOrders.remove(choice[0]);
         }
+
+        //Add to order
         else if (choice[1] == 1){
+
+            //Pizza to add and amount of it
             Pizza pizzaNr = menu.getPizzaFromListNumber(ui.addToOrder());
-            int antal = ui.whoMany();
-            allActiveOrders.get(choice[0]).addOrderLine(pizzaNr, antal);
+            int amount = ui.whoMany();
+
+            ArrayList<OrderLine> activeOrderLines =  allActiveOrders.get(choice[0]).getOrderLines();
+
+            //Loops over orderlines in order to check if there is orderline for pizza
+            for(int i = 0; i < activeOrderLines.size();i++){
+                if(pizzaNr.getPizzaNr() == activeOrderLines.get(i).getPizza().getPizzaNr()){
+                    //If orderline with pizza exist, add to amount to orderline
+                    allActiveOrders.get(choice[0]).editOrderLine(i,amount);
+                    i = activeOrderLines.size();
+                }
+                else if (i == activeOrderLines.size()-1){
+                    //else create new orderline
+                    allActiveOrders.get(choice[0]).addOrderLine(pizzaNr, amount-1);
+                }
+            }
         }
 
+        //remove from order
         else if (choice[1] == 2){
-            System.out.println(allActiveOrders.get(choice[0]));
-            ui.removeFromOrder();
+            //Get pizza to remove and amount
+            Pizza pizzaNr = menu.getPizzaFromListNumber(ui.addToOrder());
+            int amount = ui.whoMany();
+
+            ArrayList<OrderLine> activeOrderLines =  allActiveOrders.get(choice[0]).getOrderLines();
+
+            //Loop to find orderline with pizza
+            for(int i = 0; i < activeOrderLines.size();i++){
+                if(pizzaNr.getPizzaNr() == activeOrderLines.get(i).getPizza().getPizzaNr()) {
+                    //remove amount of pizza from orderline
+                    allActiveOrders.get(choice[0]).editOrderLine(i,-amount);
+
+                    //If amount is now 0 or less, remove orderline
+                    if(activeOrderLines.get(i).getAmount()<= 0){
+                        allActiveOrders.get(choice[0]).removeOrderLine(i);
+                    }
+                }}
         }
-
-        // what element to edit? pizza, other?
-
-        // add pizza to order
-        // remove pizza from order
-
-        // add/remove other items? cola, chips?
 
     }
 
@@ -131,6 +168,8 @@ public class Controller {
             allActiveOrders.remove(choice);
         } catch (IOException e) {
             ui.errorPrint("Warning: Failed to complete order, cannot store!");
+        } catch (IndexOutOfBoundsException e){
+            ui.errorPrint("There was no order by that number");
         }
     }
 }

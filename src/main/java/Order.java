@@ -39,6 +39,14 @@ public class Order {
         return price;
     }
 
+    public void editOrderLine(int orderLineToEdit, int amount){
+        orderLines.get(orderLineToEdit).addAmount(amount);
+    }
+
+    public void removeOrderLine(int orderLineToRemove){
+        orderLines.remove(orderLineToRemove);
+    }
+
 
     @Override
     public String toString() {
