@@ -34,7 +34,7 @@ public class FileHandler {
     }
 
     public void storeActiveOrders(List<Order> orders) throws IOException {
-        saveToFile(convertOrdersToJson(orders), ARCHIVED_ORDERS);
+        saveToFile(convertOrdersToJson(orders), ACTIVE_ORDERS);
     }
 
     private String convertOrdersToJson(List<Order> orders) throws JsonProcessingException {
