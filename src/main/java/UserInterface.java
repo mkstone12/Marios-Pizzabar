@@ -95,6 +95,20 @@ public class UserInterface {
 
     public int addToOrder(){
         System.out.println("Vælg en pizza");
+        input.nextLine();
+        while (!input.hasNextInt()){
+            System.out.print("Du kan kun vælge med tal:");
+            input.nextLine(); // to avoid scanner bug
+        }
+        return input.nextInt();
+    }
+    public int addToOrder(boolean triedBefore){
+        System.out.println("Denne pizza eksistere ikke. \nVælg en anden pizza");
+        input.nextLine();
+        while (!input.hasNextInt()){
+            System.out.print("Du kan kun vælge med tal:");
+            input.nextLine(); // to avoid scanner bug
+        }
         return input.nextInt();
     }
 
