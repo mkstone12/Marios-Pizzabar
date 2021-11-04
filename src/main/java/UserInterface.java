@@ -60,6 +60,16 @@ public class UserInterface {
         return 1; // todo menu to choose order
     }
 
+    public int whichOrderToComplete() {
+        Scanner input = new Scanner(System.in);
+        System.out.print("Hvilken order vil du færdigøre? ");
+        while (!input.hasNextInt()){
+            System.out.print("Du kan kun vælge med tal:");
+            input.nextLine(); // to avoid scanner bug
+        }
+        return input.nextInt();
+    }
+
     public String nameOfOrder(){
         Scanner input = new Scanner(System.in);
         System.out.println("Indtast navnet på bestillingen");
