@@ -50,6 +50,16 @@ public class Order {
         return output.toString();
     }
 
+    //*********************************************
+    //
+    // DO NOT DELETE, IS USED TO CREATE FROM JSON
+    //
+    //*********************************************
+
+    public Order(){
+
+    }
+
     public UUID getOrderID() {
         return orderID;
     }
