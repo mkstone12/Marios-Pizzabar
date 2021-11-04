@@ -1,3 +1,5 @@
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -11,8 +13,8 @@ public class Order {
     private UUID orderID;
     private static int count;
     private ArrayList<OrderLine> orderLines = new ArrayList<>();
-    private int ETA = 0;
     private double price;
+    LocalTime orderDueTime = LocalTime.now();
     private String name;
 
     public Order(String name) {
@@ -21,7 +23,10 @@ public class Order {
     }
 
     public Order(){
+    }
 
+    public LocalTime getOrderDueTime(){
+        return orderDueTime;
     }
 
     public String stringOfOrderedPizzas() { // TODO: 03/11/2021 Reduce coupling
@@ -36,7 +41,7 @@ public class Order {
     public void addOrderLine(Pizza pizza, int amount) {
         OrderLine orderLine = new OrderLine(pizza, amount);
         this.orderLines.add(orderLine);
-        ETA += 5 * amount;
+        orderDueTime = orderDueTime.truncatedTo(ChronoUnit.MINUTES).plusMinutes(5 * amount);
         price +=  pizza.getPrice() * amount;
     }
 
@@ -56,9 +61,6 @@ public class Order {
         this.orderLines = orderLines;
     }
 
-    public void setETA(int ETA) {
-        this.ETA = ETA;
-    }
 
     public void setPrice(double price) {
         this.price = price;
@@ -80,9 +82,6 @@ public class Order {
         return orderID;
     }
 
-    public int getETA(){
-        return ETA;
-    }
 
     public double getPrice(){
         return price;

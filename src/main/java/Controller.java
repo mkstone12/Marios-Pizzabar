@@ -37,14 +37,12 @@ public class Controller {
 
                 case 5 -> completeOrder();
 
-                case 0 -> keepGoing = saveAndQuite();
-
-
+                case 0 -> keepGoing = saveAndQuit();
             }
         }
     }
 
-    private boolean saveAndQuite() {
+    private boolean saveAndQuit() {
         try {
             fileHandler.storeActiveOrders(allActiveOrders);
             return false;
@@ -110,7 +108,6 @@ public class Controller {
     }
 
     public void completeOrder() {
-
         ui.printActiveOrders(getActiveOrders());
 
         // get which order to finish
