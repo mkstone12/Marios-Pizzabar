@@ -16,6 +16,7 @@ public class UserInterface {
                 3. Oprette ordre
                 4. Redigere ordre
                 5. Færdiggøre ordre
+                6. Se statistik
                 
                 0. Afslutte programmet""");
 
@@ -23,7 +24,7 @@ public class UserInterface {
         while(true){
         try{
             choice = input.nextInt();
-            if(choice <=5 && choice >= 0){
+            if(choice <=6 && choice >= 0){
             break;}
             else{
                 System.out.println("Dette er ikke muligt");
@@ -116,6 +117,14 @@ public class UserInterface {
         System.out.println("\n\nOrderen er oprettet\nDer er bestilt:");
         System.out.println(order);
         System.out.println("Prisen for denne order er " + price + " Kr\nDen skal være klar klokken " + ETA + "\n\n");
+    }
+
+    public void printStatsMenu() {
+        System.out.println("""
+                Vil du:
+                1. se total salg
+                2. se den meste populære pizza
+                3. andet??""");
     }
 
 }

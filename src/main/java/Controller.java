@@ -7,6 +7,7 @@ public class Controller {
     private final FileHandler fileHandler = new FileHandler();
     private final Menu menu = new Menu(fileHandler.getMenuFromFile());
     private final UserInterface ui = new UserInterface();
+    private final Statistics stats = new Statistics(ui);
     private ArrayList<Order> allActiveOrders;
 
     public void run() {
@@ -16,8 +17,13 @@ public class Controller {
         } catch (JsonProcessingException e) {
             System.out.println("Warning: the active orders from previous session could not be loaded!");
         }
-
         boolean keepGoing = true;
+
+        // to generate test orders
+        /*for (int i = 0; i < 10; i++) {
+            allActiveOrders.add(new Order("name " + i));
+            allActiveOrders.get(i).addOrderLine(menu.getPizzaFromListNumber(i+1), 2);
+        }*/
 
 
         while (keepGoing) {
@@ -34,6 +40,8 @@ public class Controller {
                 case 4 -> editOrder();
 
                 case 5 -> completeOrder();
+
+                case 6 -> stats.reviewStats();
 
                 case 0 -> keepGoing = saveAndQuit();
             }
@@ -160,6 +168,8 @@ public class Controller {
             allActiveOrders.remove(choice);
         } catch (IOException e) {
             ui.errorPrint("Warning: Failed to complete order, cannot store!");
+        } catch (IndexOutOfBoundsException e){
+            ui.errorPrint("There was no order by that number");
         }
     }
 }
