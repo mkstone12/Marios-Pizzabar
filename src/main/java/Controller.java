@@ -1,16 +1,21 @@
+import com.fasterxml.jackson.core.JsonProcessingException;
+
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Controller {
     private final FileHandler fileHandler = new FileHandler();
     private final Menu menu = new Menu(fileHandler.getMenuFromFile());
-    private final ArrayList<Order> allActiveOrders = fileHandler.getStoredActiveOrders();
-
-    Pizza testPizza = new Pizza("Test", "Description", 55.0, 1);
+    private final UserInterface ui = new UserInterface();
+    private ArrayList<Order> allActiveOrders;
 
     public void run() {
-
-        // make UserInterface
-        UserInterface ui = new UserInterface();
+        // get allActiveOrders
+        try {
+            allActiveOrders = fileHandler.getStoredActiveOrders();
+        } catch (JsonProcessingException e) {
+            System.out.println("Warning: the active orders from previous session could not be loaded!");
+        }
 
         boolean keepGoing = true;
 
@@ -24,20 +29,28 @@ public class Controller {
 
                 case 2 -> ui.printActiveOrders(getActiveOrders());
 
-                case 3 -> createOrder(ui, menu);
+                case 3 -> createOrder(menu);
 
-                case 4 -> editOrder(ui);
+                case 4 -> editOrder();
 
                 case 5 -> completeOrder();
 
-                case 0 -> keepGoing = false;
-
-
+                case 0 -> keepGoing = saveAndQuit();
             }
         }
     }
 
-    public void createOrder(UserInterface ui, Menu menu) {
+    private boolean saveAndQuit() {
+        try {
+            fileHandler.storeActiveOrders(allActiveOrders);
+            return false;
+        } catch (IOException e) {
+            ui.errorPrint("Warning: Storing of active orders failed. Quit aborted");
+            return true;
+        }
+    }
+
+    public void createOrder(Menu menu) {
         String name = ui.nameOfOrder();
         Order order = new Order(name);
         ui.printMenu(menu.getListofPizzas());
@@ -47,61 +60,44 @@ public class Controller {
             if (toEndOrder == 1) {
 
                 Pizza pizzaNr = menu.getPizzaFromListNumber(ui.addToOrder());
-                int antal = ui.howMany();
+                int antal = ui.whoMany();
                 order.addOrderLine(pizzaNr, antal);
             } else {
-                ui.printFinalOrder(order.stringOfOrderedPizzas(), order.getPrice(), order.getETA());
+                ui.printFinalOrder(order.stringOfOrderedPizzas(), order.getPrice(), order.getOrderDueTime());
                 allActiveOrders.add(order);
                 break;
             }
         }
     }
 
-    public void editOrder(UserInterface ui) {
-
-        // Try new
-        // Will you add or remove a pizza from an order, or delete active order
-        int choice = ui.whichEditAction();
-        switch (choice) {
-            case 1 -> addPizzaToActiveOrder(ui);
-
-            case 2 -> removePizzaFromActiveOrder(ui);
-
-            case 3 -> cancelActiveOrder(ui);
-        }
-
-
-
-        // todo remove pizza from order
-
-
-
-        // todo Cancel order (are you sure?)
-
-
-    }
-    // add pizza to order
-    public void addPizzaToActiveOrder(UserInterface ui) {
-        int pizza = ui.whichPizza();
-        Pizza pizzaToAdd = menu.getPizzaFromListNumber(pizza);
-        String pizzaToAddName = pizzaToAdd.getName();
-        System.out.println("Trying to add a " + pizzaToAddName);
+    public void editOrder() {
 
         // List active orders
+
         ui.printActiveOrders(getActiveOrders());
 
         // Choose order to edit
-        int choice = ui.editMenu();
-        System.out.println("Editing this order: " + allActiveOrders.get(choice - 1));
-        int newNumber = ui.howMany(pizzaToAddName);
-        System.out.println(newNumber); // test
-    }
+        int choice[] = ui.editMenu();
+        if(choice[1] == 3 ){
+            allActiveOrders.remove(choice[0]);
+        }
+        else if (choice[1] == 1){
+            Pizza pizzaNr = menu.getPizzaFromListNumber(ui.addToOrder());
+            int antal = ui.whoMany();
+            allActiveOrders.get(choice[0]).addOrderLine(pizzaNr, antal);
+        }
 
-    public void removePizzaFromActiveOrder(UserInterface ui) {
+        else if (choice[1] == 2){
+            System.out.println(allActiveOrders.get(choice[0]));
+            ui.removeFromOrder();
+        }
 
-    }
+        // what element to edit? pizza, other?
 
-    public void cancelActiveOrder(UserInterface ui) {
+        // add pizza to order
+        // remove pizza from order
+
+        // add/remove other items? cola, chips?
 
     }
 
@@ -123,8 +119,18 @@ public class Controller {
     }
 
     public void completeOrder() {
+        ui.printActiveOrders(getActiveOrders());
 
-        // ?
+        // get which order to finish
+        int choice =  ui.whichOrderToComplete() - 1;
 
+        try {
+            // store order
+            fileHandler.storeArchivedOrder(allActiveOrders.get(choice));
+            // remove order from allActiveOrders
+            allActiveOrders.remove(choice);
+        } catch (IOException e) {
+            ui.errorPrint("Warning: Failed to complete order, cannot store!");
+        }
     }
 }
