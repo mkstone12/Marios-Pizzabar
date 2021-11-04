@@ -16,6 +16,7 @@ public class UserInterface {
                 3. Oprette ordre
                 4. Redigere ordre
                 5. Færdiggøre ordre
+                6. Se statistik
                 
                 0. Afslutte programmet""");
 

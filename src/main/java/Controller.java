@@ -7,6 +7,7 @@ public class Controller {
     private final FileHandler fileHandler = new FileHandler();
     private final Menu menu = new Menu(fileHandler.getMenuFromFile());
     private final UserInterface ui = new UserInterface();
+    private final Statistics stats = new Statistics(ui);
     private ArrayList<Order> allActiveOrders;
 
     public void run() {
@@ -34,6 +35,8 @@ public class Controller {
                 case 4 -> editOrder();
 
                 case 5 -> completeOrder();
+
+                case 6 -> stats.reviewStats();
 
                 case 0 -> keepGoing = saveAndQuit();
             }
