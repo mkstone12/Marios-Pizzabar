@@ -16,8 +16,13 @@ public class Controller {
         } catch (JsonProcessingException e) {
             System.out.println("Warning: the active orders from previous session could not be loaded!");
         }
-
         boolean keepGoing = true;
+
+        // to generate test orders
+        /*for (int i = 0; i < 10; i++) {
+            allActiveOrders.add(new Order("name " + i));
+            allActiveOrders.get(i).addOrderLine(menu.getPizzaFromListNumber(i+1), 2);
+        }*/
 
 
         while (keepGoing) {
@@ -131,6 +136,8 @@ public class Controller {
             allActiveOrders.remove(choice);
         } catch (IOException e) {
             ui.errorPrint("Warning: Failed to complete order, cannot store!");
+        } catch (IndexOutOfBoundsException e){
+            ui.errorPrint("There was no order by that number");
         }
     }
 }
