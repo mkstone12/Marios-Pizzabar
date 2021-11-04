@@ -23,55 +23,47 @@ public class FileHandler {
         return getLinesFromFile(MENU);
     }
 
-    public void storeArchivdOrder(Order order){
+    public void storeArchivedOrder(Order order) throws IOException {
+        ArrayList<Order> storedOrders = getStoredFromFile(ARCHIVED_ORDERS);
+        storedOrders.add(order);
+        saveToFile(convertOrdersToJson(storedOrders), ARCHIVED_ORDERS);
+    }
+
+    public ArrayList<Order> getArchivedOrders() throws JsonProcessingException {
+        return getStoredFromFile(ARCHIVED_ORDERS);
+    }
+
+    public void storeActiveOrders(List<Order> orders)  {
 
     }
 
-    public List<Order> getArchivedOrders(){
-        return null;
-    }
-
-    public void storeActiveOrders(List<Order> orders) throws JsonProcessingException {
+    private String convertOrdersToJson(List<Order> orders) throws JsonProcessingException {
         JsonNode node =  Json.toJson(orders);
 
-        String jsonString = Json.prettyPrint(node);
-
-        try {
-            saveActiveOrdersToFile(jsonString);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        return Json.prettyPrint(node);
     }
 
-    private void saveActiveOrdersToFile(String stringToSave) throws FileNotFoundException {
-        File file = new File(ACTIVE_ORDERS);
-        PrintStream ps;
-        try {
-            ps = new PrintStream(file, StandardCharsets.UTF_8);
-            ps.println(stringToSave);
+    private void saveToFile(String stringToSave, String filePath) throws IOException {
+        File file = new File(filePath);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        PrintStream ps = new PrintStream(file, StandardCharsets.UTF_8);
+        ps.println(stringToSave);
     }
 
-    public ArrayList<Order> getStoredActiveOrders(){
-        List<String> lines = getLinesFromFile(ACTIVE_ORDERS);
+    public ArrayList<Order> getStoredActiveOrders() throws JsonProcessingException {
+        return getStoredFromFile(ACTIVE_ORDERS);
+    }
 
+    private ArrayList<Order> getStoredFromFile(String file) throws JsonProcessingException {
+        List<String> lines = getLinesFromFile(file);
 
-        StringBuilder stringBuilder = new StringBuilder();
-        for (String line : lines) {
-            stringBuilder.append(line).append('\n');
-        }
-
-        List<Order> orders = null;
-        if (stringBuilder.length() > 0) {
-            try {
-                orders = Json.fromJsonToArray(stringBuilder.toString(), new TypeReference<List<Order>>() {
-                });
-            } catch (JsonProcessingException e) {
-                e.printStackTrace();
+        if (lines.size() > 0) {
+            StringBuilder stringBuilder = new StringBuilder();
+            for (String line : lines) {
+                stringBuilder.append(line).append('\n');
             }
+
+            List<Order> orders = Json.fromJsonToArray(stringBuilder.toString(), new TypeReference<>() {});
             return new ArrayList<>(orders);
         }
         return new ArrayList<>();
