@@ -114,6 +114,14 @@ public class UserInterface {
         System.out.println("Prisen for denne order er " + price + " Kr\nDen skal være klar klokken " + ETA + "\n\n");
     }
 
+    public void printStatsMenu() {
+        System.out.println("""
+                Vil du:
+                1. se total salg
+                2. se den meste populære pizza
+                3. andet??""");
+    }
+
 }
 
 
