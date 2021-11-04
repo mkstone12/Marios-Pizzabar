@@ -33,8 +33,8 @@ public class FileHandler {
         return getStoredFromFile(ARCHIVED_ORDERS);
     }
 
-    public void storeActiveOrders(List<Order> orders)  {
-
+    public void storeActiveOrders(List<Order> orders) throws IOException {
+        saveToFile(convertOrdersToJson(orders), ARCHIVED_ORDERS);
     }
 
     private String convertOrdersToJson(List<Order> orders) throws JsonProcessingException {
