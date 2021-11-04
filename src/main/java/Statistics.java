@@ -1,3 +1,4 @@
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -33,6 +34,10 @@ public class Statistics {
 
     public void salesStats() {
         System.out.println("sales"); // test
+        // try date format
+        Order order = orderList.get(0);
+        Date orderDate = order.getCreationDate();
+        System.out.println(DateFormat.getDateInstance().format(orderDate)); //test date format
     }
 
     public void pizzaStats() {
