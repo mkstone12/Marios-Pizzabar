@@ -3,7 +3,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
@@ -28,6 +27,8 @@ public class FileHandler {
         return new ArrayList<>();
     }
 
+    // takes an order, reads the already store orders, adds the order to the list of orders,
+    // and then saves the new list of orders
     public void storeArchivedOrder(Order order) throws IOException {
         ArrayList<Order> storedOrders = getStoredFromFile(ARCHIVED_ORDERS);
         storedOrders.add(order);
@@ -42,12 +43,14 @@ public class FileHandler {
         saveToFile(convertOrdersToJson(orders), ACTIVE_ORDERS);
     }
 
+    // will return a string with the json information
     private String convertOrdersToJson(List<Order> orders) throws JsonProcessingException {
         JsonNode node =  Json.toJson(orders);
 
         return Json.prettyPrint(node);
     }
 
+    // will save the given string to the given file
     private void saveToFile(String stringToSave, String filePath) throws IOException {
         File file = new File(filePath);
 
@@ -59,6 +62,7 @@ public class FileHandler {
         return getStoredFromFile(ACTIVE_ORDERS);
     }
 
+    // gets the orders from a file, if it fails it will return an empty arraylist
     private ArrayList<Order> getStoredFromFile(String file) {
         List<String> lines;
         try {
@@ -78,6 +82,7 @@ public class FileHandler {
         return new ArrayList<>();
     }
 
+    // will take a file and return the lines in the file
     private ArrayList<String> getLinesFromFile(String filePath) throws IOException {
         ArrayList<String> lines = new ArrayList<>();
 
