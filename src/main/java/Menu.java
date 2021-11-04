@@ -26,4 +26,8 @@ public class Menu {
         }
         return returnString.toString();
     }
+
+    public int getPizzaAmount(){
+        return pizzasInMenu.size();
+    }
 }

@@ -96,7 +96,9 @@ public class Controller {
         else if (choice[1] == 1){
 
             //Pizza to add and amount of it
+
             Pizza pizzaNr = menu.getPizzaFromListNumber(ui.addToOrder());
+
             int amount = ui.whoMany();
 
             ArrayList<OrderLine> activeOrderLines =  allActiveOrders.get(choice[0]).getOrderLines();
@@ -136,7 +138,6 @@ public class Controller {
                     }
                 }}
         }
-
     }
 
     public ArrayList<String> getActiveOrders() {
@@ -149,7 +150,7 @@ public class Controller {
         StringBuilder activeOrder = new StringBuilder("Der er " + size + tekst);
         int id = 1;
         for (Order order : allActiveOrders) {
-            activeOrder.append(id).append(" ").append(order).append("\n");
+            activeOrder.append(id).append(" ").append(order).append("Pris "+order.getPrice() + " Kr").append("\n");
             id++;
         }
         activeOrdersList.add(activeOrder.toString());
@@ -173,4 +174,5 @@ public class Controller {
             ui.errorPrint("There was no order by that number");
         }
     }
+
 }
