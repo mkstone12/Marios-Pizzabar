@@ -3,12 +3,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.UUID;
 
-/*public class Order {
-    private UUID id;
-    private ArrayList<OrderLine> orderLines;
-    private int ETA;
-}*/
-
 public class Order {
     private UUID orderID;
     private static int count;
@@ -20,15 +14,6 @@ public class Order {
     public Order(String name) {
         this.orderID = UUID.randomUUID();
         this.name = name;
-    }
-
-    public void setOrderDueTime(LocalTime orderDueTime) {
-        this.orderDueTime = orderDueTime;
-    }
-
-
-    public LocalTime getOrderDueTime(){
-        return orderDueTime;
     }
 
     public String stringOfOrderedPizzas() { // TODO: 03/11/2021 Reduce coupling
@@ -65,10 +50,47 @@ public class Order {
         return output.toString();
     }
 
-  /*  @Override
-    public String toString() {
-        return "Ordre= " +
-                "ordreID: " + orderID +
-                ", bestilte pizzaer: " + orderedPizzas;
-    }*/
+    public UUID getOrderID() {
+        return orderID;
+    }
+
+    public void setOrderID(UUID orderID) {
+        this.orderID = orderID;
+    }
+
+    public static int getCount() {
+        return count;
+    }
+
+    public static void setCount(int count) {
+        Order.count = count;
+    }
+
+    public ArrayList<OrderLine> getOrderLines() {
+        return orderLines;
+    }
+
+    public void setOrderLines(ArrayList<OrderLine> orderLines) {
+        this.orderLines = orderLines;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public LocalTime getOrderDueTime() {
+        return orderDueTime;
+    }
+
+    public void setOrderDueTime(LocalTime orderDueTime) {
+        this.orderDueTime = orderDueTime;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
