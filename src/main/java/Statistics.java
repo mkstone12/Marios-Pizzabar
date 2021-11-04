@@ -8,15 +8,15 @@ public class Statistics {
 
     // todo: use to sort by date: .sort(Comparator.comparing(Order::getCreationDate));
 
-    // Total sales for a period (day, week, month, year, ever)
+    // Total sales for a period (startDate - endDate)
 
-    // Most popular pizza sold in a period (day, week, month, year, ever)
+    // Most popular pizza sold in a period (startDate - endDate)
 
     private final UserInterface ui;
     private ArrayList<Order> orderList;
-    private Date startDate;
-    private Date endDate;
-    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+    private Date startDate; // included in stats
+    private Date endDate; // excluded from stats
+
 
     public Statistics(UserInterface ui) {
         this.ui = ui;
@@ -35,28 +35,21 @@ public class Statistics {
 
                 case 2 -> pizzaStats();
 
-                case 3 -> changeDates();
+                case 3 -> getRequestedDates();
             }
         }
     }
 
-    public void getRequestedDates() {
-        String startStats = ui.getDate("fra"); // simple date format
-        String endStats = ui.getDate("til"); // simple date format
-        try {
-            startDate =formatter.parse(startStats);
-            endDate =formatter.parse(endStats);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }
-
     public void salesStats() {
+        //a.compareTo(d) * d.compareTo(b) > 0
         double totalSales = 0;
         double orderPrice;
         for (Order order : orderList) {
-            orderPrice = order.getPrice();
-            totalSales += orderPrice;
+            Date orderDate = order.getCreationDate();
+            if (orderDate.after(startDate) && orderDate.before(endDate)) {
+                orderPrice = order.getPrice();
+                totalSales += orderPrice;
+            }
         }
         String salg = "Total salg fra " + DateFormat.getDateInstance().format(startDate)
                 + " til " + DateFormat.getDateInstance().format(endDate) + " = " + totalSales + "kr."; // test
@@ -67,7 +60,15 @@ public class Statistics {
         System.out.println("pizza"); // test
     }
 
-    public void changeDates() {
-        System.out.println("dates"); // test
+    public void getRequestedDates() {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy");
+        String startStats = ui.getDate("fra"); // simple date format
+        String endStats = ui.getDate("til"); // simple date format
+        try {
+            startDate = formatter.parse(startStats);
+            endDate = formatter.parse(endStats); // endDate has to be after startDate - todo check
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 }

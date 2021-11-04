@@ -10,10 +10,10 @@
     },
     "amount" : 2
   } ],
-  "price" : 106.0,
   "orderDueTime" : [ 11, 40 ],
-  "name" : "name 1"
-},{
+  "name" : "name 1",
+  "price" : 106.0
+}, {
   "orderID" : "2cf5b5d0-e64d-4f27-afde-0a24ef1fa3a9",
   "creationDate" : 1636021836101,
   "orderLines" : [ {
@@ -25,9 +25,9 @@
     },
     "amount" : 2
   } ],
-  "price" : 114.0,
   "orderDueTime" : [ 11, 40 ],
-  "name" : "Earliest"
+  "name" : "Earliest",
+  "price" : 114.0
 }, {
   "orderID" : "466ed9d9-5051-4599-b5b0-1c91c2b4ed8a",
   "creationDate" : 1636021836103,
@@ -40,9 +40,9 @@
     },
     "amount" : 2
   } ],
-  "price" : 114.0,
   "orderDueTime" : [ 11, 40 ],
-  "name" : "name 2"
+  "name" : "name 2",
+  "price" : 114.0
 }, {
   "orderID" : "e1189462-a37f-49fb-b703-57525bb8add2",
   "creationDate" : 1636021836103,
@@ -55,9 +55,9 @@
     },
     "amount" : 2
   } ],
-  "price" : 126.0,
   "orderDueTime" : [ 11, 40 ],
-  "name" : "name 3"
+  "name" : "name 3",
+  "price" : 126.0
 }, {
   "orderID" : "86cf0689-79cb-4a88-af17-50e84df57b3e",
   "creationDate" : 1636021836103,
@@ -70,9 +70,9 @@
     },
     "amount" : 2
   } ],
-  "price" : 130.0,
   "orderDueTime" : [ 11, 40 ],
-  "name" : "name 4"
+  "name" : "name 4",
+  "price" : 130.0
 }, {
   "orderID" : "f73120a8-7ce4-44fd-bb0a-5d1fdb9e7d0e",
   "creationDate" : 1636021836103,
@@ -85,9 +85,9 @@
     },
     "amount" : 2
   } ],
-  "price" : 114.0,
   "orderDueTime" : [ 11, 40 ],
-  "name" : "name 5"
+  "name" : "name 5",
+  "price" : 114.0
 }, {
   "orderID" : "531c3ef9-501b-432e-a2af-56555476a182",
   "creationDate" : 1636021836103,
@@ -100,9 +100,9 @@
     },
     "amount" : 2
   } ],
-  "price" : 122.0,
   "orderDueTime" : [ 11, 40 ],
-  "name" : "name 6"
+  "name" : "name 6",
+  "price" : 122.0
 }, {
   "orderID" : "7c9f2e4a-98a5-4044-a8d4-d2f161996ccd",
   "creationDate" : 1636021836103,
@@ -115,9 +115,9 @@
     },
     "amount" : 2
   } ],
-  "price" : 122.0,
   "orderDueTime" : [ 11, 40 ],
-  "name" : "name 7"
+  "name" : "name 7",
+  "price" : 122.0
 }, {
   "orderID" : "2e3be666-1ef0-43ee-8b94-3a17bc97348b",
   "creationDate" : 1636021836103,
@@ -130,9 +130,9 @@
     },
     "amount" : 2
   } ],
-  "price" : 122.0,
   "orderDueTime" : [ 11, 40 ],
-  "name" : "name 8"
+  "name" : "name 8",
+  "price" : 122.0
 }, {
   "orderID" : "f031560e-88b3-41a0-8c7e-62b75676cb28",
   "creationDate" : 1636021836103,
@@ -145,7 +145,7 @@
     },
     "amount" : 2
   } ],
-  "price" : 122.0,
   "orderDueTime" : [ 11, 40 ],
-  "name" : "name 9"
+  "name" : "name 9",
+  "price" : 122.0
 } ]

@@ -129,7 +129,7 @@ public class UserInterface {
 
     public String getDate(String type) {
         Scanner inputLine = new Scanner(System.in);
-        System.out.print("Indtast datoen du vil søge " + type + " (dd/mm/åååå) "); // check valid throws exception
+        System.out.print("Indtast datoen du vil søge " + type + " (dd/mm/åå) "); // check valid throws exception
         return inputLine.nextLine();
     }
 
