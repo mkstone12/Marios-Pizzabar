@@ -2,6 +2,8 @@ import java.util.Date;
 
 public class Statistics {
 
+    // todo: use to sort by date: .sort(Comparator.comparing(Order::getCreationDate));
+
     // Total sales for a period (day, week, month, year, ever)
 
     // Most popular pizza sold in a period (day, week, month, year, ever)
