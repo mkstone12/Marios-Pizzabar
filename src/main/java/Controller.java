@@ -106,11 +106,12 @@ public class Controller {
                 if(pizzaNr.getPizzaNr() == activeOrderLines.get(i).getPizza().getPizzaNr()){
                     //If orderline with pizza exist, add to amount to orderline
                     allActiveOrders.get(choice[0]).editOrderLine(i,amount);
-                    i = activeOrderLines.size();
+                    break;
                 }
                 else if (i == activeOrderLines.size()-1){
                     //else create new orderline
-                    allActiveOrders.get(choice[0]).addOrderLine(pizzaNr, amount-1);
+                    allActiveOrders.get(choice[0]).addOrderLine(pizzaNr, amount);
+                    break;
                 }
             }
         }
