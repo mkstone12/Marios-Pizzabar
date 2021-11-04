@@ -22,6 +22,10 @@ public class Order {
         this.name = name;
     }
 
+    public void setOrderDueTime(LocalTime orderDueTime) {
+        this.orderDueTime = orderDueTime;
+    }
+
     public Order(){
     }
 
