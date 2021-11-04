@@ -1,5 +1,6 @@
 import com.fasterxml.jackson.core.JsonProcessingException;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Controller {
@@ -36,10 +37,20 @@ public class Controller {
 
                 case 5 -> completeOrder();
 
-                case 0 -> keepGoing = false;
+                case 0 -> keepGoing = saveAndQuite();
 
 
             }
+        }
+    }
+
+    private boolean saveAndQuite() {
+        try {
+            fileHandler.storeActiveOrders(allActiveOrders);
+            return false;
+        } catch (IOException e) {
+            ui.errorPrint("Warning: Storing of active orders failed. Quit aborted");
+            return true;
         }
     }
 
