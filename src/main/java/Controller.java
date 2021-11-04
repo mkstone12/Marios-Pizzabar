@@ -31,9 +31,9 @@ public class Controller {
 
                 case 2 -> ui.printActiveOrders(getActiveOrders());
 
-                case 3 -> createOrder(ui, menu);
+                case 3 -> createOrder(menu);
 
-                case 4 -> editOrder(ui);
+                case 4 -> editOrder();
 
                 case 5 -> completeOrder();
 
@@ -54,7 +54,7 @@ public class Controller {
         }
     }
 
-    public void createOrder(UserInterface ui, Menu menu) {
+    public void createOrder(Menu menu) {
         String name = ui.nameOfOrder();
         Order order = new Order(name);
         ui.printMenu(menu.getListofPizzas());
@@ -74,7 +74,7 @@ public class Controller {
         }
     }
 
-    public void editOrder(UserInterface ui) {
+    public void editOrder() {
 
         // List active orders
 
