@@ -1,3 +1,4 @@
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -88,10 +89,10 @@ public class UserInterface {
 
     }
 
-    public void printFinalOrder(String order, double price,int ETA){
+    public void printFinalOrder(String order, double price, LocalTime ETA){
         System.out.println("\n\nOrderen er oprettet\nDer er bestilt:");
         System.out.println(order);
-        System.out.println("Prisen for denne order er " + price + " Kr\nDen skal være klar om " + ETA + " minutter\n\n");
+        System.out.println("Prisen for denne order er " + price + " Kr\nDen skal være klar klokken " + ETA + "\n\n");
 
     }
 }
