@@ -13,14 +13,19 @@ import java.util.Scanner;
 
 public class FileHandler {
 
-    private final String ARCHIVED_ORDERS = "data/archived_orders.txt";
+    private final String ARCHIVED_ORDERS = "data/archived_orders.json";
     private final String MENU = "data/menu.csv";
     private final String ACTIVE_ORDERS = "data/active_orders.json";
 
 
 
-    public List<String> getMenuFromFile() {
-        return getLinesFromFile(MENU);
+    public List<String> getMenuFromFile()  {
+        try {
+            return getLinesFromFile(MENU);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return new ArrayList<>();
     }
 
     public void storeArchivedOrder(Order order) throws IOException {
@@ -29,7 +34,7 @@ public class FileHandler {
         saveToFile(convertOrdersToJson(storedOrders), ARCHIVED_ORDERS);
     }
 
-    public ArrayList<Order> getArchivedOrders() throws JsonProcessingException {
+    public ArrayList<Order> getArchivedOrders() {
         return getStoredFromFile(ARCHIVED_ORDERS);
     }
 
@@ -54,32 +59,34 @@ public class FileHandler {
         return getStoredFromFile(ACTIVE_ORDERS);
     }
 
-    private ArrayList<Order> getStoredFromFile(String file) throws JsonProcessingException {
-        List<String> lines = getLinesFromFile(file);
+    private ArrayList<Order> getStoredFromFile(String file) {
+        List<String> lines;
+        try {
+            lines = getLinesFromFile(file);
+            if (lines.size() > 0) {
+                StringBuilder stringBuilder = new StringBuilder();
+                for (String line : lines) {
+                    stringBuilder.append(line).append('\n');
+                }
 
-        if (lines.size() > 0) {
-            StringBuilder stringBuilder = new StringBuilder();
-            for (String line : lines) {
-                stringBuilder.append(line).append('\n');
+                List<Order> orders = Json.fromJsonToArray(stringBuilder.toString(), new TypeReference<>() {});
+                return new ArrayList<>(orders);
             }
-
-            List<Order> orders = Json.fromJsonToArray(stringBuilder.toString(), new TypeReference<>() {});
-            return new ArrayList<>(orders);
+        } catch (IOException e) {
+            return new ArrayList<>();
         }
         return new ArrayList<>();
     }
 
-    private ArrayList<String> getLinesFromFile(String filePath){
+    private ArrayList<String> getLinesFromFile(String filePath) throws IOException {
         ArrayList<String> lines = new ArrayList<>();
-        try {
-            Scanner load = new Scanner(new File(filePath));
-            while(load.hasNextLine()){
-                lines.add(load.nextLine());
-            }
-            return lines;
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+
+        File file = new File(filePath);
+
+        Scanner load = new Scanner(file);
+        while(load.hasNextLine()){
+            lines.add(load.nextLine());
         }
-        return null;
+        return lines;
     }
 }
