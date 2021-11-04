@@ -47,7 +47,7 @@ public class Controller {
             if (toEndOrder == 1) {
 
                 Pizza pizzaNr = menu.getPizzaFromListNumber(ui.addToOrder());
-                int antal = ui.whoMany();
+                int antal = ui.howMany();
                 order.addOrderLine(pizzaNr, antal);
             } else {
                 ui.printFinalOrder(order.stringOfOrderedPizzas(), order.getPrice(), order.getETA());
@@ -59,19 +59,49 @@ public class Controller {
 
     public void editOrder(UserInterface ui) {
 
-        // List active orders
+        // Try new
+        // Will you add or remove a pizza from an order, or delete active order
+        int choice = ui.whichEditAction();
+        switch (choice) {
+            case 1 -> addPizzaToActiveOrder(ui);
 
+            case 2 -> removePizzaFromActiveOrder(ui);
+
+            case 3 -> cancelActiveOrder(ui);
+        }
+
+
+
+        // todo remove pizza from order
+
+
+
+        // todo Cancel order (are you sure?)
+
+
+    }
+    // add pizza to order
+    public void addPizzaToActiveOrder(UserInterface ui) {
+        int pizza = ui.whichPizza();
+        Pizza pizzaToAdd = menu.getPizzaFromListNumber(pizza);
+        String pizzaToAddName = pizzaToAdd.getName();
+        System.out.println("Trying to add a " + pizzaToAddName);
+
+        // List active orders
         ui.printActiveOrders(getActiveOrders());
 
         // Choose order to edit
         int choice = ui.editMenu();
+        System.out.println("Editing this order: " + allActiveOrders.get(choice - 1));
+        int newNumber = ui.howMany(pizzaToAddName);
+        System.out.println(newNumber); // test
+    }
 
-        // what element to edit? pizza, other?
+    public void removePizzaFromActiveOrder(UserInterface ui) {
 
-        // add pizza to order
-        // remove pizza from order
+    }
 
-        // add/remove other items? cola, chips?
+    public void cancelActiveOrder(UserInterface ui) {
 
     }
 

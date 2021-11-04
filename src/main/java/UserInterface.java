@@ -51,8 +51,46 @@ public class UserInterface {
     }
 
     public int editMenu() {
-        System.out.println("Hvilken order vil du ændre? ");
-        return 1; // todo menu to choose order
+        System.out.print("Hvilken order vil du ændre? ");
+        Scanner input = new Scanner(System.in); // new scanner object??
+        int choice = input.nextInt(); // todo try catch
+        input.nextLine();
+        return choice;
+    }
+
+    public int whichEditAction() {
+        Scanner input = new Scanner(System.in); // new scanner object??
+        System.out.println("""
+                Hvordan vil du ændre en order?
+                
+                1. Tilføje en pizza
+                2. Fjerne en pizza
+                3. Annulere en order""");
+
+        int choice;
+        while(true){
+            try{
+                choice = input.nextInt();
+                if(choice <=3 && choice >= 1){
+                    break;}
+                else{
+                    System.out.println("Dette er ikke muligt");
+                }
+            }
+            catch (InputMismatchException e){
+                System.out.println("Dette er ikke muligt");
+                input.nextLine();
+            }
+        }
+        return 1; // For test, shall return choice
+    }
+
+    public int whichPizza() {
+        System.out.print("Hvilken pizza skal tilføjes/fjernes? (indtast pizza nummer fra menu) ");
+        Scanner input = new Scanner(System.in); // new scanner object??
+        int pizza = input.nextInt(); // todo try catch
+        input.nextLine();
+        return pizza;
     }
 
     public String nameOfOrder(){
@@ -67,7 +105,13 @@ public class UserInterface {
         return input.nextInt();
     }
 
-    public int whoMany(){
+    public int howMany(String name) { // overload, probably should just fix the other constructor
+        Scanner input = new Scanner(System.in);
+        System.out.println("Hvor mange " + name + " pizzaer i ordren?");
+        return input.nextInt();
+    }
+
+    public int howMany(){
         Scanner input = new Scanner(System.in);
         System.out.println("Hvor mange af denne type pizzaer");
         return input.nextInt();

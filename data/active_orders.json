@@ -7,15 +7,7 @@
       "price" : 57.0,
       "pizzaNr" : 1
     },
-    "amount" : 2
-  }, {
-    "pizza" : {
-      "name" : "Vesuvio",
-      "desc" : "tomatsauce, ost, skinke og oregano",
-      "price" : 57.0,
-      "pizzaNr" : 1
-    },
-    "amount" : 1
+    "amount" : 3
   } ],
   "price" : 171.0,
   "name" : "Name",
