@@ -55,7 +55,7 @@ public class UserInterface {
         System.out.println("\033[0;91m" + errorMessage + "\u001B[0m");
     }
 
-    public int editMenu() {
+    public int editMenu(int choice) {
         System.out.println("Hvilken order vil du ændre? ");
         return 1; // todo menu to choose order
     }
