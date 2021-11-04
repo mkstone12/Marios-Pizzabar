@@ -50,6 +50,11 @@ public class UserInterface {
         System.out.print(string);
     }
 
+    // prints errorMessage in bright red and resets the text color afterwards
+    public void errorPrint(String errorMessage){
+        System.out.println("\033[0;91m" + errorMessage + "\u001B[0m");
+    }
+
     public int editMenu() {
         System.out.println("Hvilken order vil du ændre? ");
         return 1; // todo menu to choose order
