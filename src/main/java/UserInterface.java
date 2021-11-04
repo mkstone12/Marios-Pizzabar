@@ -100,12 +100,6 @@ public class UserInterface {
         System.out.println("Prisen for denne order er " + price + " Kr\nDen skal være klar klokken " + ETA + "\n\n");
     }
 
-    public int deleteOrderMenu(){
-        System.out.println("Hvilken order er færdig?");
-        int choice = input.nextInt();
-        System.out.println("Order " + choice + " er afsluttet\n");
-        return choice;
-    }
 }
 
 
