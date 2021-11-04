@@ -26,8 +26,6 @@ public class Order {
         this.orderDueTime = orderDueTime;
     }
 
-    public Order(){
-    }
 
     public LocalTime getOrderDueTime(){
         return orderDueTime;
