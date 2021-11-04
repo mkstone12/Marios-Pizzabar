@@ -60,15 +60,29 @@ public class Controller {
     }
 
     public void editOrder(UserInterface ui) {
+        Order selectedOrder;
 
         // List active orders
-
         ui.printActiveOrders(getActiveOrders());
 
         // Choose order to edit
-        int choice = ui.editMenu();
+        int choice = 0;
+        int size = allActiveOrders.size();
+        if (size > 0) {
+            choice = ui.editMenu(size);
+        } if (choice != 0) {
+            selectedOrder = allActiveOrders.get(choice - 1);
+            System.out.println(selectedOrder);
 
-        // what element to edit? pizza, other?
+        // choose orderline to edit
+        ArrayList<String> orderlinesNames = new ArrayList<>();
+        ArrayList<Integer> orderlinesAmounts = new ArrayList<>();
+        /*for (Pizza pizza : selectedOrder) {
+
+        }
+        ui.printSelectedOrderlines();*/
+        }
+        // Choose add o
 
         // add pizza to order
         // remove pizza from order

@@ -50,9 +50,22 @@ public class UserInterface {
         System.out.print(string);
     }
 
-    public int editMenu() {
-        System.out.println("Hvilken order vil du ændre? ");
-        return 1; // todo menu to choose order
+    public void printSelectedOrderline() {
+
+    }
+
+    public int editMenu(int choices) {
+        Scanner input = new Scanner(System.in); // new scanner??
+        System.out.print("Hvilken order vil du ændre? ");
+        int choice = input.nextInt();
+        input.nextLine();
+        if (choice < 1 || choice > choices) {
+            System.out.println("Ugyldig valg");
+            return 0;
+        } else {
+
+            return choice;
+        }
     }
 
     public String nameOfOrder(){
