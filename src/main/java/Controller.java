@@ -6,8 +6,8 @@ import java.util.ArrayList;
 public class Controller {
     private final FileHandler fileHandler = new FileHandler();
     private final Menu menu = new Menu(fileHandler.getMenuFromFile());
+    private final UserInterface ui = new UserInterface();
     private ArrayList<Order> allActiveOrders;
-    private UserInterface ui = new UserInterface();
 
     Pizza testPizza = new Pizza("Test", "Description", 55.0, 1);
 
