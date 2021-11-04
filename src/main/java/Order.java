@@ -9,7 +9,7 @@ public class Order {
     private Date creationDate;
     private static int count;
     private ArrayList<OrderLine> orderLines = new ArrayList<>();
-    private double price;
+    private double totalOrderPrice;
     LocalTime orderDueTime = LocalTime.now();
     private String name;
 
@@ -32,19 +32,28 @@ public class Order {
         OrderLine orderLine = new OrderLine(pizza, amount);
         this.orderLines.add(orderLine);
         orderDueTime = orderDueTime.truncatedTo(ChronoUnit.MINUTES).plusMinutes(5 * amount);
-        price +=  pizza.getPrice() * amount;
+        updatePrice();
     }
 
     public double getPrice(){
-        return price;
+        return totalOrderPrice;
     }
 
     public void editOrderLine(int orderLineToEdit, int amount){
         orderLines.get(orderLineToEdit).addAmount(amount);
+        updatePrice();
     }
 
     public void removeOrderLine(int orderLineToRemove){
         orderLines.remove(orderLineToRemove);
+        updatePrice();
+    }
+
+    public void updatePrice(){
+        totalOrderPrice = 0;
+        for(int i = 0; i <orderLines.size();i++){
+            totalOrderPrice += orderLines.get(i).getPizza().getPrice() * orderLines.get(i).getAmount();
+        }
     }
 
 
@@ -100,7 +109,7 @@ public class Order {
     }
 
     public void setPrice(double price) {
-        this.price = price;
+        this.totalOrderPrice = price;
     }
 
     public LocalTime getOrderDueTime() {

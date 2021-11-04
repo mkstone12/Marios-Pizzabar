@@ -149,7 +149,7 @@ public class Controller {
         StringBuilder activeOrder = new StringBuilder("Der er " + size + tekst);
         int id = 1;
         for (Order order : allActiveOrders) {
-            activeOrder.append(id).append(" ").append(order).append("\n");
+            activeOrder.append(id).append(" ").append(order).append("Pris "+order.getPrice() + " Kr").append("\n");
             id++;
         }
         activeOrdersList.add(activeOrder.toString());
