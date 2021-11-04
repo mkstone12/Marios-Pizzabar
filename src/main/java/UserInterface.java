@@ -18,6 +18,7 @@ public class UserInterface {
                 5. Færdiggøre ordre
                 
                 0. Afslutte programmet""");
+
         int choice;
         while(true){
         try{
@@ -55,9 +56,22 @@ public class UserInterface {
         System.out.println("\033[0;91m" + errorMessage + "\u001B[0m");
     }
 
-    public int editMenu() {
+    public int[] editMenu() {
         System.out.println("Hvilken order vil du ændre? ");
-        return 1; // todo menu to choose order
+        int orderChoice = input.nextInt();
+        System.out.println("""
+                Vil du:
+                1. Tilføje til order
+                2. Fjerne fra order
+                3. Slette order""");
+        int editChoice = input.nextInt();
+        int[] choice = {orderChoice - 1 ,editChoice};
+        return choice; // todo menu to choose order
+    }
+
+    public int removeFromOrder(){
+        System.out.println("Hvad skal fjernes fra order");
+        return 1;
     }
 
     public int whichOrderToComplete() {

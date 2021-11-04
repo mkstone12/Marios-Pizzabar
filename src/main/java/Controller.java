@@ -9,7 +9,6 @@ public class Controller {
     private final UserInterface ui = new UserInterface();
     private ArrayList<Order> allActiveOrders;
 
-
     public void run() {
         // get allActiveOrders
         try {
@@ -78,7 +77,20 @@ public class Controller {
         ui.printActiveOrders(getActiveOrders());
 
         // Choose order to edit
-        int choice = ui.editMenu();
+        int choice[] = ui.editMenu();
+        if(choice[1] == 3 ){
+            allActiveOrders.remove(choice[0]);
+        }
+        else if (choice[1] == 1){
+            Pizza pizzaNr = menu.getPizzaFromListNumber(ui.addToOrder());
+            int antal = ui.whoMany();
+            allActiveOrders.get(choice[0]).addOrderLine(pizzaNr, antal);
+        }
+
+        else if (choice[1] == 2){
+            System.out.println(allActiveOrders.get(choice[0]));
+            ui.removeFromOrder();
+        }
 
         // what element to edit? pizza, other?
 
