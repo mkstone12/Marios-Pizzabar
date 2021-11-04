@@ -9,7 +9,6 @@ public class Controller {
     private final UserInterface ui = new UserInterface();
     private ArrayList<Order> allActiveOrders;
 
-    Pizza testPizza = new Pizza("Test", "Description", 55.0, 1);
 
     public void run() {
         // get allActiveOrders
