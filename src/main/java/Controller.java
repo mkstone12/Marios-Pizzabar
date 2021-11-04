@@ -41,7 +41,7 @@ public class Controller {
 
                 case 5 -> completeOrder();
 
-                case 6 -> stats.reviewStats();
+                case 6 -> seeStats();
 
                 case 0 -> keepGoing = saveAndQuit();
             }
@@ -68,7 +68,7 @@ public class Controller {
             if (toEndOrder == 1) {
 
                 Pizza pizzaNr = menu.getPizzaFromListNumber(ui.addToOrder());
-                int amount = ui.whoMany();
+                int amount = ui.howMany();
                 order.addOrderLine(pizzaNr, amount);
             } else {
                 ui.printFinalOrder(order.stringOfOrderedPizzas(), order.getPrice(), order.getOrderDueTime());
@@ -97,7 +97,7 @@ public class Controller {
 
             //Pizza to add and amount of it
             Pizza pizzaNr = menu.getPizzaFromListNumber(ui.addToOrder());
-            int amount = ui.whoMany();
+            int amount = ui.howMany();
 
             ArrayList<OrderLine> activeOrderLines =  allActiveOrders.get(choice[0]).getOrderLines();
 
@@ -120,7 +120,7 @@ public class Controller {
         else if (choice[1] == 2){
             //Get pizza to remove and amount
             Pizza pizzaNr = menu.getPizzaFromListNumber(ui.addToOrder());
-            int amount = ui.whoMany();
+            int amount = ui.howMany();
 
             ArrayList<OrderLine> activeOrderLines =  allActiveOrders.get(choice[0]).getOrderLines();
 
@@ -172,5 +172,10 @@ public class Controller {
         } catch (IndexOutOfBoundsException e){
             ui.errorPrint("There was no order by that number");
         }
+    }
+
+    public void seeStats() {
+        ArrayList<Order> orders = fileHandler.getArchivedOrders();
+        stats.reviewStats(orders);
     }
 }
