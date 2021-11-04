@@ -1,19 +1,4 @@
 [ {
-  "orderID" : "2cf5b5d0-e64d-4f27-afde-0a24ef1fa3a9",
-  "creationDate" : 1636021836101,
-  "orderLines" : [ {
-    "pizza" : {
-      "name" : "Vesuvio",
-      "desc" : "tomatsauce, ost, skinke og oregano",
-      "price" : 57.0,
-      "pizzaNr" : 1
-    },
-    "amount" : 2
-  } ],
-  "price" : 114.0,
-  "orderDueTime" : [ 11, 40 ],
-  "name" : "name 0"
-}, {
   "orderID" : "9260669e-58e4-4d0b-bfc6-469b1e667f47",
   "creationDate" : 1636021836103,
   "orderLines" : [ {
@@ -28,6 +13,21 @@
   "price" : 106.0,
   "orderDueTime" : [ 11, 40 ],
   "name" : "name 1"
+},{
+  "orderID" : "2cf5b5d0-e64d-4f27-afde-0a24ef1fa3a9",
+  "creationDate" : 1636021836101,
+  "orderLines" : [ {
+    "pizza" : {
+      "name" : "Vesuvio",
+      "desc" : "tomatsauce, ost, skinke og oregano",
+      "price" : 57.0,
+      "pizzaNr" : 1
+    },
+    "amount" : 2
+  } ],
+  "price" : 114.0,
+  "orderDueTime" : [ 11, 40 ],
+  "name" : "Earliest"
 }, {
   "orderID" : "466ed9d9-5051-4599-b5b0-1c91c2b4ed8a",
   "creationDate" : 1636021836103,
