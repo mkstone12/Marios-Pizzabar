@@ -60,12 +60,17 @@ public class UserInterface {
     public int[] editMenu() {
         System.out.println("Hvilken order vil du ændre? ");
         int orderChoice = input.nextInt();
+
+
         System.out.println("""
                 Vil du:
                 1. Tilføje til order
                 2. Fjerne fra order
                 3. Slette order""");
         int editChoice = input.nextInt();
+
+
+
         int[] choice = {orderChoice - 1 ,editChoice};
         return choice; // todo menu to choose order
     }
@@ -92,7 +97,7 @@ public class UserInterface {
     }
 
     public int addToOrder(){
-        System.out.println("Hvad vil du gerne tilføje til ordre");
+        System.out.println("Vælg en pizza");
         return input.nextInt();
     }
 

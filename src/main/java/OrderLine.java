@@ -18,4 +18,8 @@ public class OrderLine {
     public int getAmount(){
         return amount;
     }
+    public void addAmount(int amount){
+        this.amount += amount;
+    }
+
 }
