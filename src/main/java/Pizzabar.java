@@ -4,4 +4,5 @@ public class Pizzabar {
 
     Controller controller = new Controller();
     controller.run();
-}}
+    }
+}
