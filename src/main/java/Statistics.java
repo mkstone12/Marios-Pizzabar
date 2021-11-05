@@ -1,7 +1,6 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 
 public class Statistics {
 
@@ -36,7 +35,7 @@ public class Statistics {
 
                 case 1 -> salesStats();
 
-                case 2 -> pizzaStats();
+                case 2 -> pizzaStats2();
 
                 case 3 -> getRequestedDates();
             }
@@ -64,6 +63,33 @@ public class Statistics {
         String salg = "Total salg fra " + startDate
                 + " til " + endDate + " = " + totalSales + "kr."; // test
         ui.printTotalSales(salg);
+    }
+
+    public void pizzaStats2() {
+        Map<String, Integer>  pizzaMap = new HashMap<>();
+
+        for (Order order : relevantOrders) {
+            for (OrderLine line : order.getOrderLines()) {
+                String pizza = line.getPizza().toString();
+                if (pizzaMap.containsKey(pizza)){
+                    pizzaMap.put(pizza, line.getAmount() + pizzaMap.get(pizza));
+                } else {
+                    pizzaMap.put(pizza, line.getAmount());
+                }
+            }
+        }
+
+        List<Map.Entry<String, Integer>> listOfPizzas = new LinkedList<>(pizzaMap.entrySet());
+
+        listOfPizzas.sort(((o1, o2) -> o2.getValue().compareTo(o1.getValue())));
+
+
+        StringBuilder sb = new StringBuilder("Her er pizzaerne rangeret efter mest solget:\n");
+        for (Map.Entry<String, Integer> entry : listOfPizzas){
+            sb.append(entry.getValue()).append(" stk.: ").append(entry.getKey()).append('\n');
+        }
+
+        ui.printTotalSales(sb.toString());
     }
 
     public void pizzaStats() {
@@ -112,7 +138,7 @@ public class Statistics {
     }
 
     public void getRequestedDates() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uu");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         startDate = LocalDate.parse(ui.getDate("fra"), formatter);
         endDate = LocalDate.parse(ui.getDate("til"), formatter);
 
