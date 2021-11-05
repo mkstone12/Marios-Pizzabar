@@ -25,7 +25,6 @@ public class Controller {
             allActiveOrders.get(i).addOrderLine(menu.getPizzaFromListNumber(i+1), 2);
         }*/
 
-
         while (keepGoing) {
 
             int choice = ui.printMainMenu();
