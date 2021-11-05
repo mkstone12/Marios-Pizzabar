@@ -1,8 +1,6 @@
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class Statistics {
 
@@ -14,8 +12,8 @@ public class Statistics {
 
     private final UserInterface ui;
     private ArrayList<Order> orderList;
-    private Date startDate; // included in stats
-    private Date endDate; // excluded from stats
+    private LocalDate startDate; // included in stats
+    private LocalDate endDate; // excluded from stats
 
 
     public Statistics(UserInterface ui) {
@@ -45,14 +43,14 @@ public class Statistics {
         double totalSales = 0;
         double orderPrice;
         for (Order order : orderList) {
-            Date orderDate = order.getCreationDate();
-            if (orderDate.after(startDate) && orderDate.before(endDate)) {
+            LocalDate orderDate = order.getCreationDate();
+            if (!orderDate.isBefore(startDate) && !orderDate.isAfter(endDate)) {
                 orderPrice = order.getPrice();
                 totalSales += orderPrice;
             }
         }
-        String salg = "Total salg fra " + DateFormat.getDateInstance().format(startDate)
-                + " til " + DateFormat.getDateInstance().format(endDate) + " = " + totalSales + "kr."; // test
+        String salg = "Total salg fra " + startDate
+                + " til " + endDate + " = " + totalSales + "kr."; // test
         ui.printTotalSales(salg);
     }
 
@@ -61,14 +59,10 @@ public class Statistics {
     }
 
     public void getRequestedDates() {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy");
-        String startStats = ui.getDate("fra"); // simple date format
-        String endStats = ui.getDate("til"); // simple date format
-        try {
-            startDate = formatter.parse(startStats);
-            endDate = formatter.parse(endStats); // endDate has to be after startDate - todo check
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        startDate = LocalDate.parse(ui.getDate("fra"), formatter);
+        endDate = LocalDate.parse(ui.getDate("til"), formatter);
+
+        // TODO: 05/11/2021 check that startDate cannot be after endDate
     }
 }
