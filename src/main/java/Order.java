@@ -1,12 +1,12 @@
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.UUID;
 
 public class Order {
     private UUID orderID;
-    private Date creationDate;
+    private LocalDate creationDate;
     private static int count;
     private ArrayList<OrderLine> orderLines = new ArrayList<>();
     private double totalOrderPrice;
@@ -15,7 +15,7 @@ public class Order {
 
     public Order(String name) {
         this.orderID = UUID.randomUUID();
-        this.creationDate = new Date();
+        this.creationDate = LocalDate.now();
         this.name = name;
     }
 
@@ -76,11 +76,11 @@ public class Order {
 
     }
 
-    public Date getCreationDate() {
+    public LocalDate getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
     }
 
