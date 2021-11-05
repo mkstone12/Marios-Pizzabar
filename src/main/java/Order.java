@@ -57,12 +57,14 @@ public class Order {
     }
 
 
+
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder(name + ": ");
         for (OrderLine orderLine : orderLines) {
-            output.append(orderLine.getAmount()).append(" ").append(orderLine.getPizza().getName()).append(", ");
+            output.append(orderLine).append(", ");
         }
+        output.append("Pris ").append(getPrice()).append(" kr.");
         return output.toString();
     }
 
