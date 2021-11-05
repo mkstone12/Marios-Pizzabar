@@ -98,7 +98,7 @@
       "price" : 61.0,
       "pizzaNr" : 7
     },
-    "amount" : 2
+    "amount" : 1
   } ],
   "price" : 122.0,
   "orderDueTime" : [ 11, 40 ],
@@ -113,7 +113,7 @@
       "price" : 61.0,
       "pizzaNr" : 8
     },
-    "amount" : 2
+    "amount" : 3
   } ],
   "price" : 122.0,
   "orderDueTime" : [ 11, 40 ],

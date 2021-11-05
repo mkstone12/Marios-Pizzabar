@@ -121,7 +121,7 @@ public class UserInterface {
                 Vil du:
                 1. Se total salg
                 2. Se den meste populære pizza
-                3. Skift datoer
+                3. Skifte datoer
                 
                 0. Forlade statistik""");
         return input.nextInt();
