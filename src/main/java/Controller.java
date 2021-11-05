@@ -93,7 +93,7 @@ public class Controller {
         ui.printActiveOrders(getActiveOrders());
 
         // Choose order to edit and what to edit
-        int choice[] = ui.editMenu();
+        int[] choice = ui.editMenu();
 
         //Delete order
         if(choice[1] == 3 ){
@@ -157,7 +157,7 @@ public class Controller {
         StringBuilder activeOrder = new StringBuilder("Der er " + size + tekst);
         int id = 1;
         for (Order order : allActiveOrders) {
-            activeOrder.append(id).append(" ").append(order).append("Pris "+order.getPrice() + " Kr").append("\n");
+            activeOrder.append(id).append(" ").append(order).append("\n");
             id++;
         }
         activeOrdersList.add(activeOrder.toString());
