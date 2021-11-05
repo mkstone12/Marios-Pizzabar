@@ -63,6 +63,10 @@ public class Statistics {
         startDate = LocalDate.parse(ui.getDate("fra"), formatter);
         endDate = LocalDate.parse(ui.getDate("til"), formatter);
 
-        // TODO: 05/11/2021 check that startDate cannot be after endDate
+        if (startDate.isAfter(endDate)){
+            ui.errorPrint("Warning: the start date you selected was after the end date.\n" +
+                    "You start date has been set to be the same as your end date.");
+            startDate = endDate;
+        }
     }
 }
