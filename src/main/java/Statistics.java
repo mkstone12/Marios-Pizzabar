@@ -16,8 +16,6 @@ public class Statistics {
     private ArrayList<Order> orderList;
     private LocalDate startDate; // included in stats
     private LocalDate endDate; // excluded from stats
-    //private Date startDate; // included in stats
-    //private Date endDate; // excluded from stats
     private final int MENU_SIZE = 14;
     private int[] orderedPizzaTotals = new int[MENU_SIZE];
     private String[] orderedPizzaNames = new String[MENU_SIZE];
