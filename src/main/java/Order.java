@@ -19,11 +19,10 @@ public class Order {
         this.name = name;
     }
 
-    public String stringOfOrderedPizzas() { // TODO: 03/11/2021 Reduce coupling
+    public String stringOfOrderedPizzas() {
         StringBuilder returnString = new StringBuilder();
         for (OrderLine orderLine : orderLines) {
-            returnString.append(orderLine.getPizza().getPizzaNr()).append(". ").
-                    append(orderLine.getPizza().getName()).append(" - Antal ").append(orderLine.getAmount()).append("\n");
+            returnString.append(orderLine).append("\n");
         }
         return returnString.toString();
     }
