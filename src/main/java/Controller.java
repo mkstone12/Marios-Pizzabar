@@ -25,6 +25,15 @@ public class Controller {
             allActiveOrders.get(i).addOrderLine(menu.getPizzaFromListNumber(i+1), 2);
         }*/
 
+        // to populate archivedOrders
+        /*for (Order order : allActiveOrders) {
+            try {
+                fileHandler.storeArchivedOrder(order);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }*/
+
         while (keepGoing) {
 
             int choice = ui.printMainMenu();
