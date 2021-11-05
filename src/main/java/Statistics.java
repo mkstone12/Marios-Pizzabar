@@ -2,7 +2,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 
 public class Statistics {
 
@@ -13,7 +12,7 @@ public class Statistics {
     // Most popular pizza sold in a period (startDate - endDate)
 
     private final UserInterface ui;
-    private ArrayList<Order> orderList;
+    private ArrayList<Order> orderList, relevantOrders;
     private LocalDate startDate; // included in stats
     private LocalDate endDate; // excluded from stats
     private final int MENU_SIZE = 14;
@@ -28,6 +27,7 @@ public class Statistics {
     public void reviewStats(ArrayList<Order> orderList) {
         this.orderList = orderList;
         getRequestedDates();
+        setRelevantOrders();
         boolean stats = true;
         while (stats) {
             int choice = ui.printStatsMenu();
@@ -43,16 +43,23 @@ public class Statistics {
         }
     }
 
+    public void setRelevantOrders(){
+        relevantOrders = new ArrayList<>();
+        for (Order order : orderList) {
+            LocalDate orderDate = order.getCreationDate();
+            if (!orderDate.isBefore(startDate) && !orderDate.isAfter(endDate)) {
+                relevantOrders.add(order);
+            }
+        }
+    }
+
     public void salesStats() {
         //a.compareTo(d) * d.compareTo(b) > 0
         double totalSales = 0;
         double orderPrice;
-        for (Order order : orderList) {
-            LocalDate orderDate = order.getCreationDate();
-            if (!orderDate.isBefore(startDate) && !orderDate.isAfter(endDate)) {
-                orderPrice = order.getPrice();
-                totalSales += orderPrice;
-            }
+        for (Order order : relevantOrders) {
+            orderPrice = order.getPrice();
+            totalSales += orderPrice;
         }
         String salg = "Total salg fra " + startDate
                 + " til " + endDate + " = " + totalSales + "kr."; // test
@@ -63,9 +70,7 @@ public class Statistics {
         System.out.println("most popular pizza"); // test
         int pizzaNumber, pizzaQuantity, pizzaTotal;
         Pizza pizza;
-        for (Order order : orderList) {
-            LocalDate orderDate = order.getCreationDate();
-            if (!orderDate.isBefore(startDate) && !orderDate.isAfter(endDate)) {
+        for (Order order : relevantOrders) {
                 ArrayList<OrderLine> orderLines = order.getOrderLines();
                 for (OrderLine orderLine : orderLines) {
                     pizza = orderLine.getPizza();
@@ -75,7 +80,6 @@ public class Statistics {
                     pizzaTotal = orderedPizzaTotals[pizzaNumber] + pizzaQuantity;
                     orderedPizzaTotals[pizzaNumber] = pizzaTotal;
                 }
-            }
         }
         sortPizzaArrays();
         System.out.println(Arrays.toString(orderedPizzaTotals)); //test
@@ -114,8 +118,8 @@ public class Statistics {
 
         if (startDate.isAfter(endDate)){
             ui.errorPrint("Warning: the start date you selected was after the end date.\n" +
-                    "You start date has been set to be the same as your end date.");
-            startDate = endDate;
+                    "Your start date has been set to one day before as your end date.");
+            startDate = endDate.minusDays(1);
         }
         resetPizzaArrays();
     }
