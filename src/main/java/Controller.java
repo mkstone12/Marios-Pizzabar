@@ -72,9 +72,7 @@ public class Controller {
         ui.printMenu(menu.getListofPizzas());
         while (true) {
             int toEndOrder = ui.toEndOrder();
-
             if (toEndOrder == 1) {
-
                 Pizza pizzaNr = menu.getPizzaFromListNumber(ui.addToOrder());
                 int amount = ui.howMany();
                 order.addOrderLine(pizzaNr, amount);
@@ -89,7 +87,6 @@ public class Controller {
     public void editOrder() {
 
         // List active orders
-
         ui.printActiveOrders(getActiveOrders());
 
         // Choose order to edit and what to edit
@@ -147,7 +144,7 @@ public class Controller {
 
     }
 
-    public ArrayList<String> getActiveOrders() {
+    public ArrayList<String> getActiveOrders() { // TODO: 05/11/2021 Why does it return an arraylist, and not just a string?
         ArrayList<String> activeOrdersList = new ArrayList<>();
         String tekst = " aktive ordre:\n";
         int size = allActiveOrders.size();
@@ -183,7 +180,6 @@ public class Controller {
     }
 
     public void seeStats() {
-        ArrayList<Order> orders = fileHandler.getArchivedOrders();
-        stats.reviewStats(orders);
+        stats.reviewStats(fileHandler.getArchivedOrders());
     }
 }
