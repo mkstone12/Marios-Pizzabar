@@ -35,6 +35,7 @@ public class Order {
     }
 
     public double getPrice(){
+        updatePrice();
         return totalOrderPrice;
     }
 
@@ -50,8 +51,8 @@ public class Order {
 
     public void updatePrice(){
         totalOrderPrice = 0;
-        for(int i = 0; i <orderLines.size();i++){
-            totalOrderPrice += orderLines.get(i).getPizza().getPrice() * orderLines.get(i).getAmount();
+        for (OrderLine orderLine : orderLines) {
+            totalOrderPrice += orderLine.getPizza().getPrice() * orderLine.getAmount();
         }
     }
 
