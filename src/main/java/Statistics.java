@@ -110,7 +110,7 @@ public class Statistics {
     }
 
     public void getRequestedDates() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/uu");
         startDate = LocalDate.parse(ui.getDate("fra"), formatter);
         endDate = LocalDate.parse(ui.getDate("til"), formatter);
 
