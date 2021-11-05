@@ -1,6 +1,5 @@
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -15,6 +14,8 @@ public class Statistics {
 
     private final UserInterface ui;
     private ArrayList<Order> orderList;
+    private LocalDate startDate; // included in stats
+    private LocalDate endDate; // excluded from stats
     private Date startDate; // included in stats
     private Date endDate; // excluded from stats
     private final int MENU_SIZE = 14;
@@ -49,14 +50,14 @@ public class Statistics {
         double totalSales = 0;
         double orderPrice;
         for (Order order : orderList) {
-            Date orderDate = order.getCreationDate();
-            if (orderDate.after(startDate) && orderDate.before(endDate)) {
+            LocalDate orderDate = order.getCreationDate();
+            if (!orderDate.isBefore(startDate) && !orderDate.isAfter(endDate)) {
                 orderPrice = order.getPrice();
                 totalSales += orderPrice;
             }
         }
-        String salg = "Total salg fra " + DateFormat.getDateInstance().format(startDate)
-                + " til " + DateFormat.getDateInstance().format(endDate) + " = " + totalSales + " kr."; // test
+        String salg = "Total salg fra " + startDate
+                + " til " + endDate + " = " + totalSales + "kr."; // test
         ui.printTotalSales(salg);
     }
 
@@ -109,14 +110,14 @@ public class Statistics {
     }
 
     public void getRequestedDates() {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yy");
-        String startStats = ui.getDate("fra"); // simple date format
-        String endStats = ui.getDate("til"); // simple date format
-        try {
-            startDate = formatter.parse(startStats);
-            endDate = formatter.parse(endStats); // endDate has to be after startDate - todo check
-        } catch (ParseException e) {
-            e.printStackTrace();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        startDate = LocalDate.parse(ui.getDate("fra"), formatter);
+        endDate = LocalDate.parse(ui.getDate("til"), formatter);
+
+        if (startDate.isAfter(endDate)){
+            ui.errorPrint("Warning: the start date you selected was after the end date.\n" +
+                    "You start date has been set to be the same as your end date.");
+            startDate = endDate;
         }
         resetPizzaArrays();
     }

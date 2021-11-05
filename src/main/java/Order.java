@@ -1,12 +1,12 @@
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.UUID;
 
 public class Order {
     private UUID orderID;
-    private Date creationDate;
+    private LocalDate creationDate;
     private static int count;
     private ArrayList<OrderLine> orderLines = new ArrayList<>();
     private double totalOrderPrice;
@@ -15,15 +15,14 @@ public class Order {
 
     public Order(String name) {
         this.orderID = UUID.randomUUID();
-        this.creationDate = new Date();
+        this.creationDate = LocalDate.now();
         this.name = name;
     }
 
-    public String stringOfOrderedPizzas() { // TODO: 03/11/2021 Reduce coupling
+    public String stringOfOrderedPizzas() {
         StringBuilder returnString = new StringBuilder();
         for (OrderLine orderLine : orderLines) {
-            returnString.append(orderLine.getPizza().getPizzaNr()).append(". ").
-                    append(orderLine.getPizza().getName()).append(" - Antal ").append(orderLine.getAmount()).append("\n");
+            returnString.append(orderLine).append("\n");
         }
         return returnString.toString();
     }
@@ -57,12 +56,14 @@ public class Order {
     }
 
 
+
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder(name + ": ");
         for (OrderLine orderLine : orderLines) {
-            output.append(orderLine.getAmount()).append(" ").append(orderLine.getPizza().getName()).append(", ");
+            output.append(orderLine).append(", ");
         }
+        output.append("Pris ").append(getPrice()).append(" kr.");
         return output.toString();
     }
 
@@ -76,11 +77,11 @@ public class Order {
 
     }
 
-    public Date getCreationDate() {
+    public LocalDate getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
     }
 
