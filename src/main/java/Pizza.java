@@ -33,7 +33,7 @@ public class Pizza {
     //
     //*********************************************
 
-    public Pizza(){
+    public Pizza() {
 
     }
 
