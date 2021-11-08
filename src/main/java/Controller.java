@@ -66,7 +66,7 @@ public class Controller {
         }
     }
 
-    public void createOrder(Menu menu) {
+    private void createOrder(Menu menu) {
         String name = ui.nameOfOrder();
         Order order = new Order(name);
         ui.printMenu(menu.getListofPizzas());
@@ -85,7 +85,7 @@ public class Controller {
         }
     }
 
-    public void editOrder() {
+    private void editOrder() {
 
         // List active orders
         ui.printActiveOrders(getActiveOrders());
@@ -150,7 +150,7 @@ public class Controller {
 
     }
 
-    public String getActiveOrders() {
+    private String getActiveOrders() {
         ArrayList<String> activeOrdersList = new ArrayList<>();
         String tekst = " aktive ordre:\n";
         int size = allActiveOrders.size();
@@ -170,7 +170,7 @@ public class Controller {
         return activeOrders.toString();
     }
 
-    public void completeOrder() {
+    private void completeOrder() {
         ui.printActiveOrders(getActiveOrders());
 
         // get which order to finish
@@ -188,11 +188,11 @@ public class Controller {
         }
     }
 
-    public void seeStats() {
+    private void seeStats() {
         stats.reviewStats(fileHandler.getArchivedOrders());
     }
 
-    public Pizza getValidPizza() {
+    private Pizza getValidPizza() {
         Pizza pizzaNr = menu.getPizzaFromListNumber(ui.addToOrder());
         while (pizzaNr == null) {
             pizzaNr = menu.getPizzaFromListNumber(ui.addToOrder(true));
