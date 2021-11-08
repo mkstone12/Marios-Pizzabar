@@ -1,6 +1,6 @@
 [ {
-  "orderID" : "2cf5b5d0-e64d-4f27-afde-0a24ef1fa3a9",
-  "creationDate" : 1636021836101,
+  "orderID" : "725bb13e-af70-41c9-b1ef-5a45800512dd",
+  "creationDate" : [ 2021, 11, 5 ],
   "orderLines" : [ {
     "pizza" : {
       "name" : "Vesuvio",
@@ -10,12 +10,12 @@
     },
     "amount" : 2
   } ],
-  "orderDueTime" : [ 11, 40 ],
+  "orderDueTime" : [ 8, 46 ],
   "name" : "name 0",
   "price" : 114.0
 }, {
-  "orderID" : "9260669e-58e4-4d0b-bfc6-469b1e667f47",
-  "creationDate" : 1636021836103,
+  "orderID" : "3af020d3-181d-4f13-881f-70078830915b",
+  "creationDate" : [ 2021, 11, 5 ],
   "orderLines" : [ {
     "pizza" : {
       "name" : "Amerikaner",
@@ -25,12 +25,12 @@
     },
     "amount" : 2
   } ],
-  "orderDueTime" : [ 11, 40 ],
+  "orderDueTime" : [ 8, 46 ],
   "name" : "name 1",
   "price" : 106.0
 }, {
-  "orderID" : "466ed9d9-5051-4599-b5b0-1c91c2b4ed8a",
-  "creationDate" : 1636021836103,
+  "orderID" : "bd44c83c-6456-43bb-a05d-05974d7280be",
+  "creationDate" : [ 2021, 11, 5 ],
   "orderLines" : [ {
     "pizza" : {
       "name" : "Cacciatore",
@@ -40,12 +40,12 @@
     },
     "amount" : 2
   } ],
-  "orderDueTime" : [ 11, 40 ],
+  "orderDueTime" : [ 8, 46 ],
   "name" : "name 2",
   "price" : 114.0
 }, {
-  "orderID" : "e1189462-a37f-49fb-b703-57525bb8add2",
-  "creationDate" : 1636021836103,
+  "orderID" : "99177041-d500-4423-b12b-6478b814ae14",
+  "creationDate" : [ 2021, 11, 5 ],
   "orderLines" : [ {
     "pizza" : {
       "name" : "Carbona",
@@ -55,12 +55,12 @@
     },
     "amount" : 2
   } ],
-  "orderDueTime" : [ 11, 40 ],
+  "orderDueTime" : [ 8, 46 ],
   "name" : "name 3",
   "price" : 126.0
 }, {
-  "orderID" : "86cf0689-79cb-4a88-af17-50e84df57b3e",
-  "creationDate" : 1636021836103,
+  "orderID" : "0eda44bb-d74a-45ae-8d99-930b984b41a3",
+  "creationDate" : [ 2021, 11, 5 ],
   "orderLines" : [ {
     "pizza" : {
       "name" : "Dennis",
@@ -70,12 +70,12 @@
     },
     "amount" : 2
   } ],
-  "orderDueTime" : [ 11, 40 ],
+  "orderDueTime" : [ 8, 46 ],
   "name" : "name 4",
   "price" : 130.0
 }, {
-  "orderID" : "f73120a8-7ce4-44fd-bb0a-5d1fdb9e7d0e",
-  "creationDate" : 1636021836103,
+  "orderID" : "d3ac3943-429d-4ad3-8320-278fb5d664d1",
+  "creationDate" : [ 2021, 11, 5 ],
   "orderLines" : [ {
     "pizza" : {
       "name" : "Bertil",
@@ -85,12 +85,12 @@
     },
     "amount" : 2
   } ],
-  "orderDueTime" : [ 11, 40 ],
+  "orderDueTime" : [ 8, 46 ],
   "name" : "name 5",
   "price" : 114.0
 }, {
-  "orderID" : "531c3ef9-501b-432e-a2af-56555476a182",
-  "creationDate" : 1636021836103,
+  "orderID" : "fafe91cc-5836-40be-b8c1-4ceac3dba5b8",
+  "creationDate" : [ 2021, 11, 4 ],
   "orderLines" : [ {
     "pizza" : {
       "name" : "Silvia",
@@ -100,12 +100,12 @@
     },
     "amount" : 2
   } ],
-  "orderDueTime" : [ 11, 40 ],
+  "orderDueTime" : [ 8, 46 ],
   "name" : "name 6",
   "price" : 122.0
 }, {
-  "orderID" : "7c9f2e4a-98a5-4044-a8d4-d2f161996ccd",
-  "creationDate" : 1636021836103,
+  "orderID" : "5721fd4e-6bdd-4a58-ae63-3ec2ac73d979",
+  "creationDate" : [ 2021, 11, 4 ],
   "orderLines" : [ {
     "pizza" : {
       "name" : "Victoria",
@@ -115,12 +115,12 @@
     },
     "amount" : 2
   } ],
-  "orderDueTime" : [ 11, 40 ],
+  "orderDueTime" : [ 8, 46 ],
   "name" : "name 7",
   "price" : 122.0
 }, {
-  "orderID" : "2e3be666-1ef0-43ee-8b94-3a17bc97348b",
-  "creationDate" : 1636021836103,
+  "orderID" : "ae560a92-0734-4703-838d-7cd94def4948",
+  "creationDate" : [ 2021, 11, 3 ],
   "orderLines" : [ {
     "pizza" : {
       "name" : "Toronfo",
@@ -130,12 +130,12 @@
     },
     "amount" : 2
   } ],
-  "orderDueTime" : [ 11, 40 ],
+  "orderDueTime" : [ 8, 46 ],
   "name" : "name 8",
   "price" : 122.0
 }, {
-  "orderID" : "f031560e-88b3-41a0-8c7e-62b75676cb28",
-  "creationDate" : 1636021836103,
+  "orderID" : "1193124f-2880-4c87-aac3-37670eccc3f5",
+  "creationDate" : [ 2021, 11, 3 ],
   "orderLines" : [ {
     "pizza" : {
       "name" : "Capricciosa",
@@ -144,16 +144,8 @@
       "pizzaNr" : 10
     },
     "amount" : 2
-  }, {
-    "pizza" : {
-      "name" : "Mafia",
-      "desc" : "tomatsauce, ost, pepperoni, bacon, løg og oregano",
-      "price" : 61.0,
-      "pizzaNr" : 14
-    },
-    "amount" : 2
   } ],
-  "orderDueTime" : [ 11, 50 ],
+  "orderDueTime" : [ 8, 46 ],
   "name" : "name 9",
-  "price" : 244.0
+  "price" : 122.0
 } ]

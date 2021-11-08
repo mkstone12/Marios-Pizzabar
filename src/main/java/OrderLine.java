@@ -22,4 +22,8 @@ public class OrderLine {
         this.amount += amount;
     }
 
+    @Override
+    public String toString() {
+        return amount + " stk. " + pizza.getPizzaNr() + ". " + pizza.getName();
+    }
 }
