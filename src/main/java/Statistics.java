@@ -5,14 +5,14 @@ import java.util.*;
 
 public class Statistics {
 
-    private final UserInterface ui;
+    private final UserInterface UI;
     private ArrayList<Order> orderList, relevantOrders;
     private LocalDate startDate; // included in stats
     private LocalDate endDate; // excluded from stats
 
 
     public Statistics(UserInterface ui) {
-        this.ui = ui;
+        this.UI = ui;
     }
 
     public void reviewStats(ArrayList<Order> orderList) {
@@ -21,7 +21,7 @@ public class Statistics {
         setRelevantOrders();
         boolean stats = true;
         while (stats) {
-            int choice = ui.printStatsMenu();
+            int choice = UI.printStatsMenu();
             switch (choice) {
                 case 0 -> stats = false;
 
@@ -56,7 +56,7 @@ public class Statistics {
             totalSales += order.getPrice();
         }
         // print the result
-        ui.printMessage("Total salg fra " + startDate + " til " + endDate + " = " + totalSales + "kr.");
+        UI.printMessage("Total salg fra " + startDate + " til " + endDate + " = " + totalSales + "kr.");
     }
 
     private void pizzaStats() {
@@ -88,7 +88,7 @@ public class Statistics {
         }
 
         // print the sorted list of pizzas
-        ui.printMessage(sb.toString());
+        UI.printMessage(sb.toString());
     }
 
     private void printArchivedOrders(ArrayList<Order> orders) {
@@ -111,7 +111,7 @@ public class Statistics {
         }
 
         //print the string of the Stringbuilder
-        ui.printMessage(activeOrder.toString());
+        UI.printMessage(activeOrder.toString());
     }
 
     private void getRequestedDates() {
@@ -120,18 +120,18 @@ public class Statistics {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
             // get the dates from the user and parse
-            startDate = LocalDate.parse(ui.getDate("fra"), formatter);
-            endDate = LocalDate.parse(ui.getDate("til"), formatter);
+            startDate = LocalDate.parse(UI.getDate("fra"), formatter);
+            endDate = LocalDate.parse(UI.getDate("til"), formatter);
 
             // if the startDate is after the endDate, then print warning
             // and set the startdate a day before the end date
             if (startDate.isAfter(endDate)) {
-                ui.errorPrint("Warning: the start date you selected was after the end date.\n" +
+                UI.errorPrint("Warning: the start date you selected was after the end date.\n" +
                         "Your start date has been set to one day before as your end date.");
                 startDate = endDate.minusDays(1);
             }
         } catch (DateTimeParseException e) { // if the user types an input the parser does not understand
-            ui.errorPrint("Warning: Invalid Input. Please check formating and try again:");
+            UI.errorPrint("Warning: Invalid Input. Please check formating and try again:");
             getRequestedDates();
         }
     }
