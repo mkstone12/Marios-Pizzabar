@@ -56,9 +56,22 @@ public class UserInterface {
         System.out.println("\033[0;91m" + errorMessage + "\u001B[0m");
     }
 
-    public int[] editMenu() {
+    public int[] editMenu(int orderSize) {
         System.out.println("Hvilken order vil du ændre? ");
-        int orderChoice = input.nextInt();
+        int orderChoice = 0;
+        boolean goodChoice = false;
+        while(!goodChoice){
+            if (orderChoice  >= 1 && orderChoice <=orderSize){
+                goodChoice = true;
+            }
+            else{
+                System.out.println("Du kan kun vælge med tal mellem 1 og " + orderSize);
+                try{
+                    orderChoice = input.nextInt();
+                }
+                catch (InputMismatchException e){
+                    input.nextLine();
+                }}}
 
         System.out.println("""
                 Vil du:
@@ -66,14 +79,25 @@ public class UserInterface {
                 2. Fjerne fra order
                 3. Slette order""");
 
-        int editChoice = input.nextInt();
-        return new int[]{orderChoice - 1 ,editChoice}; // todo menu to choose order
+        int editChoice = 0;
+        goodChoice = false;
+        while(!goodChoice){
+            if (editChoice  >= 1 && editChoice <=3){
+                goodChoice = true;
+            }
+            else{
+                System.out.println("Du kan kun vælge med tal mellem 1 og 3");
+                try{
+                    editChoice = input.nextInt();
+                }
+                catch (InputMismatchException e){
+                    input.nextLine();
+                }}}
+
+        int[] choice = {orderChoice - 1 ,editChoice};
+        return choice;
     }
 
-    public int removeFromOrder(){
-        System.out.println("Hvad skal fjernes fra order");
-        return 1;
-    }
 
     public int whichOrderToComplete() {
         Scanner input = new Scanner(System.in);
@@ -86,25 +110,71 @@ public class UserInterface {
     }
 
     public String nameOfOrder(){
-        System.out.println("Indtast navnet på bestillingen");
+        System.out.println("Indtast navnet og telefonnummer på bestillingen");
         input.nextLine();
         return input.nextLine();
     }
 
     public int addToOrder(){
         System.out.println("Vælg en pizza");
+        input.nextLine();
+        while (!input.hasNextInt()){
+            System.out.print("Du kan kun vælge med tal:");
+            input.nextLine(); // to avoid scanner bug
+        }
+        return input.nextInt();
+    }
+    public int addToOrder(boolean triedBefore){
+        System.out.println("Denne pizza eksistere ikke. \nVælg en anden pizza");
+        input.nextLine();
+        while (!input.hasNextInt()){
+            System.out.print("Du kan kun vælge med tal:");
+            input.nextLine(); // to avoid scanner bug
+        }
         return input.nextInt();
     }
 
     public int howMany(){
         System.out.println("Hvor mange af denne type pizzaer");
-        return input.nextInt();
+        int choice = 0;
+        boolean goodChoice = false;
+        while(!goodChoice){
+            if (choice  >= 1){
+                goodChoice = true;
+            }
+            else{
+                System.out.println("Du kan kun vælge et tal større end 0");
+                try{
+                    choice = input.nextInt();
+                }
+                catch (InputMismatchException e){
+                    input.nextLine();
+                }
+            }}
+
+        return choice;
     }
 
     public int toEndOrder(){
         System.out.println("1. Vil du tilføje til order\n2. Vil du afslutte order");
-        //TO DO check om det er 1 eller 2
-        return input.nextInt();
+
+        int choice = 0;
+        boolean goodChoice = false;
+        while(!goodChoice){
+
+        if (choice  ==1 || choice == 2){
+            goodChoice = true;
+        }
+        else{
+            System.out.println("Du kan kun vælge tallene 1 og 2");
+            try{
+                choice = input.nextInt();
+            }
+            catch (InputMismatchException e){
+                input.nextLine();
+            }
+        }}
+        return choice;
 
     }
 
