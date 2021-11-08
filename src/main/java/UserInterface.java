@@ -47,8 +47,7 @@ public class UserInterface {
     }
 
 
-    public void printActiveOrders(ArrayList<String> list) {
-        for (String string : list)
+    public void printActiveOrders(String string) {
         System.out.print(string);
     }
 
@@ -68,8 +67,7 @@ public class UserInterface {
                 3. Slette order""");
 
         int editChoice = input.nextInt();
-        int[] choice = {orderChoice - 1 ,editChoice};
-        return choice; // todo menu to choose order
+        return new int[]{orderChoice - 1 ,editChoice}; // todo menu to choose order
     }
 
     public int removeFromOrder(){
