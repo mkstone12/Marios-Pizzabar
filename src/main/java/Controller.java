@@ -94,70 +94,73 @@ public class Controller {
         boolean keepEditing = true;
         int orderToEdit = ui.orderToEdit(allActiveOrders.size());
 
-        while(keepEditing){
-        int choice = ui.editMenu();
+        while (keepEditing) {
+            int choice = ui.editMenu();
 
-        //Delete order
-        if (choice == 3) {
-            allActiveOrders.remove(orderToEdit);
-            keepEditing = false;
-        }
-        if(choice == 0){
-            keepEditing = false;
-        }
+            //Delete order
+            if (choice == 3) {
+                allActiveOrders.remove(orderToEdit);
+                keepEditing = false;
+            }
+            if (choice == 0) {
+                keepEditing = false;
+            }
 
-        //Add to order
-        else if (choice == 1) {
+            //Add to order
+            else if (choice == 1) {
 
-            //Pizza to add and amount of it
-            ui.printMenu(menu.getListofPizzas());
-            Pizza pizzaNr = getValidPizza();
-            int amount = ui.howMany();
+                //Pizza to add and amount of it
+                ui.printMenu(menu.getListofPizzas());
+                Pizza pizzaNr = getValidPizza();
+                int amount = ui.howMany();
 
-            ArrayList<OrderLine> activeOrderLines = allActiveOrders.get(orderToEdit).getOrderLines();
+                ArrayList<OrderLine> activeOrderLines = allActiveOrders.get(orderToEdit).getOrderLines();
 
-            //Loops over orderlines in order to check if there is orderline for pizza
-            for (int i = 0; i < activeOrderLines.size(); i++) {
-                if (pizzaNr.getPizzaNr() == activeOrderLines.get(i).getPizza().getPizzaNr()) {
-                    //If orderline with pizza exist, add amount to orderline
-                    allActiveOrders.get(orderToEdit).editOrderLine(i, amount);
-                    break;
-                } else if (i == activeOrderLines.size() - 1) {
-                    //else create new orderline
-                    allActiveOrders.get(orderToEdit).addOrderLine(pizzaNr, amount);
-                    break;
+                //Loops over orderlines in order to check if there is orderline for pizza
+                for (int i = 0; i < activeOrderLines.size(); i++) {
+                    if (pizzaNr.getPizzaNr() == activeOrderLines.get(i).getPizza().getPizzaNr()) {
+                        //If orderline with pizza exist, add amount to orderline
+                        allActiveOrders.get(orderToEdit).editOrderLine(i, amount);
+                        break;
+                    } else if (i == activeOrderLines.size() - 1) {
+                        //else create new orderline
+                        allActiveOrders.get(orderToEdit).addOrderLine(pizzaNr, amount);
+                        break;
+                    }
                 }
             }
-        }
 
-        //remove from order
-        else if (choice == 2) {
-            //Get pizza to remove and amount
+            //remove from order
+            else if (choice == 2) {
+                //Get pizza to remove and amount
 
-            ui.printOrderLinesInOrder(allActiveOrders.get(orderToEdit).getOrderLines());
-            Pizza pizzaNr = getValidPizza();
+                ui.printOrderLinesInOrder(allActiveOrders.get(orderToEdit).getOrderLines());
+                Pizza pizzaNr = getValidPizza();
 
-            int amount = ui.howMany();
+                int amount = ui.howMany();
 
-            ArrayList<OrderLine> activeOrderLines = allActiveOrders.get(orderToEdit).getOrderLines();
+                ArrayList<OrderLine> activeOrderLines = allActiveOrders.get(orderToEdit).getOrderLines();
 
-            //Loop to find orderline with pizza
-            for (int i = 0; i < activeOrderLines.size(); i++) {
-                if (pizzaNr.getPizzaNr() == activeOrderLines.get(i).getPizza().getPizzaNr()) {
-                    //remove amount of pizza from orderline
-                    allActiveOrders.get(orderToEdit).editOrderLine(i, -amount);
+                //Loop to find orderline with pizza
+                for (int i = 0; i < activeOrderLines.size(); i++) {
+                    if (pizzaNr.getPizzaNr() == activeOrderLines.get(i).getPizza().getPizzaNr()) {
+                        //remove amount of pizza from orderline
+                        allActiveOrders.get(orderToEdit).editOrderLine(i, -amount);
 
-                    //If amount is now 0 or less, remove orderline
-                    if (activeOrderLines.get(i).getAmount() <= 0) {
-                        allActiveOrders.get(orderToEdit).removeOrderLine(i);
-                    }}}
-            //Remove order if empty
-            if(allActiveOrders.get(orderToEdit).getOrderLines().size() == 0){
-                allActiveOrders.remove(orderToEdit);
+                        //If amount is now 0 or less, remove orderline
+                        if (activeOrderLines.get(i).getAmount() <= 0) {
+                            allActiveOrders.get(orderToEdit).removeOrderLine(i);
+                        }
+                    }
+                }
+                //Remove order if empty
+                if (allActiveOrders.get(orderToEdit).getOrderLines().size() == 0) {
+                    allActiveOrders.remove(orderToEdit);
+                }
             }
-        }
 
-    }}
+        }
+    }
 
     private String getActiveOrders() {
         ArrayList<String> activeOrdersList = new ArrayList<>();
@@ -184,19 +187,22 @@ public class Controller {
 
         // get which order to finish
         int choice = ui.whichOrderToComplete() - 1;
-        if(choice!=-1){
-        try {
-            // store order
-            fileHandler.storeArchivedOrder(allActiveOrders.get(choice));
-            // remove order from allActiveOrders
-            allActiveOrders.remove(choice);
-            ui.printMessage("Ordren er arkivered");
-        } catch (IOException e) {
-            ui.errorPrint("Warning: Failed to complete order, cannot store!");
-        } catch (IndexOutOfBoundsException e) {
-            ui.errorPrint("There was no order by that number");
+        if (choice != -1) {
+            try {
+                // store order
+                fileHandler.storeArchivedOrder(allActiveOrders.get(choice));
+                // remove order from allActiveOrders
+                allActiveOrders.remove(choice);
+                ui.printMessage("Ordren er arkivered");
+
+            } catch (IOException e) {
+                ui.errorPrint("Warning: Failed to complete order, cannot store!");
+
+            } catch (IndexOutOfBoundsException e) {
+                ui.errorPrint("There was no order by that number");
+            }
         }
-    }}
+    }
 
     private void seeStats() {
         stats.reviewStats(fileHandler.getArchivedOrders());
