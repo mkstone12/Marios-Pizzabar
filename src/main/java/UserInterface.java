@@ -152,7 +152,6 @@ public class UserInterface {
                     input.nextLine();
                 }
             }}
-
         return choice;
     }
 
@@ -204,6 +203,14 @@ public class UserInterface {
 
     public void printTotalSales(String sales) {
         System.out.println(sales);
+    }
+
+    public void removeFromOrder(ArrayList<OrderLine> orders){
+        for (OrderLine order : orders) {
+            System.out.println(order);
+        }
+
+
     }
 }
 

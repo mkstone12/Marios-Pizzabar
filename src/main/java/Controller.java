@@ -127,9 +127,11 @@ public class Controller {
         //remove from order
         else if (choice[1] == 2){
             //Get pizza to remove and amount
+            ui.removeFromOrder(allActiveOrders.get(choice[0]).getOrderLines());
             Pizza pizzaNr = getValidPizza();
 
             int amount = ui.howMany();
+
 
             ArrayList<OrderLine> activeOrderLines =  allActiveOrders.get(choice[0]).getOrderLines();
 
@@ -144,6 +146,9 @@ public class Controller {
                         allActiveOrders.get(choice[0]).removeOrderLine(i);
                     }
                 }}
+        if(allActiveOrders.get(choice[0]).getOrderLines().size()  == 0){
+            allActiveOrders.remove(choice[0]);
+        }
         }
 
     }
