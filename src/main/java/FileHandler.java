@@ -29,7 +29,7 @@ public class FileHandler {
 
     // takes an order, reads the already store orders, adds the order to the list of orders,
     // and then saves the new list of orders
-    public void storeArchivedOrder(Order order) throws IOException {
+        public void storeArchivedOrder(Order order) throws IOException {
         ArrayList<Order> storedOrders = getStoredFromFile(ARCHIVED_ORDERS);
         storedOrders.add(order);
         saveToFile(convertOrdersToJson(storedOrders), ARCHIVED_ORDERS);

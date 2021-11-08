@@ -46,11 +46,6 @@ public class UserInterface {
         System.out.println();
     }
 
-
-    public void printActiveOrders(String orderList) {
-        System.out.print(orderList);
-    }
-
     // prints errorMessage in bright red and resets the text color afterwards
     public void errorPrint(String errorMessage){
         System.out.println("\033[0;91m" + errorMessage + "\u001B[0m");
@@ -219,8 +214,8 @@ public class UserInterface {
         return inputLine.nextLine();
     }
 
-    public void printTotalSales(String sales) {
-        System.out.println(sales);
+    public void printMessage(String message){
+        System.out.println(message);
     }
 
     public void printOrderLinesInOrder(ArrayList<OrderLine> orders){
