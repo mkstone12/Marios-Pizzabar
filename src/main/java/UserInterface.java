@@ -124,6 +124,7 @@ public class UserInterface {
         }
         return input.nextInt();
     }
+
     public int addToOrder(boolean triedBefore){
         System.out.println("Denne pizza eksistere ikke. \nVælg en anden pizza: ");
         input.nextLine();
@@ -193,7 +194,13 @@ public class UserInterface {
                 5. Udskriv all arkiverede ordre
                 
                 0. Forlade statistik""");
-        return input.nextInt();
+        try{
+            return input.nextInt();
+        }catch (InputMismatchException e){
+            errorPrint("Warning: input not accepted, please enter a whole number from the list");
+            input.nextLine(); // to avoid scannerbug
+            return printStatsMenu();
+        }
     }
 
     public String getDate(String type) {
