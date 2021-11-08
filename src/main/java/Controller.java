@@ -92,7 +92,7 @@ public class Controller {
 
         // Choose order to edit and what to edit
         boolean keepEditing = true;
-        int orderToEdit = ui.ordertoEdit(allActiveOrders.size());
+        int orderToEdit = ui.orderToEdit(allActiveOrders.size());
 
         while(keepEditing){
         int choice = ui.editMenu();

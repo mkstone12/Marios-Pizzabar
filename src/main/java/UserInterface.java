@@ -56,7 +56,7 @@ public class UserInterface {
         System.out.println("\033[0;91m" + errorMessage + "\u001B[0m");
     }
 
-    public int ordertoEdit(int orderSize) {
+    public int orderToEdit(int orderSize) {
         System.out.println("Hvilken order vil du ændre? ");
         int orderChoice = 0;
 
