@@ -147,17 +147,12 @@ public class Controller {
                         //remove amount of pizza from orderline
                         allActiveOrders.get(orderToEdit).editOrderLine(i, -amount);
 
-                        //If amount is now 0 or less, remove orderline
-                        if (activeOrderLines.get(i).getAmount() <= 0) {
-                            allActiveOrders.get(orderToEdit).removeOrderLine(i);
-                        }
-                    }
-                }
-                //Remove order if empty
-                if (allActiveOrders.get(orderToEdit).getOrderLines().size() == 0) {
-                    allActiveOrders.remove(orderToEdit);
-                }
-            }
+                    //If amount is now 0 or less, remove orderline
+                    if (activeOrderLines.get(i).getAmount() <= 0) {
+                        allActiveOrders.get(orderToEdit).removeOrderLine(i);
+                    }}}
+
+        }
 
         }
     }
