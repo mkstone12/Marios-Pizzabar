@@ -4,16 +4,16 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class Controller {
-    private final FileHandler fileHandler = new FileHandler();
-    private final Menu menu = new Menu(fileHandler.getMenuFromFile());
-    private final UserInterface ui = new UserInterface();
-    private final Statistics stats = new Statistics(ui);
+    private final FileHandler FILE_HANDLER = new FileHandler();
+    private final Menu MENU = new Menu(FILE_HANDLER.getMenuFromFile());
+    private final UserInterface UI = new UserInterface();
+    private final Statistics STATISTICS = new Statistics(UI);
     private ArrayList<Order> allActiveOrders;
 
     public void run() {
         // get allActiveOrders
         try {
-            allActiveOrders = fileHandler.getStoredActiveOrders();
+            allActiveOrders = FILE_HANDLER.getStoredActiveOrders();
         } catch (JsonProcessingException e) {
             System.out.println("Warning: the active orders from previous session could not be loaded!");
         }
@@ -36,14 +36,14 @@ public class Controller {
 
         while (keepGoing) {
 
-            int choice = ui.printMainMenu();
+            int choice = UI.printMainMenu();
 
             switch (choice) {
-                case 1 -> ui.printMenu(menu.getListofPizzas());
+                case 1 -> UI.printMenu(MENU.getListofPizzas());
 
-                case 2 -> ui.printMessage(getActiveOrders());
+                case 2 -> UI.printMessage(getActiveOrders());
 
-                case 3 -> createOrder(menu);
+                case 3 -> createOrder(MENU);
 
                 case 4 -> editOrder();
 
@@ -58,27 +58,27 @@ public class Controller {
 
     private boolean saveAndQuit() {
         try {
-            fileHandler.storeActiveOrders(allActiveOrders);
+            FILE_HANDLER.storeActiveOrders(allActiveOrders);
             return false;
         } catch (IOException e) {
-            ui.errorPrint("Warning: Storing of active orders failed. Quit aborted");
+            UI.errorPrint("Warning: Storing of active orders failed. Quit aborted");
             return true;
         }
     }
 
     private void createOrder(Menu menu) {
-        String name = ui.nameOfOrder();
+        String name = UI.nameOfOrder();
         Order order = new Order(name);
-        ui.printMenu(menu.getListofPizzas());
+        UI.printMenu(menu.getListofPizzas());
         while (true) {
-            int toEndOrder = ui.toEndOrder();
+            int toEndOrder = UI.toEndOrder();
             if (toEndOrder == 1) {
 
                 Pizza pizzaNr = getValidPizza();
-                int amount = ui.howMany();
+                int amount = UI.howMany();
                 order.addOrderLine(pizzaNr, amount);
             } else {
-                ui.printFinalOrder(order.stringOfOrderedPizzas(), order.getPrice(), order.getOrderDueTime());
+                UI.printFinalOrder(order.stringOfOrderedPizzas(), order.getPrice(), order.getOrderDueTime());
                 allActiveOrders.add(order);
                 break;
             }
@@ -88,14 +88,14 @@ public class Controller {
     private void editOrder() {
 
         // List active orders
-        ui.printMessage(getActiveOrders());
+        UI.printMessage(getActiveOrders());
 
         // Choose order to edit and what to edit
         boolean keepEditing = true;
-        int orderToEdit = ui.orderToEdit(allActiveOrders.size());
+        int orderToEdit = UI.orderToEdit(allActiveOrders.size());
 
         while (keepEditing) {
-            int choice = ui.editMenu();
+            int choice = UI.editMenu();
 
             //Delete order
             if (choice == 3) {
@@ -110,9 +110,9 @@ public class Controller {
             else if (choice == 1) {
 
                 //Pizza to add and amount of it
-                ui.printMenu(menu.getListofPizzas());
+                UI.printMenu(MENU.getListofPizzas());
                 Pizza pizzaNr = getValidPizza();
-                int amount = ui.howMany();
+                int amount = UI.howMany();
 
                 ArrayList<OrderLine> activeOrderLines = allActiveOrders.get(orderToEdit).getOrderLines();
 
@@ -134,10 +134,10 @@ public class Controller {
             else if (choice == 2) {
                 //Get pizza to remove and amount
 
-                ui.printOrderLinesInOrder(allActiveOrders.get(orderToEdit).getOrderLines());
+                UI.printOrderLinesInOrder(allActiveOrders.get(orderToEdit).getOrderLines());
                 Pizza pizzaNr = getValidPizza();
 
-                int amount = ui.howMany();
+                int amount = UI.howMany();
 
                 ArrayList<OrderLine> activeOrderLines = allActiveOrders.get(orderToEdit).getOrderLines();
 
@@ -178,35 +178,35 @@ public class Controller {
     }
 
     private void completeOrder() {
-        ui.printMessage(getActiveOrders());
+        UI.printMessage(getActiveOrders());
 
         // get which order to finish
-        int choice = ui.whichOrderToComplete() - 1;
+        int choice = UI.whichOrderToComplete() - 1;
         if (choice != -1) {
             try {
                 // store order
-                fileHandler.storeArchivedOrder(allActiveOrders.get(choice));
+                FILE_HANDLER.storeArchivedOrder(allActiveOrders.get(choice));
                 // remove order from allActiveOrders
                 allActiveOrders.remove(choice);
-                ui.printMessage("Ordren er arkivered");
+                UI.printMessage("Ordren er arkivered");
 
             } catch (IOException e) {
-                ui.errorPrint("Warning: Failed to complete order, cannot store!");
+                UI.errorPrint("Warning: Failed to complete order, cannot store!");
 
             } catch (IndexOutOfBoundsException e) {
-                ui.errorPrint("There was no order by that number");
+                UI.errorPrint("There was no order by that number");
             }
         }
     }
 
     private void seeStats() {
-        stats.reviewStats(fileHandler.getArchivedOrders());
+        STATISTICS.reviewStats(FILE_HANDLER.getArchivedOrders());
     }
 
     private Pizza getValidPizza() {
-        Pizza pizzaNr = menu.getPizzaFromListNumber(ui.addToOrder());
+        Pizza pizzaNr = MENU.getPizzaFromListNumber(UI.addToOrder());
         while (pizzaNr == null) {
-            pizzaNr = menu.getPizzaFromListNumber(ui.addToOrder(true));
+            pizzaNr = MENU.getPizzaFromListNumber(UI.addToOrder(true));
         }
         return pizzaNr;
     }
