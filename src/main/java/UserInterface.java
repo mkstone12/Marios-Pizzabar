@@ -1,4 +1,5 @@
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -212,6 +213,12 @@ public class UserInterface {
 
     public void printTotalSales(String sales) {
         System.out.println(sales);
+    }
+
+    public void removeFromOrderLine(ArrayList<OrderLine> orders){
+        for (OrderLine order: orders){
+            System.out.println(order);
+        }
     }
 }
 
