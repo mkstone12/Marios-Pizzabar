@@ -88,7 +88,7 @@ public class Statistics {
         }
 
         // print the sorted list of pizzas
-        ui.printMessage(sb.toString()); 
+        ui.printMessage(sb.toString());
     }
 
     private void printArchivedOrders(ArrayList<Order> orders) {
