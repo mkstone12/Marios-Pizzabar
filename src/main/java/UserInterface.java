@@ -47,8 +47,7 @@ public class UserInterface {
     }
 
 
-    public void printActiveOrders(ArrayList<String> list) {
-        for (String string : list)
+    public void printActiveOrders(String string) {
         System.out.print(string);
     }
 

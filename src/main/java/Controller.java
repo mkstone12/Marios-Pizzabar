@@ -2,6 +2,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Controller {
     private final FileHandler fileHandler = new FileHandler();
@@ -153,21 +154,32 @@ public class Controller {
 
     }
 
-    public ArrayList<String> getActiveOrders() { // TODO: 05/11/2021 Why does it return an arraylist, and not just a string?
-        ArrayList<String> activeOrdersList = new ArrayList<>();
-        String tekst = " aktive ordre:\n";
+    public String getActiveOrders() {
+
+        // sort orders by the time they are to be finished
+        allActiveOrders.sort(Comparator.comparing(Order::getOrderDueTime));
+
+        // get the length of allActiveOrders and set the right grammer
         int size = allActiveOrders.size();
+        String tekst;
         if (size == 1) {
             tekst = " aktiv order:\n";
+        }else{
+            tekst = " aktive ordre:\n";
         }
+
+        // create String builder and initial line
         StringBuilder activeOrder = new StringBuilder("Der er " + size + tekst);
+
+        // add the activeorders to the Stringbuilder, with an id
         int id = 1;
         for (Order order : allActiveOrders) {
             activeOrder.append(id).append(" ").append(order).append("Pris "+order.getPrice() + " Kr").append("\n");
             id++;
         }
-        activeOrdersList.add(activeOrder.toString());
-        return activeOrdersList;
+
+        //return the string of the Stringbuilder
+        return activeOrder.toString();
     }
 
     public void completeOrder() {
