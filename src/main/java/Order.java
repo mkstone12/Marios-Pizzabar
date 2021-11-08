@@ -56,8 +56,6 @@ public class Order {
         }
     }
 
-
-
     @Override
     public String toString() {
         StringBuilder output = new StringBuilder(name + ": ");
