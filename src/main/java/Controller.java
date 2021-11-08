@@ -169,7 +169,7 @@ public class Controller {
         // add the activeorders to the Stringbuilder, with an id
         int id = 1;
         for (Order order : allActiveOrders) {
-            activeOrder.append(id).append(" ").append(order).append("Pris "+order.getPrice() + " Kr").append("\n");
+            activeOrder.append(id).append(" ").append(order).append("Pris ").append(order.getPrice()).append(" Kr").append("\n");
             id++;
         }
 
