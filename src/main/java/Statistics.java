@@ -35,7 +35,11 @@ public class Statistics {
     }
 
     public void setRelevantOrders(){
+        // create a new empty Arraylist
         relevantOrders = new ArrayList<>();
+
+        // loop through the orders, and if the creation date is between the start and end date,
+        // then add it to the new arraylist
         for (Order order : orderList) {
             LocalDate orderDate = order.getCreationDate();
             if (!orderDate.isBefore(startDate) && !orderDate.isAfter(endDate)) {
@@ -45,16 +49,14 @@ public class Statistics {
     }
 
     public void salesStats() {
-        //a.compareTo(d) * d.compareTo(b) > 0
         double totalSales = 0;
-        double orderPrice;
+
+        // goes through all the relevantOrders and adds the price to totalSales
         for (Order order : relevantOrders) {
-            orderPrice = order.getPrice();
-            totalSales += orderPrice;
+            totalSales += order.getPrice();
         }
-        String salg = "Total salg fra " + startDate
-                + " til " + endDate + " = " + totalSales + "kr."; // test
-        ui.printTotalSales(salg);
+        // print the result
+        ui.printTotalSales("Total salg fra " + startDate + " til " + endDate + " = " + totalSales + "kr.");
     }
 
     public void pizzaStats() {
@@ -91,10 +93,15 @@ public class Statistics {
 
     public void getRequestedDates() {
         try {
+            // make a pattern to parse the given dates from
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy");
+
+            // get the dates from the user and parse
             startDate = LocalDate.parse(ui.getDate("fra"), formatter);
             endDate = LocalDate.parse(ui.getDate("til"), formatter);
 
+            // if the startDate is after the endDate, then print warning
+            // and set the startdate a day before the end date
             if (startDate.isAfter(endDate)){
                 ui.errorPrint("Warning: the start date you selected was after the end date.\n" +
                         "Your start date has been set to one day before as your end date.");
