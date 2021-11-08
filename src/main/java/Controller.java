@@ -143,6 +143,7 @@ public class Controller {
                     if (activeOrderLines.get(i).getAmount() <= 0) {
                         allActiveOrders.get(choice[0]).removeOrderLine(i);
                     }}}
+            //Remove order if empty
             if(allActiveOrders.get(choice[0]).getOrderLines().size() == 0){
                 allActiveOrders.remove(choice[0]);
             }
