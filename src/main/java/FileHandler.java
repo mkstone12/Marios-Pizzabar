@@ -17,8 +17,7 @@ public class FileHandler {
     private final String ACTIVE_ORDERS = "data/active_orders.json";
 
 
-
-    public List<String> getMenuFromFile()  {
+    public List<String> getMenuFromFile() {
         try {
             return getLinesFromFile(MENU);
         } catch (IOException e) {
@@ -29,7 +28,7 @@ public class FileHandler {
 
     // takes an order, reads the already store orders, adds the order to the list of orders,
     // and then saves the new list of orders
-        public void storeArchivedOrder(Order order) throws IOException {
+    public void storeArchivedOrder(Order order) throws IOException {
         ArrayList<Order> storedOrders = getStoredFromFile(ARCHIVED_ORDERS);
         storedOrders.add(order);
         saveToFile(convertOrdersToJson(storedOrders), ARCHIVED_ORDERS);
@@ -45,7 +44,7 @@ public class FileHandler {
 
     // will return a string with the json information
     private String convertOrdersToJson(List<Order> orders) throws JsonProcessingException {
-        JsonNode node =  Json.toJson(orders);
+        JsonNode node = Json.toJson(orders);
 
         return Json.prettyPrint(node);
     }
@@ -73,7 +72,8 @@ public class FileHandler {
                     stringBuilder.append(line).append('\n');
                 }
 
-                List<Order> orders = Json.fromJsonToArray(stringBuilder.toString(), new TypeReference<>() {});
+                List<Order> orders = Json.fromJsonToArray(stringBuilder.toString(), new TypeReference<>() {
+                });
                 return new ArrayList<>(orders);
             }
         } catch (IOException e) {
@@ -89,7 +89,7 @@ public class FileHandler {
         File file = new File(filePath);
 
         Scanner load = new Scanner(file);
-        while(load.hasNextLine()){
+        while (load.hasNextLine()) {
             lines.add(load.nextLine());
         }
         return lines;

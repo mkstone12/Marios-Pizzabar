@@ -38,7 +38,7 @@ public class Statistics {
         }
     }
 
-    private void setRelevantOrders(){
+    private void setRelevantOrders() {
         relevantOrders = new ArrayList<>();
         for (Order order : orderList) {
             LocalDate orderDate = order.getCreationDate();
@@ -61,13 +61,13 @@ public class Statistics {
 
     private void pizzaStats() {
         // make new HashMap
-        Map<String, Integer>  pizzaMap = new HashMap<>();
+        Map<String, Integer> pizzaMap = new HashMap<>();
 
         // populate Map with the string of a pizza, and the amount of times the pizza has been sold
         for (Order order : relevantOrders) {
             for (OrderLine line : order.getOrderLines()) {
                 String pizza = line.getPizza().toString();
-                if (pizzaMap.containsKey(pizza)){
+                if (pizzaMap.containsKey(pizza)) {
                     pizzaMap.put(pizza, line.getAmount() + pizzaMap.get(pizza));
                 } else {
                     pizzaMap.put(pizza, line.getAmount());
@@ -83,7 +83,7 @@ public class Statistics {
 
         // make the string of the sorted pizzas for print
         StringBuilder sb = new StringBuilder("Her er pizzaerne rangeret efter mest solget:\n");
-        for (Map.Entry<String, Integer> entry : listOfPizzas){
+        for (Map.Entry<String, Integer> entry : listOfPizzas) {
             sb.append(entry.getValue()).append(" stk.: ").append(entry.getKey()).append('\n');
         }
 
@@ -98,7 +98,7 @@ public class Statistics {
         String tekst;
         if (size == 1) {
             tekst = " arkiverede order:\n";
-        }else{
+        } else {
             tekst = " arkiverede ordre:\n";
         }
 
@@ -125,7 +125,7 @@ public class Statistics {
 
             // if the startDate is after the endDate, then print warning
             // and set the startdate a day before the end date
-            if (startDate.isAfter(endDate)){
+            if (startDate.isAfter(endDate)) {
                 ui.errorPrint("Warning: the start date you selected was after the end date.\n" +
                         "Your start date has been set to one day before as your end date.");
                 startDate = endDate.minusDays(1);

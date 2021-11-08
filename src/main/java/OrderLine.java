@@ -2,22 +2,23 @@ public class OrderLine {
     private Pizza pizza;
     private int amount;
 
-    public OrderLine(Pizza pizza, int amount){
+    public OrderLine(Pizza pizza, int amount) {
         this.pizza = pizza;
         this.amount = amount;
     }
-    
-    public OrderLine(){
+
+    public OrderLine() {
     }
 
-    public Pizza getPizza(){
+    public Pizza getPizza() {
         return pizza;
     }
 
-    public int getAmount(){
+    public int getAmount() {
         return amount;
     }
-    public void addAmount(int amount){
+
+    public void addAmount(int amount) {
         this.amount += amount;
     }
 
