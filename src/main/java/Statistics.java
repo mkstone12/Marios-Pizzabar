@@ -36,9 +36,13 @@ public class Statistics {
 
                 case 1 -> salesStats();
 
-                case 2 -> pizzaStats();
+                case 2 -> pizzaStats2();
 
                 case 3 -> getRequestedDates();
+
+                case 4 -> printArchivedOrders(relevantOrders);
+
+                case 5 -> printArchivedOrders(orderList);
             }
         }
     }
@@ -141,6 +145,29 @@ public class Statistics {
             orderedPizzaNames[i] = "";
             orderedPizzaTotals[i] = 0;
         }
+    }
+
+    public void printArchivedOrders(ArrayList<Order> orders) {
+
+        // get the length of allActiveOrders and set the right grammer
+        int size = orders.size();
+        String tekst;
+        if (size == 1) {
+            tekst = " arkiverede order:\n";
+        }else{
+            tekst = " arkiverede ordre:\n";
+        }
+
+        // create String builder and initial line
+        StringBuilder activeOrder = new StringBuilder("Der er " + size + tekst);
+
+        // add the archived orders to the Stringbuilder, with an id
+        for (Order order : orders) {
+            activeOrder.append(order.getOrderID()).append(" ").append(order).append("Pris ").append(order.getPrice()).append(" Kr").append("\n");
+        }
+
+        //return the string of the Stringbuilder
+        ui.printActiveOrders(activeOrder.toString());
     }
 
     public void getRequestedDates() {
