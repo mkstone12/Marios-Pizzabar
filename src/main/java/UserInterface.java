@@ -47,9 +47,8 @@ public class UserInterface {
     }
 
 
-    public void printActiveOrders(ArrayList<String> list) {
-        for (String string : list)
-        System.out.print(string);
+    public void printActiveOrders(String orderList) {
+        System.out.print(orderList);
     }
 
     // prints errorMessage in bright red and resets the text color afterwards

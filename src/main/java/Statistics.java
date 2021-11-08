@@ -36,7 +36,7 @@ public class Statistics {
 
                 case 1 -> salesStats();
 
-                case 2 -> pizzaStats();
+                case 2 -> pizzaStats2();
 
                 case 3 -> getRequestedDates();
             }
@@ -145,7 +145,7 @@ public class Statistics {
 
     public void getRequestedDates() {
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy");
             startDate = LocalDate.parse(ui.getDate("fra"), formatter);
             endDate = LocalDate.parse(ui.getDate("til"), formatter);
 
