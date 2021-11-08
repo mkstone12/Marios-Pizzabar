@@ -49,7 +49,7 @@ public class Order {
         updatePrice();
     }
 
-    public void updatePrice() {
+    private void updatePrice() {
         totalOrderPrice = 0;
         for (OrderLine orderLine : orderLines) {
             totalOrderPrice += orderLine.getPizza().getPrice() * orderLine.getAmount();
