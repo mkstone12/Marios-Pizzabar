@@ -34,22 +34,22 @@ public class Order {
         updatePrice();
     }
 
-    public double getPrice(){
+    public double getPrice() {
         updatePrice();
         return totalOrderPrice;
     }
 
-    public void editOrderLine(int orderLineToEdit, int amount){
+    public void editOrderLine(int orderLineToEdit, int amount) {
         orderLines.get(orderLineToEdit).addAmount(amount);
         updatePrice();
     }
 
-    public void removeOrderLine(int orderLineToRemove){
+    public void removeOrderLine(int orderLineToRemove) {
         orderLines.remove(orderLineToRemove);
         updatePrice();
     }
 
-    public void updatePrice(){
+    public void updatePrice() {
         totalOrderPrice = 0;
         for (OrderLine orderLine : orderLines) {
             totalOrderPrice += orderLine.getPizza().getPrice() * orderLine.getAmount();
@@ -72,7 +72,7 @@ public class Order {
     //
     //*********************************************
 
-    public Order(){
+    public Order() {
 
     }
 
