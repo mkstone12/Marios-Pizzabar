@@ -41,7 +41,7 @@ public class Controller {
             switch (choice) {
                 case 1 -> ui.printMenu(menu.getListofPizzas());
 
-                case 2 -> ui.printActiveOrders(getActiveOrders());
+                case 2 -> ui.printMessage(getActiveOrders());
 
                 case 3 -> createOrder(menu);
 
@@ -88,7 +88,7 @@ public class Controller {
     private void editOrder() {
 
         // List active orders
-        ui.printActiveOrders(getActiveOrders());
+        ui.printMessage(getActiveOrders());
 
         // Choose order to edit and what to edit
         boolean keepEditing = true;
@@ -180,7 +180,7 @@ public class Controller {
     }
 
     private void completeOrder() {
-        ui.printActiveOrders(getActiveOrders());
+        ui.printMessage(getActiveOrders());
 
         // get which order to finish
         int choice = ui.whichOrderToComplete() - 1;
@@ -190,6 +190,7 @@ public class Controller {
             fileHandler.storeArchivedOrder(allActiveOrders.get(choice));
             // remove order from allActiveOrders
             allActiveOrders.remove(choice);
+            ui.printMessage("Ordren er arkivered");
         } catch (IOException e) {
             ui.errorPrint("Warning: Failed to complete order, cannot store!");
         } catch (IndexOutOfBoundsException e) {
