@@ -151,10 +151,7 @@ public class Controller {
                     if (activeOrderLines.get(i).getAmount() <= 0) {
                         allActiveOrders.get(orderToEdit).removeOrderLine(i);
                     }}}
-            //Remove order if empty
-            if(allActiveOrders.get(orderToEdit).getOrderLines().size() == 0){
-                allActiveOrders.remove(orderToEdit);
-            }
+
         }
 
     }}
