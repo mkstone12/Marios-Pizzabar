@@ -56,7 +56,7 @@ public class UserInterface {
         System.out.println("\033[0;91m" + errorMessage + "\u001B[0m");
     }
 
-    public int[] editMenu(int orderSize) {
+    public int ordertoEdit(int orderSize) {
         System.out.println("Hvilken order vil du ændre? ");
         int orderChoice = 0;
 
@@ -74,21 +74,27 @@ public class UserInterface {
                     input.nextLine();
                 }
             }}
+        return orderChoice;
+
+    }
+
+    public int editMenu(){
 
         System.out.println("""
                 Vil du:
                 1. Tilføje til order
                 2. Fjerne fra order
-                3. Slette order""");
+                3. Slette order
+                0. Afslut redigering""");
 
-        int editChoice = 0;
-        goodChoice = false;
+        int editChoice = -1;
+        boolean goodChoice = false;
         while(!goodChoice){
-            if (editChoice  >= 1 && editChoice <=3){
+            if (editChoice  >= 0 && editChoice <=3){
                 goodChoice = true;
             }
             else{
-                System.out.println("Du kan kun vælge et tal mellem 1 og 3");
+                System.out.println("Du kan kun vælge et tal mellem 0 og 3");
                 try{
                     editChoice = input.nextInt();
                 }
@@ -97,7 +103,7 @@ public class UserInterface {
                 }
             }}
 
-        return new int[]{orderChoice - 1 ,editChoice}; // todo menu to choose order
+        return editChoice;
     }
 
 
