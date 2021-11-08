@@ -47,8 +47,8 @@ public class UserInterface {
     }
 
 
-    public void printActiveOrders(String string) {
-        System.out.print(string);
+    public void printActiveOrders(String orderList) {
+        System.out.print(orderList);
     }
 
     // prints errorMessage in bright red and resets the text color afterwards
@@ -56,22 +56,9 @@ public class UserInterface {
         System.out.println("\033[0;91m" + errorMessage + "\u001B[0m");
     }
 
-    public int[] editMenu(int orderSize) {
+    public int[] editMenu() {
         System.out.println("Hvilken order vil du ændre? ");
-        int orderChoice = 0;
-        boolean goodChoice = false;
-        while(!goodChoice){
-            if (orderChoice  >= 1 && orderChoice <=orderSize){
-                goodChoice = true;
-            }
-            else{
-                System.out.println("Du kan kun vælge med tal mellem 1 og " + orderSize);
-                try{
-                    orderChoice = input.nextInt();
-                }
-                catch (InputMismatchException e){
-                    input.nextLine();
-                }}}
+        int orderChoice = input.nextInt();
 
         System.out.println("""
                 Vil du:
@@ -79,23 +66,9 @@ public class UserInterface {
                 2. Fjerne fra order
                 3. Slette order""");
 
-        int editChoice = 0;
-        goodChoice = false;
-        while(!goodChoice){
-            if (editChoice  >= 1 && editChoice <=3){
-                goodChoice = true;
-            }
-            else{
-                System.out.println("Du kan kun vælge med tal mellem 1 og 3");
-                try{
-                    editChoice = input.nextInt();
-                }
-                catch (InputMismatchException e){
-                    input.nextLine();
-                }}}
-
+        int editChoice = input.nextInt();
         int[] choice = {orderChoice - 1 ,editChoice};
-        return choice;
+        return choice; // todo menu to choose order
     }
 
 
@@ -143,14 +116,16 @@ public class UserInterface {
                 goodChoice = true;
             }
             else{
-                System.out.println("Du kan kun vælge et tal større end 0");
+                System.out.println("Du kan kun vælge et positivt tal");
                 try{
                     choice = input.nextInt();
                 }
                 catch (InputMismatchException e){
+                    System.out.println("Du kan kun vælge med tal");
                     input.nextLine();
                 }
             }}
+
         return choice;
     }
 
@@ -189,8 +164,6 @@ public class UserInterface {
                 1. Se total salg
                 2. Se den meste populære pizza
                 3. Skifte datoer
-                4. Udskriv all arkiverede ordre indfor datoerne
-                5. Udskriv all arkiverede ordre
                 
                 0. Forlade statistik""");
         return input.nextInt();
@@ -204,14 +177,6 @@ public class UserInterface {
 
     public void printTotalSales(String sales) {
         System.out.println(sales);
-    }
-
-    public void removeFromOrder(ArrayList<OrderLine> orders){
-        for (OrderLine order : orders) {
-            System.out.println(order);
-        }
-
-
     }
 }
 
