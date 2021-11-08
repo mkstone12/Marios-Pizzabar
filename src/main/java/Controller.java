@@ -2,6 +2,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 public class Controller {
     private final FileHandler fileHandler = new FileHandler();
@@ -73,7 +74,8 @@ public class Controller {
         while (true) {
             int toEndOrder = ui.toEndOrder();
             if (toEndOrder == 1) {
-                Pizza pizzaNr = menu.getPizzaFromListNumber(ui.addToOrder());
+
+                Pizza pizzaNr = getValidPizza();
                 int amount = ui.howMany();
                 order.addOrderLine(pizzaNr, amount);
             } else {
@@ -90,7 +92,8 @@ public class Controller {
         ui.printActiveOrders(getActiveOrders());
 
         // Choose order to edit and what to edit
-        int[] choice = ui.editMenu();
+
+        int[] choice = ui.editMenu(allActiveOrders.size());
 
         //Delete order
         if(choice[1] == 3 ){
@@ -101,7 +104,8 @@ public class Controller {
         else if (choice[1] == 1){
 
             //Pizza to add and amount of it
-            Pizza pizzaNr = menu.getPizzaFromListNumber(ui.addToOrder());
+            ui.printMenu(menu.getListofPizzas());
+            Pizza pizzaNr = getValidPizza();
             int amount = ui.howMany();
 
             ArrayList<OrderLine> activeOrderLines =  allActiveOrders.get(choice[0]).getOrderLines();
@@ -109,7 +113,7 @@ public class Controller {
             //Loops over orderlines in order to check if there is orderline for pizza
             for(int i = 0; i < activeOrderLines.size();i++){
                 if(pizzaNr.getPizzaNr() == activeOrderLines.get(i).getPizza().getPizzaNr()){
-                    //If orderline with pizza exist, add to amount to orderline
+                    //If orderline with pizza exist, add amount to orderline
                     allActiveOrders.get(choice[0]).editOrderLine(i,amount);
                     break;
                 }
@@ -124,8 +128,11 @@ public class Controller {
         //remove from order
         else if (choice[1] == 2){
             //Get pizza to remove and amount
-            Pizza pizzaNr = menu.getPizzaFromListNumber(ui.addToOrder());
+            ui.removeFromOrder(allActiveOrders.get(choice[0]).getOrderLines());
+            Pizza pizzaNr = getValidPizza();
+
             int amount = ui.howMany();
+
 
             ArrayList<OrderLine> activeOrderLines =  allActiveOrders.get(choice[0]).getOrderLines();
 
@@ -140,25 +147,39 @@ public class Controller {
                         allActiveOrders.get(choice[0]).removeOrderLine(i);
                     }
                 }}
+        if(allActiveOrders.get(choice[0]).getOrderLines().size()  == 0){
+            allActiveOrders.remove(choice[0]);
+        }
         }
 
     }
 
-    public ArrayList<String> getActiveOrders() { // TODO: 05/11/2021 Why does it return an arraylist, and not just a string?
-        ArrayList<String> activeOrdersList = new ArrayList<>();
-        String tekst = " aktive ordre:\n";
+    public String getActiveOrders() {
+
+        // sort orders by the time they are to be finished
+        allActiveOrders.sort(Comparator.comparing(Order::getOrderDueTime));
+
+        // get the length of allActiveOrders and set the right grammer
         int size = allActiveOrders.size();
+        String tekst;
         if (size == 1) {
             tekst = " aktiv order:\n";
+        }else{
+            tekst = " aktive ordre:\n";
         }
+
+        // create String builder and initial line
         StringBuilder activeOrder = new StringBuilder("Der er " + size + tekst);
+
+        // add the activeorders to the Stringbuilder, with an id
         int id = 1;
         for (Order order : allActiveOrders) {
-            activeOrder.append(id).append(" ").append(order).append("\n");
+            activeOrder.append(id).append(" ").append(order).append("Pris ").append(order.getPrice()).append(" Kr").append("\n");
             id++;
         }
-        activeOrdersList.add(activeOrder.toString());
-        return activeOrdersList;
+
+        //return the string of the Stringbuilder
+        return activeOrder.toString();
     }
 
     public void completeOrder() {
@@ -182,4 +203,13 @@ public class Controller {
     public void seeStats() {
         stats.reviewStats(fileHandler.getArchivedOrders());
     }
+
+    public Pizza getValidPizza(){
+        Pizza pizzaNr = menu.getPizzaFromListNumber(ui.addToOrder());
+        while(pizzaNr == null){
+            pizzaNr = menu.getPizzaFromListNumber(ui.addToOrder(true));
+        }
+        return pizzaNr;
+    }
+
 }
