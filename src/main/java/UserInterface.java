@@ -83,7 +83,7 @@ public class UserInterface {
     }
 
     public String nameOfOrder(){
-        System.out.println("Indtast navnet og telefonnummer på bestillingen");
+        System.out.println("Indtast navnet og telefonnummer på bestillingen: ");
         input.nextLine();
         return input.nextLine();
     }
@@ -92,13 +92,13 @@ public class UserInterface {
         System.out.println("Vælg en pizza");
         input.nextLine();
         while (!input.hasNextInt()){
-            System.out.print("Du kan kun vælge med tal:");
+            System.out.print("Du kan kun vælge med tal: ");
             input.nextLine(); // to avoid scanner bug
         }
         return input.nextInt();
     }
     public int addToOrder(boolean triedBefore){
-        System.out.println("Denne pizza eksistere ikke. \nVælg en anden pizza");
+        System.out.println("Denne pizza eksistere ikke. \nVælg en anden pizza: ");
         input.nextLine();
         while (!input.hasNextInt()){
             System.out.print("Du kan kun vælge med tal:");
