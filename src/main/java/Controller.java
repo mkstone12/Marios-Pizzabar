@@ -184,7 +184,7 @@ public class Controller {
 
         // get which order to finish
         int choice = ui.whichOrderToComplete() - 1;
-
+        if(choice!=-1){
         try {
             // store order
             fileHandler.storeArchivedOrder(allActiveOrders.get(choice));
@@ -195,7 +195,7 @@ public class Controller {
         } catch (IndexOutOfBoundsException e) {
             ui.errorPrint("There was no order by that number");
         }
-    }
+    }}
 
     private void seeStats() {
         stats.reviewStats(fileHandler.getArchivedOrders());

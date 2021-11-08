@@ -109,7 +109,7 @@ public class UserInterface {
 
     public int whichOrderToComplete() {
         Scanner input = new Scanner(System.in);
-        System.out.print("Hvilken order vil du færdigøre? ");
+        System.out.print("Hvilken order vil du færdigøre? Tast 0 for at afslutte");
         while (!input.hasNextInt()){
             System.out.print("Du kan kun vælge med tal:");
             input.nextLine(); // to avoid scanner bug
