@@ -146,7 +146,7 @@ public class Controller {
 
     }
 
-    public String getActiveOrders() { // TODO: 05/11/2021 Why does it return an arraylist, and not just a string?
+    public String getActiveOrders() {
         ArrayList<String> activeOrdersList = new ArrayList<>();
         String tekst = " aktive ordre:\n";
         int size = allActiveOrders.size();
