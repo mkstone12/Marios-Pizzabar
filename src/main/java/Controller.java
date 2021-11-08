@@ -66,7 +66,7 @@ public class Controller {
         }
     }
 
-    public void createOrder(Menu menu) {
+    private void createOrder(Menu menu) {
         String name = ui.nameOfOrder();
         Order order = new Order(name);
         ui.printMenu(menu.getListofPizzas());
@@ -85,72 +85,81 @@ public class Controller {
         }
     }
 
-    public void editOrder() {
+    private void editOrder() {
 
         // List active orders
         ui.printActiveOrders(getActiveOrders());
 
         // Choose order to edit and what to edit
-        int[] choice = ui.editMenu(allActiveOrders.size());
+        boolean keepEditing = true;
+        int orderToEdit = ui.ordertoEdit(allActiveOrders.size());
+
+        while(keepEditing){
+        int choice = ui.editMenu();
 
         //Delete order
-        if (choice[1] == 3) {
-            allActiveOrders.remove(choice[0]);
+        if (choice == 3) {
+            allActiveOrders.remove(orderToEdit);
+            keepEditing = false;
+        }
+        if(choice == 0){
+            keepEditing = false;
         }
 
         //Add to order
-        else if (choice[1] == 1) {
+        else if (choice == 1) {
 
             //Pizza to add and amount of it
             ui.printMenu(menu.getListofPizzas());
             Pizza pizzaNr = getValidPizza();
             int amount = ui.howMany();
 
-            ArrayList<OrderLine> activeOrderLines = allActiveOrders.get(choice[0]).getOrderLines();
+            ArrayList<OrderLine> activeOrderLines = allActiveOrders.get(orderToEdit).getOrderLines();
 
             //Loops over orderlines in order to check if there is orderline for pizza
             for (int i = 0; i < activeOrderLines.size(); i++) {
                 if (pizzaNr.getPizzaNr() == activeOrderLines.get(i).getPizza().getPizzaNr()) {
                     //If orderline with pizza exist, add amount to orderline
-                    allActiveOrders.get(choice[0]).editOrderLine(i, amount);
+                    allActiveOrders.get(orderToEdit).editOrderLine(i, amount);
                     break;
                 } else if (i == activeOrderLines.size() - 1) {
                     //else create new orderline
-                    allActiveOrders.get(choice[0]).addOrderLine(pizzaNr, amount);
+                    allActiveOrders.get(orderToEdit).addOrderLine(pizzaNr, amount);
                     break;
                 }
             }
         }
 
         //remove from order
-        else if (choice[1] == 2) {
+        else if (choice == 2) {
             //Get pizza to remove and amount
 
-            ui.printOrderLinesInOrder(allActiveOrders.get(choice[0]).getOrderLines());
+            ui.printOrderLinesInOrder(allActiveOrders.get(orderToEdit).getOrderLines());
             Pizza pizzaNr = getValidPizza();
 
             int amount = ui.howMany();
 
-            ArrayList<OrderLine> activeOrderLines = allActiveOrders.get(choice[0]).getOrderLines();
+            ArrayList<OrderLine> activeOrderLines = allActiveOrders.get(orderToEdit).getOrderLines();
 
             //Loop to find orderline with pizza
             for (int i = 0; i < activeOrderLines.size(); i++) {
                 if (pizzaNr.getPizzaNr() == activeOrderLines.get(i).getPizza().getPizzaNr()) {
                     //remove amount of pizza from orderline
-                    allActiveOrders.get(choice[0]).editOrderLine(i, -amount);
+                    allActiveOrders.get(orderToEdit).editOrderLine(i, -amount);
 
                     //If amount is now 0 or less, remove orderline
                     if (activeOrderLines.get(i).getAmount() <= 0) {
-                        allActiveOrders.get(choice[0]).removeOrderLine(i);
+                        allActiveOrders.get(orderToEdit).removeOrderLine(i);
                     }}}
-            if(allActiveOrders.get(choice[0]).getOrderLines().size() == 0){
-                allActiveOrders.remove(choice[0]);
+            //Remove order if empty
+            if(allActiveOrders.get(orderToEdit).getOrderLines().size() == 0){
+                allActiveOrders.remove(orderToEdit);
             }
         }
 
-    }
+    }}
 
-    public String getActiveOrders() {
+    private String getActiveOrders() {
         ArrayList<String> activeOrdersList = new ArrayList<>();
         String tekst = " aktive ordre:\n";
         int size = allActiveOrders.size();
@@ -170,12 +179,12 @@ public class Controller {
         return activeOrders.toString();
     }
 
-    public void completeOrder() {
+    private void completeOrder() {
         ui.printActiveOrders(getActiveOrders());
 
         // get which order to finish
         int choice = ui.whichOrderToComplete() - 1;
-
+        if(choice!=-1){
         try {
             // store order
             fileHandler.storeArchivedOrder(allActiveOrders.get(choice));
@@ -186,13 +195,13 @@ public class Controller {
         } catch (IndexOutOfBoundsException e) {
             ui.errorPrint("There was no order by that number");
         }
-    }
+    }}
 
-    public void seeStats() {
+    private void seeStats() {
         stats.reviewStats(fileHandler.getArchivedOrders());
     }
 
-    public Pizza getValidPizza() {
+    private Pizza getValidPizza() {
         Pizza pizzaNr = menu.getPizzaFromListNumber(ui.addToOrder());
         while (pizzaNr == null) {
             pizzaNr = menu.getPizzaFromListNumber(ui.addToOrder(true));

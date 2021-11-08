@@ -38,7 +38,7 @@ public class Statistics {
         }
     }
 
-    public void setRelevantOrders(){
+    private void setRelevantOrders(){
         relevantOrders = new ArrayList<>();
         for (Order order : orderList) {
             LocalDate orderDate = order.getCreationDate();
@@ -48,7 +48,7 @@ public class Statistics {
         }
     }
 
-    public void salesStats() {
+    private void salesStats() {
         double totalSales = 0;
 
         // goes through all the relevantOrders and adds the price to totalSales
@@ -59,7 +59,7 @@ public class Statistics {
         ui.printTotalSales("Total salg fra " + startDate + " til " + endDate + " = " + totalSales + "kr.");
     }
 
-    public void pizzaStats() {
+    private void pizzaStats() {
         // make new HashMap
         Map<String, Integer>  pizzaMap = new HashMap<>();
 
@@ -91,7 +91,7 @@ public class Statistics {
         ui.printTotalSales(sb.toString()); // TODO: 05/11/2021 Find better way to print
     }
 
-    public void printArchivedOrders(ArrayList<Order> orders) {
+    private void printArchivedOrders(ArrayList<Order> orders) {
 
         // get the length of allActiveOrders and set the right grammer
         int size = orders.size();
@@ -114,7 +114,7 @@ public class Statistics {
         ui.printActiveOrders(activeOrder.toString());
     }
 
-    public void getRequestedDates() {
+    private void getRequestedDates() {
         try {
             // make a pattern to parse the given dates from
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");

@@ -4,7 +4,6 @@ public class Pizza {
     private String desc;
     private double price;
     private int pizzaNr;
-    private boolean newProduct;
 
     public Pizza(String csv) {
         //checks if the string that has been passed is not empty
@@ -20,16 +19,22 @@ public class Pizza {
         this.price = Double.parseDouble(components[3]);
     }
 
-    public Pizza(){
-
-    }
-
     @Override
     public String toString() {
         return pizzaNr + ". " +
                 name + ": " +
                 desc + "......." +
                 String.format("%.2fkr.", price);
+    }
+
+    //*********************************************
+    //
+    // DO NOT DELETE, IS USED TO CREATE FROM JSON
+    //
+    //*********************************************
+
+    public Pizza(){
+
     }
 
     public String getName() {

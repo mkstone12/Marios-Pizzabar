@@ -30,7 +30,7 @@ public class Order {
     public void addOrderLine(Pizza pizza, int amount) {
         OrderLine orderLine = new OrderLine(pizza, amount);
         this.orderLines.add(orderLine);
-        orderDueTime = orderDueTime.truncatedTo(ChronoUnit.MINUTES).plusMinutes(5 * amount);
+        orderDueTime = orderDueTime.truncatedTo(ChronoUnit.MINUTES).plusMinutes(5L * amount);
         updatePrice();
     }
 
