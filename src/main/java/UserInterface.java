@@ -1,5 +1,4 @@
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -67,8 +66,7 @@ public class UserInterface {
                 3. Slette order""");
 
         int editChoice = input.nextInt();
-        int[] choice = {orderChoice - 1 ,editChoice};
-        return choice; // todo menu to choose order
+        return new int[]{orderChoice - 1 ,editChoice}; // todo menu to choose order
     }
 
 
