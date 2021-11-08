@@ -25,6 +25,14 @@ public class Controller {
             allActiveOrders.get(i).addOrderLine(menu.getPizzaFromListNumber(i+1), 2);
         }*/
 
+        // to populate archivedOrders
+        /*for (Order order : allActiveOrders) {
+            try {
+                fileHandler.storeArchivedOrder(order);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }*/
 
         while (keepGoing) {
 
@@ -64,9 +72,7 @@ public class Controller {
         ui.printMenu(menu.getListofPizzas());
         while (true) {
             int toEndOrder = ui.toEndOrder();
-
             if (toEndOrder == 1) {
-
                 Pizza pizzaNr = menu.getPizzaFromListNumber(ui.addToOrder());
                 int amount = ui.howMany();
                 order.addOrderLine(pizzaNr, amount);
@@ -81,11 +87,10 @@ public class Controller {
     public void editOrder() {
 
         // List active orders
-
         ui.printActiveOrders(getActiveOrders());
 
         // Choose order to edit and what to edit
-        int choice[] = ui.editMenu();
+        int[] choice = ui.editMenu();
 
         //Delete order
         if(choice[1] == 3 ){
@@ -139,7 +144,7 @@ public class Controller {
 
     }
 
-    public ArrayList<String> getActiveOrders() {
+    public ArrayList<String> getActiveOrders() { // TODO: 05/11/2021 Why does it return an arraylist, and not just a string?
         ArrayList<String> activeOrdersList = new ArrayList<>();
         String tekst = " aktive ordre:\n";
         int size = allActiveOrders.size();
@@ -149,7 +154,7 @@ public class Controller {
         StringBuilder activeOrder = new StringBuilder("Der er " + size + tekst);
         int id = 1;
         for (Order order : allActiveOrders) {
-            activeOrder.append(id).append(" ").append(order).append("Pris "+order.getPrice() + " Kr").append("\n");
+            activeOrder.append(id).append(" ").append(order).append("\n");
             id++;
         }
         activeOrdersList.add(activeOrder.toString());
@@ -175,7 +180,6 @@ public class Controller {
     }
 
     public void seeStats() {
-        ArrayList<Order> orders = fileHandler.getArchivedOrders();
-        stats.reviewStats(orders);
+        stats.reviewStats(fileHandler.getArchivedOrders());
     }
 }
