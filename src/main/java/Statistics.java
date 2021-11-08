@@ -56,7 +56,7 @@ public class Statistics {
             totalSales += order.getPrice();
         }
         // print the result
-        ui.printTotalSales("Total salg fra " + startDate + " til " + endDate + " = " + totalSales + "kr.");
+        ui.printMessage("Total salg fra " + startDate + " til " + endDate + " = " + totalSales + "kr.");
     }
 
     private void pizzaStats() {
@@ -88,7 +88,7 @@ public class Statistics {
         }
 
         // print the sorted list of pizzas
-        ui.printTotalSales(sb.toString()); // TODO: 05/11/2021 Find better way to print
+        ui.printMessage(sb.toString()); 
     }
 
     private void printArchivedOrders(ArrayList<Order> orders) {
@@ -110,8 +110,8 @@ public class Statistics {
             activeOrder.append(order.getOrderID()).append(" ").append(order).append("Pris ").append(order.getPrice()).append(" Kr").append("\n");
         }
 
-        //return the string of the Stringbuilder
-        ui.printActiveOrders(activeOrder.toString());
+        //print the string of the Stringbuilder
+        ui.printMessage(activeOrder.toString());
     }
 
     private void getRequestedDates() {
