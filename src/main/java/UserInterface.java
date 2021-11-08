@@ -217,7 +217,7 @@ public class UserInterface {
         System.out.println(sales);
     }
 
-    public void removeFromOrderLine(ArrayList<OrderLine> orders){
+    public void printOrderLinesInOrder(ArrayList<OrderLine> orders){
         for (OrderLine order: orders){
             System.out.println(order);
         }

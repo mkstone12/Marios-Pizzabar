@@ -125,7 +125,7 @@ public class Controller {
         else if (choice[1] == 2) {
             //Get pizza to remove and amount
 
-            ui.removeFromOrderLine(allActiveOrders.get(choice[0]).getOrderLines());
+            ui.printOrderLinesInOrder(allActiveOrders.get(choice[0]).getOrderLines());
             Pizza pizzaNr = getValidPizza();
 
             int amount = ui.howMany();
