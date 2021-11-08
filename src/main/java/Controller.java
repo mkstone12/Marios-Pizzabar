@@ -91,7 +91,7 @@ public class Controller {
         ui.printActiveOrders(getActiveOrders());
 
         // Choose order to edit and what to edit
-        int[] choice = ui.editMenu();
+        int[] choice = ui.editMenu(allActiveOrders.size());
 
         //Delete order
         if (choice[1] == 3) {
