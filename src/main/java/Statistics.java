@@ -30,6 +30,10 @@ public class Statistics {
                 case 2 -> pizzaStats();
 
                 case 3 -> getRequestedDates();
+
+                case 4 -> printArchivedOrders(relevantOrders);
+
+                case 5 -> printArchivedOrders(orderList);
             }
         }
     }
@@ -45,16 +49,14 @@ public class Statistics {
     }
 
     public void salesStats() {
-        //a.compareTo(d) * d.compareTo(b) > 0
         double totalSales = 0;
-        double orderPrice;
+
+        // goes through all the relevantOrders and adds the price to totalSales
         for (Order order : relevantOrders) {
-            orderPrice = order.getPrice();
-            totalSales += orderPrice;
+            totalSales += order.getPrice();
         }
-        String salg = "Total salg fra " + startDate
-                + " til " + endDate + " = " + totalSales + "kr."; // test
-        ui.printTotalSales(salg);
+        // print the result
+        ui.printTotalSales("Total salg fra " + startDate + " til " + endDate + " = " + totalSales + "kr.");
     }
 
     public void pizzaStats() {
@@ -89,12 +91,40 @@ public class Statistics {
         ui.printTotalSales(sb.toString()); // TODO: 05/11/2021 Find better way to print
     }
 
+    public void printArchivedOrders(ArrayList<Order> orders) {
+
+        // get the length of allActiveOrders and set the right grammer
+        int size = orders.size();
+        String tekst;
+        if (size == 1) {
+            tekst = " arkiverede order:\n";
+        }else{
+            tekst = " arkiverede ordre:\n";
+        }
+
+        // create String builder and initial line
+        StringBuilder activeOrder = new StringBuilder("Der er " + size + tekst);
+
+        // add the archived orders to the Stringbuilder, with an id
+        for (Order order : orders) {
+            activeOrder.append(order.getOrderID()).append(" ").append(order).append("Pris ").append(order.getPrice()).append(" Kr").append("\n");
+        }
+
+        //return the string of the Stringbuilder
+        ui.printActiveOrders(activeOrder.toString());
+    }
+
     public void getRequestedDates() {
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy");
+            // make a pattern to parse the given dates from
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+            // get the dates from the user and parse
             startDate = LocalDate.parse(ui.getDate("fra"), formatter);
             endDate = LocalDate.parse(ui.getDate("til"), formatter);
 
+            // if the startDate is after the endDate, then print warning
+            // and set the startdate a day before the end date
             if (startDate.isAfter(endDate)){
                 ui.errorPrint("Warning: the start date you selected was after the end date.\n" +
                         "Your start date has been set to one day before as your end date.");
