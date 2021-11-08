@@ -30,16 +30,16 @@ public class Statistics {
                 case 2 -> pizzaStats();
 
                 case 3 -> getRequestedDates();
+
+                case 4 -> printArchivedOrders(relevantOrders);
+
+                case 5 -> printArchivedOrders(orderList);
             }
         }
     }
 
     public void setRelevantOrders(){
-        // create a new empty Arraylist
         relevantOrders = new ArrayList<>();
-
-        // loop through the orders, and if the creation date is between the start and end date,
-        // then add it to the new arraylist
         for (Order order : orderList) {
             LocalDate orderDate = order.getCreationDate();
             if (!orderDate.isBefore(startDate) && !orderDate.isAfter(endDate)) {
@@ -91,10 +91,33 @@ public class Statistics {
         ui.printTotalSales(sb.toString()); // TODO: 05/11/2021 Find better way to print
     }
 
+    public void printArchivedOrders(ArrayList<Order> orders) {
+
+        // get the length of allActiveOrders and set the right grammer
+        int size = orders.size();
+        String tekst;
+        if (size == 1) {
+            tekst = " arkiverede order:\n";
+        }else{
+            tekst = " arkiverede ordre:\n";
+        }
+
+        // create String builder and initial line
+        StringBuilder activeOrder = new StringBuilder("Der er " + size + tekst);
+
+        // add the archived orders to the Stringbuilder, with an id
+        for (Order order : orders) {
+            activeOrder.append(order.getOrderID()).append(" ").append(order).append("Pris ").append(order.getPrice()).append(" Kr").append("\n");
+        }
+
+        //return the string of the Stringbuilder
+        ui.printActiveOrders(activeOrder.toString());
+    }
+
     public void getRequestedDates() {
         try {
             // make a pattern to parse the given dates from
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
             // get the dates from the user and parse
             startDate = LocalDate.parse(ui.getDate("fra"), formatter);

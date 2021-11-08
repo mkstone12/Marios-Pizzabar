@@ -194,6 +194,8 @@ public class UserInterface {
                 1. Se total salg
                 2. Se den meste populære pizza
                 3. Skifte datoer
+                4. Udskriv all arkiverede ordre indfor datoerne
+                5. Udskriv all arkiverede ordre
                 
                 0. Forlade statistik""");
         try{
