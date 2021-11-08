@@ -110,7 +110,7 @@ public class Controller {
             //Loops over orderlines in order to check if there is orderline for pizza
             for(int i = 0; i < activeOrderLines.size();i++){
                 if(pizzaNr.getPizzaNr() == activeOrderLines.get(i).getPizza().getPizzaNr()){
-                    //If orderline with pizza exist, add to amount to orderline
+                    //If orderline with pizza exist, add amount to orderline
                     allActiveOrders.get(choice[0]).editOrderLine(i,amount);
                     break;
                 }

@@ -72,10 +72,6 @@ public class UserInterface {
         return choice; // todo menu to choose order
     }
 
-    public int removeFromOrder(){
-        System.out.println("Hvad skal fjernes fra order");
-        return 1;
-    }
 
     public int whichOrderToComplete() {
         Scanner input = new Scanner(System.in);
@@ -88,7 +84,7 @@ public class UserInterface {
     }
 
     public String nameOfOrder(){
-        System.out.println("Indtast navnet på bestillingen");
+        System.out.println("Indtast navnet og telefonnummer på bestillingen");
         input.nextLine();
         return input.nextLine();
     }
@@ -114,13 +110,46 @@ public class UserInterface {
 
     public int howMany(){
         System.out.println("Hvor mange af denne type pizzaer");
-        return input.nextInt();
+        int choice = 0;
+        boolean goodChoice = false;
+        while(!goodChoice){
+            if (choice  >= 1){
+                goodChoice = true;
+            }
+            else{
+                System.out.println("Du kan kun vælge et positivt tal");
+                try{
+                    choice = input.nextInt();
+                }
+                catch (InputMismatchException e){
+                    System.out.println("Du kan kun vælge med tal");
+                    input.nextLine();
+                }
+            }}
+
+        return choice;
     }
 
     public int toEndOrder(){
         System.out.println("1. Vil du tilføje til order\n2. Vil du afslutte order");
-        //TO DO check om det er 1 eller 2
-        return input.nextInt();
+
+        int choice = 0;
+        boolean goodChoice = false;
+        while(!goodChoice){
+
+        if (choice  ==1 || choice == 2){
+            goodChoice = true;
+        }
+        else{
+            System.out.println("Du kan kun vælge tallene 1 og 2");
+            try{
+                choice = input.nextInt();
+            }
+            catch (InputMismatchException e){
+                input.nextLine();
+            }
+        }}
+        return choice;
 
     }
 
