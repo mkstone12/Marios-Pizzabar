@@ -102,6 +102,7 @@ public class Controller {
         else if (choice[1] == 1) {
 
             //Pizza to add and amount of it
+            ui.printMenu(menu.getListofPizzas());
             Pizza pizzaNr = getValidPizza();
             int amount = ui.howMany();
 
