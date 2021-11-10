@@ -10,7 +10,7 @@ public class Order {
     private static int count;
     private ArrayList<OrderLine> orderLines = new ArrayList<>();
     private double totalOrderPrice;
-    LocalTime orderDueTime = LocalTime.now();
+    private LocalTime orderDueTime = LocalTime.now();
     private String name;
 
     public Order(String name) {
